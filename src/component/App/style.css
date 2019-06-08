@@ -1,0 +1,14 @@
+
+.background_content {
+   
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 100px;
+
+}
+.login-box-body{
+    border-radius: 20px;
+    width: 400px;
+    height : 350px;
+}

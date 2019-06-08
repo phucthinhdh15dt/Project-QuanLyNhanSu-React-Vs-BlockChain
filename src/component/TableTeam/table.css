@@ -1,0 +1,29 @@
+body{
+/* margin-bottom: 300px; */
+display: block;
+}
+.search{
+  display: flex;
+}
+.active{
+    color:red;
+  }
+  .thinh {
+    color:white;
+    padding-bottom: -20px; 
+  }
+
+  .csv {
+    margin-bottom: -40px;
+    margin-left: 400px;
+    box-shadow: 4px 4px #888888;
+  }
+  .madow{
+    box-shadow: 4px 4px #888888;
+  }
+
+  .tablecss{
+    height: 100px;
+    font-size: 12px;
+    text-align: center;
+  }

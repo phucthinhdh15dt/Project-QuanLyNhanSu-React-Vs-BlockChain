@@ -1,0 +1,1 @@
+export const MSG_LOGIN_FAIL = "Đăng nhập thất bại";
