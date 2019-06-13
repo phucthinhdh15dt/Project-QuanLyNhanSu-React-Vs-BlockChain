@@ -5,4 +5,7 @@ export const STRING_NAVIGATION_QUANLYNHANSU ="HOME-QUẢN LÝ NHÂN SỰ-NHÂN S
 // NAVIGATION QUẢN LÝ NHÂN SỰ
 // SỮA FILE EXPORT
 export const TITLE_NAVIGATION_TEAM ="QUẢN LÝ ĐỘI NHÓM";
+//Quan lý task
+export const TITLE_NAVIGATION_TASK="DANH SÁCH CÔNG VIỆC";
+
 

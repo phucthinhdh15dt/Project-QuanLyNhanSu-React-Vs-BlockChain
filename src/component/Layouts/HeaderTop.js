@@ -39,132 +39,16 @@ export default class HeaderTop extends Component {
         <div className="navbar-custom-menu">
           <ul className="nav navbar-nav">
             {/* Messages: style can be found in dropdown.less*/}
-            <li className="dropdown messages-menu">
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                <i className="fa fa-envelope-o" />
-                <span className="label label-success">4</span>
-              </a>
-              <ul className="dropdown-menu">
-                <li className="header">You have 4 messages</li>
-                <li>
-                  {/* inner menu: contains the actual data */}
-                  <ul className="menu">
-                    <li>{/* start message */}
-                      <a href="#">
-                        <div className="pull-left">
-                          <img src="../../dist/img/user2-160x160.jpg" className="img-circle" alt="User Image" />
-                        </div>
-                        <h4>
-                          Support Team
-                          <small><i className="fa fa-clock-o" /> 5 mins</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    {/* end message */}
-                    <li>
-                      <a href="#">
-                        <div className="pull-left">
-                          <img src="../../dist/img/user3-128x128.jpg" className="img-circle" alt="User Image" />
-                        </div>
-                        <h4>
-                          AdminLTE Design Team
-                          <small><i className="fa fa-clock-o" /> 2 hours</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="pull-left">
-                          <img src="../../dist/img/user4-128x128.jpg" className="img-circle" alt="User Image" />
-                        </div>
-                        <h4>
-                          Developers
-                          <small><i className="fa fa-clock-o" /> Today</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="pull-left">
-                          <img src="../../dist/img/user3-128x128.jpg" className="img-circle" alt="User Image" />
-                        </div>
-                        <h4>
-                          Sales Department
-                          <small><i className="fa fa-clock-o" /> Yesterday</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="pull-left">
-                          <img src="../../dist/img/user4-128x128.jpg" className="img-circle" alt="User Image" />
-                        </div>
-                        <h4>
-                          Reviewers
-                          <small><i className="fa fa-clock-o" /> 2 days</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="footer"><a href="#">See All Messages</a></li>
-              </ul>
-            </li>
-            {/* Notifications: style can be found in dropdown.less */}
-            <li className="dropdown notifications-menu">
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                <i className="fa fa-bell-o" />
-                <span className="label label-warning">10</span>
-              </a>
-              <ul className="dropdown-menu">
-                <li className="header">You have 10 notifications</li>
-                <li>
-                  {/* inner menu: contains the actual data */}
-                  <ul className="menu">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-users text-aqua" /> 5 new members joined today
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-warning text-yellow" /> Very long description here that may not fit into the
-                        page and may cause design problems
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-users text-red" /> 5 new members joined
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-shopping-cart text-green" /> 25 sales made
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-user text-red" /> You changed your username
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="footer"><a href="#">View all</a></li>
-              </ul>
-            </li>
+            
+            
             {/* Tasks: style can be found in dropdown.less */}
             <li className="dropdown tasks-menu">
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                 <i className="fa fa-flag-o" />
-                <span className="label label-danger">9</span>
+                <span className="label label-danger">4</span>
               </a>
               <ul className="dropdown-menu">
-                <li className="header">You have 9 tasks</li>
+                <li className="header">Bạn còn 4 công việc chưa hoàn thành </li>
                 <li>
                   {/* inner menu: contains the actual data */}
                   <ul className="menu">

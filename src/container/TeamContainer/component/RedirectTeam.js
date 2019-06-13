@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './ModalCreate.css';
-import { callApiPaging, callApibyId, callApiAdd } from './../../../utils/ConnectApi';
+import { callApiPaging, callApibyId, callApiEdit } from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 
@@ -27,10 +27,40 @@ export default class RedirectTeam extends Component {
       visibility : 'hidden'
     }
   }
+  redir  =() =>{
+   
+    if( document.getElementById("id").value !== "" ) {
+      
+      var data = {
+        "team_id": this.refs.team.value
+       
+      };
+     
+      callApiEdit('developer',data ,null, document.getElementById("id").value )
+      .then(response => {
+        this.setState({ 
+          editStatus :true , 
+          msg : "Chuyển nhóm thành công"
+          });
+    })
+    .catch(function (error) {
+      console.log(error);
+      this.setState({ 
+       
+        msg : "bug"
+        });
+  })}else{
+    
+    this.setState({ 
+       
+      msg : "Có trường không hợp lệ ,xin kiểm tra lại"
+      });
+  }
+    }
   search =() =>{
    
     
-    callApibyId('developer',null , this.refs.id.value)
+    callApibyId('developer',null , this.refs.team.value)
     .then(response => {
         if(response.data === undefined){
             this.setState({ 
@@ -119,7 +149,7 @@ export default class RedirectTeam extends Component {
                  <div className="title">
                 Chuyển nhóm
                 </div>
-                <div style={{paddingLeft: "160px" ,color : "red" ,height: "30px"}} >  {this.state.msg} </div>
+                <div style={{paddingLeft: "200px" ,color : "#01DF01" ,height: "30px" ,fontSize : "16px",fontWeight: "700"}} >  {this.state.msg} </div>
                 <form  name="myForm">
               <div className="modal-body container">
                
@@ -131,8 +161,7 @@ export default class RedirectTeam extends Component {
                      
                         <label >Nhập mã nhân viên </label>
                         <input type="text" className="form-control" style={{radius :  "10px"}}
-                          id="id"  onChange={this.onChangeId}
-                         ref='id'
+                          id="id"  
                          />
                       </div>
                       <div className="col-md-1">
@@ -152,7 +181,8 @@ export default class RedirectTeam extends Component {
                 <div className="col-md-4">
                      
                      <label >Chọn Đội(Nhóm) làm việc mới</label>
-                     <select className="form-control " value={this.state.team} >
+                     <select className="form-control " value={this.state.team} onChange={this.onChangeTeam}
+                         ref='team' id="team">
                      {this.selectOptionTeam()}
                     </select>
                    </div>
@@ -181,7 +211,7 @@ export default class RedirectTeam extends Component {
                <br/>
               <div className="bt-action" style={{marginTop : "50px"}}>
               <button type="reset" className="btn btn-success">Làm mới </button>
-              <button type="button" className="btn btn-success" onClick={this.add}>Chuyển </button>
+              <button type="button" className="btn btn-success" onClick={this.redir}>Chuyển </button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>

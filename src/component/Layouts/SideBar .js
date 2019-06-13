@@ -14,7 +14,7 @@ export default class SideBar extends Component {
     callApiInfo('me/',null,localStorage.getItem('token'))
         .then(response => {
             this.setState({ 
-              reposDetail : response.data.results[0]
+              reposDetail : response.data
               });
         })
         .catch(function (error) {
@@ -71,8 +71,9 @@ export default class SideBar extends Component {
                   </span>
                 </a>
                 <ul className="treeview-menu">
-                  <li><Link to="/logout"><i className="fa fa-circle-o" /> Công việc được giao </Link></li>
-                  <li><a href="../../index2.html"><i className="fa fa-circle-o" /> Giao việc</a></li>
+                  <li><Link to="/home/cong-viec-cua-toi"><i className="fa fa-circle-o" /> Công việc của tôi </Link></li>
+                  <li><Link to="/home/cong-viec"><i className="fa fa-circle-o" /> Danh sách công viêc </Link></li>
+                  <li><Link to="/home/giao-viec"><i className="fa fa-circle-o" /> Giao việc </Link></li>
                 </ul>
               </li>
               <li className="treeview" style={{textAlign: 'left'}}>
@@ -83,8 +84,8 @@ export default class SideBar extends Component {
                   </span>
                 </a>
                 <ul className="treeview-menu">
-                  <li><a href="../../index.html"><i className="fa fa-circle-o" /> Tiến độ</a></li>
-                  <li><a href="../../index2.html"><i className="fa fa-circle-o" /> Lịch sử</a></li>
+                <li><Link to="/home/du-an/tien-do-du-an"><i className="fa fa-circle-o" /> Danh sách dự án </Link></li>
+                  <li><Link to="/home/du-an/cap-nhat-tien-do"><i className="fa fa-circle-o" /> Cập nhật tiến độ </Link></li>
                 </ul>
               </li>
               <li className="treeview" style={{textAlign: 'left'}}> 
@@ -103,13 +104,15 @@ export default class SideBar extends Component {
               <li className="treeview" style={{textAlign: 'left'}}> 
                 <a href="#">
                   <i className="fa fa-files-o" />
-                  <span>Quản lý quá trình làm việc </span>
+                  <span>Quản lý Đội nhóm </span>
+                  <span className="pull-right-container">
+                    <i className="fa fa-angle-left pull-right" />
+                  </span>
                   
                 </a>
                 <ul className="treeview-menu">
-                  <li><a href="../layout/top-nav.html"><i className="fa fa-circle-o" />Xem tiến độ</a></li>
-                  <li><a href="../layout/boxed.html"><i className="fa fa-circle-o" /> Cập nhật tiến độ</a></li>
-                  <li><a href="../layout/collapsed-sidebar.html"><i className="fa fa-circle-o" /> Collapsed Sidebar</a></li>
+                <li><Link to="/home/nhom"><i className="fa fa-circle-o" />Quản lý</Link></li>
+                  
                 </ul>
               </li>
               <li style={{textAlign: 'left'}}>

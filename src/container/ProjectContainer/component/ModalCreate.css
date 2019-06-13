@@ -1,0 +1,52 @@
+body {
+   height:500px;
+}
+.contai{
+    background-color:aliceblue
+}
+.form-control  input {
+
+    margin-bottom: 8px;
+    border-radius: 2px;
+    width: 60%;
+      height: 5px;
+      margin: 0 auto;
+      border: none; /* <-- This thing here */
+      border:solid 1px #ccc;
+      border-radius: 10px;
+}
+.title{
+    font-size: 26px;
+    font-weight: 700;
+    color: blue;
+    padding-left: 180px;
+    
+}
+.modal-footer{
+    padding-right: 160px;
+}
+.bt-action {
+    padding-left: 150px;
+}
+.modal-footer button{
+   width: 100px;
+   height: 40px;
+   box-shadow: 5px 5px #888888;
+   border: 2px solid;
+  
+}
+.bt-action button{
+   width: 70px;
+   height: 40px;
+   margin-right: 30px;
+   box-shadow: 5px 5px #888888;
+   border: 1px solid;
+}
+.form-control{
+    font-size: 14px;
+    border: 2px solid #8181F7 ;
+    box-shadow: 1px 1px;
+    border-radius: 2px;
+  
+    font-weight: 800 ;
+}

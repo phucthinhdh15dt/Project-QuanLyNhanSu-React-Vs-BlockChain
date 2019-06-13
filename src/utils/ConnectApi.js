@@ -22,7 +22,7 @@ export  function callApiDelete(endpoint, body, accesstoken,idDelete) {
 export  function callApiInfo(endpoint, body, accesstoken) {
     var method ='get' ;
     return axios({
-        url: `${config.API_URL_LV}/${endpoint}`,
+        url: `${config.API_URL_INFO}/${endpoint}`,
         method,
         headers:{
             // 'access-control-request-origin':'*',

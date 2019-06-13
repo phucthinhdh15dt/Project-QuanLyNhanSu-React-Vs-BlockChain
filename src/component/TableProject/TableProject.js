@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import Navigation from '../Layouts/Navigation';
-import Pagination from './Pagination';
 import * as StringNavigation from '../../constants/NavigationConstants';
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
 import './table.css';
 
- class Table extends Component {
+ class TableProject extends Component {
   state = {
     status : '',
     repos: 0 ,
@@ -31,7 +30,7 @@ import './table.css';
 
   loadingDataSearch =async () => {
      
-    callApiPaging('developers',null,null,this.state.page+"&search="+this.refs.search.value)
+    callApiPaging('projects',null,null,this.state.page+"&search="+this.refs.search.value)
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results
@@ -45,7 +44,7 @@ import './table.css';
  
   loadingData =async () => {
      
-    callApiPaging('developers',null,null,this.state.page)
+    callApiPaging('projects',null,null,this.state.page)
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results,
@@ -60,7 +59,7 @@ import './table.css';
        confirmDelete =async (idDelete) =>{
        
           
-            await callApiDelete(`developer`, null, "null",idDelete)
+            await callApiDelete(`projects`, null, "null",idDelete)
             .then(res => this.setState({ 
                  status: res.status,
                  msgerr : 'Xóa thành công'
@@ -111,17 +110,17 @@ import './table.css';
           result = repos.map((tableJson, index) =>{
               return <tr key={tableJson.index}> 
               <td>{index+1}</td>
-              <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
-              <td>{tableJson[prototype[2]]}</td>
-              <td style={{textAlign : "left"}}>{tableJson[prototype[3]]}</td>
-              <td>{tableJson[prototype[4]]}</td>
+              <td style={{textAlign : "left"}}>{tableJson[prototype[0]]}</td>
+              <td>{tableJson[prototype[1]]}</td>
+              <td>{tableJson.team.name}</td>
+              {/* <td style={{textAlign : "left"}}>{tableJson[prototype[2]]}</td> */}
+              <td>{tableJson[prototype[3]]}</td>
+             
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
                 
-                <NavLink to={`/home/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
-                 <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
-                <NavLink to={`/home/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"> <span class="glyphicon glyphicon-info-sign"></span> </NavLink>
+                <NavLink to={`/home/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Xem tiến độ"> <span class="glyphicon glyphicon-signal" style={{fontSize:"20px"}}></span> </NavLink>
                 
                 <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -226,7 +225,7 @@ import './table.css';
           
         <div className="content-wrapper" >
         
-          <Navigation title={StringNavigation.TITLE_NAVIGATION_QUANLYNHANSU} navi={StringNavigation.STRING_NAVIGATION_QUANLYNHANSU} />
+          {/* <Navigation title={StringNavigation.TITLE_NAVIGATION_QUANLYNHANSU} navi={StringNavigation.STRING_NAVIGATION_QUANLYNHANSU} /> */}
           <section className="content">
             <div className="row">
               <div className="col-xs-12">
@@ -320,6 +319,6 @@ import './table.css';
 }
 
 
-export default Table;
+export default TableProject;
 
 

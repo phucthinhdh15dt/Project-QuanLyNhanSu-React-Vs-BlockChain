@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './ModalCreate.css';
-import {callApi, callApiPaging, callApiDelete, callApiEdit } from './../../../utils/ConnectApi';
+import {callApi, callApiPaging, callApiDelete, callApiAdd } from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 
@@ -10,7 +10,7 @@ import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 
 
 
-export default class ModalEdit extends Component {
+export default class ModalCreate extends Component {
   constructor(props) {
     super(props);
    
@@ -25,29 +25,11 @@ export default class ModalEdit extends Component {
       email : '' ,
       education : '',
       team : '',
-      msg : '',
+      msg : '' ,
       arrayTeam : []
     }
   }
-  selectOptionTeam =()=>{
-
-    var result =[] ;
-      
-      if(this.state.arrayTeam.length !== 0){
-          result = this.state.arrayTeam.map((item, index) =>{
-              return <option value={item.id}>{item.name}</option>
-          } );
-      }
-   
-      return  result;
-    
-   
-    
-  }
-  reset =() =>{
-    this.loadingData();
-  }
-  edit =() =>{
+  add =() =>{
   if(validateformBlank()){
     var data = {
       "name": this.refs.name.value,
@@ -57,14 +39,15 @@ export default class ModalEdit extends Component {
       "email":this.refs.email.value,
       "education": this.refs.education.value,
       "day_of_work": 0,
-      "day_of_thinking": 0
+      "day_of_thinking": 0,
+      "team_id" : this.refs.team.value
     };
-   
-    callApiEdit('developer',data ,null, this.props.match.params.id )
+    
+    callApiAdd('developers',data ,localStorage.getItem('token'))
     .then(response => {
       this.setState({ 
         editStatus :true , 
-        msg : "Sửa thành công "
+        msg : "Thành công"
         });
   })
   .catch(function (error) {
@@ -86,21 +69,7 @@ export default class ModalEdit extends Component {
   }
 
   loadingData = () => {
-    callApiPaging('developer/'+ this.props.match.params.id,null,null,'1')
-        .then(response => {
-            this.setState({ 
-              name: response.data.name,
-              birth : response.data.birth,
-              address : response.data.address,
-              level : response.data.level,
-              email : response.data.email,
-              education : response.data.education,
-              team : response.data.team['name']
-              });
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+    
         callApiPaging('teams',null,null,'1')
         .then(response => {
             this.setState({ 
@@ -115,6 +84,20 @@ export default class ModalEdit extends Component {
   componentDidMount (){
     this.loadingData();
   }
+
+  selectOptionTeam =()=>{
+
+    var result =[] ;
+      
+      if(this.state.arrayTeam.length !== 0){
+          result = this.state.arrayTeam.map((item, index) =>{
+              return <option value={item.id}>{item.name}</option>
+          } );
+      }
+      return  result;
+  }
+
+  
 
   onChangeName=(e)=> {
     this.setState({
@@ -154,14 +137,12 @@ export default class ModalEdit extends Component {
     });
    
   }
-
-  onChangeTeam=(e)=> {
+  onChangeTeam =(e)=> {
     this.setState({
       team: e.target.value
     });
    
   }
-  
 
   render() {
     
@@ -175,9 +156,9 @@ export default class ModalEdit extends Component {
               <div className="col-md-8">
               <br /> <br /> <br />  <br/>
                  <div className="title">
-                Sửa nhân sự
+                Thêm Nhân sự
                 </div>
-                <div style={{paddingLeft: "200px" ,color : "#01DF01" ,height: "30px" ,fontSize : "16px",fontWeight: "700"}} >  {this.state.msg} </div>
+                <div style={{paddingLeft: "160px" ,color : "red" ,height: "30px"}} >  {this.state.msg} </div>
                 <form  name="myForm">
               <div className="modal-body container">
              
@@ -186,13 +167,13 @@ export default class ModalEdit extends Component {
                      
                         <label >Tên nhân sự</label>
                         <input type="text" className="form-control" style={{radius :  "10px"}}
-                         value={this.state.name} id="name"  onChange={this.onChangeName}
+                          id="name"  onChange={this.onChangeName}
                          ref='name'
                          />
                       </div>
                       <div className="col-md-2">
                         <label >Ngày sinh</label>
-                        <input type="date" className="form-control" name="birth" value={this.state.birth}
+                        <input type="date" className="form-control" name="birth" 
                           onChange={this.onChangeBirth}  ref='birth'/>
                       </div>
                 </div>
@@ -201,13 +182,13 @@ export default class ModalEdit extends Component {
                     <div className="col-md-2">
                      
                      <label >Đội(Nhóm)</label>
-                     <select className="form-control " value={this.state.team} >
+                     <select className="form-control "  ref='team' onChange={this.onChangeTeam} >
                      {this.selectOptionTeam()}
                     </select>
                    </div>
                    <div className="col-md-4">
                      <label >Email</label>
-                     <input type="text" className="form-control" name="email" value={this.state.email}
+                     <input type="text" className="form-control" name="email" 
                       onChange={this.onChangeEmail}   ref='email' id="email" />
                    </div>
                    </div>
@@ -217,20 +198,20 @@ export default class ModalEdit extends Component {
                      
                      <label >Tốt nghiệp trường</label>
                      <input type="text" className="form-control" style={{radius :  "10px"}}
-                      value={this.state.education} onChange={this.onChangeEducation} id='education'   ref='education'/>
+                      onChange={this.onChangeEducation} id='education'   ref='education'/>
                    </div>
                    <div className="col-md-2">
-                     <label >Cấp độ</label>
+                   <label >Cấp độ</label>
                      
-                        <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
-                            <option value="Fresher">Fresher</option>
-                            <option value="Junior">Junior</option>
-                            <option value="Senior">Senior</option>
-                            <option value="Software Architecture">Software Architecture</option>
-                            <option value="Team Leader">Team Leader</option>
-                            <option value="Project Manage">Project Manager</option>
-                      </select>
-                   </div>
+                     <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
+                     <option value="FR">Fresher</option>
+                     <option value="JR">Junior</option>
+                     <option value="SR">Senior</option>
+                     <option value="SA">Software Architecture</option>
+                     <option value="TD">Team Leader</option>
+                     <option value="PM">Project Manager</option>
+                   </select>
+                </div>
                    </div>
                    <div className="row">
                    <div className="col-md-6">
@@ -243,8 +224,8 @@ export default class ModalEdit extends Component {
                    
                <br/>
               <div className="bt-action">
-              <button type="reset" className="btn btn-success"  onClick={this.reset}>Làm mới </button>
-              <button type="button" className="btn btn-success" onClick={this.edit}>Sửa </button>
+              <button type="reset" className="btn btn-success">Làm mới </button>
+              <button type="button" className="btn btn-success" onClick={this.add}>Thêm </button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>

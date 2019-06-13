@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import Navigation from '../Layouts/Navigation';
-import Pagination from './Pagination';
 import * as StringNavigation from '../../constants/NavigationConstants';
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
 import './table.css';
 
- class Table extends Component {
+ class TableTask extends Component {
   state = {
     status : '',
     repos: 0 ,
@@ -31,7 +30,7 @@ import './table.css';
 
   loadingDataSearch =async () => {
      
-    callApiPaging('developers',null,null,this.state.page+"&search="+this.refs.search.value)
+    callApiPaging('tasks',null,null,this.state.page+"&search="+this.refs.search.value)
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results
@@ -45,7 +44,7 @@ import './table.css';
  
   loadingData =async () => {
      
-    callApiPaging('developers',null,null,this.state.page)
+    callApiPaging('tasks',null,null,this.state.page)
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results,
@@ -60,7 +59,7 @@ import './table.css';
        confirmDelete =async (idDelete) =>{
        
           
-            await callApiDelete(`developer`, null, "null",idDelete)
+            await callApiDelete(`tasks`, null, "null",idDelete)
             .then(res => this.setState({ 
                  status: res.status,
                  msgerr : 'Xóa thành công'
@@ -115,32 +114,15 @@ import './table.css';
               <td>{tableJson[prototype[2]]}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[3]]}</td>
               <td>{tableJson[prototype[4]]}</td>
+              <td>{tableJson.leadTask.name}</td>
+              <td>{tableJson.developer.name}</td>
+              <td>{tableJson.date_start.substring(0,10)}</td>
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
                 
-                <NavLink to={`/home/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
-                 <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
-                <NavLink to={`/home/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"> <span class="glyphicon glyphicon-info-sign"></span> </NavLink>
-                
-                <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Xóa nhân sự</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Bạn có chắc chắn xóa</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"  onClick={()=>this.confirmDelete(tableJson[prototype[0]])} id="confirm">Delete</button>
-                    </div>
-                    </div>
-                </div>
-                </div>
-
+                <NavLink to={`/home/cong-viec/sua/${tableJson[prototype[0]]}`} activeClassName="active" ><button className="btn btn-primary btn-xs madow" title="Sửa" disabled={ tableJson[prototype[3]] ==="Active" ? true :false} ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
+               
             </td>
             
           </tr>
@@ -226,7 +208,7 @@ import './table.css';
           
         <div className="content-wrapper" >
         
-          <Navigation title={StringNavigation.TITLE_NAVIGATION_QUANLYNHANSU} navi={StringNavigation.STRING_NAVIGATION_QUANLYNHANSU} />
+          <Navigation title={StringNavigation.TITLE_NAVIGATION_TASK} navi={StringNavigation.TITLE_NAVIGATION_TASK} />
           <section className="content">
             <div className="row">
               <div className="col-xs-12">
@@ -246,10 +228,10 @@ import './table.css';
                   </div>
                   <div className="col-xs-1" >
                   
-                   <NavLink to={`/home/nhan-su-chinh-thuc/them`} activeClassName="active" >
+                   {/* <NavLink to={`/home/nhan-su-chinh-thuc/them`} activeClassName="active" >
                    <button className="btn btn-success btn-md madow" name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
                   
-                    </NavLink>
+                    </NavLink> */}
                     <br />
                     <br />
 
@@ -265,7 +247,7 @@ import './table.css';
                   <br/>
                   <div className="box-body" >
                   <div style={{height:"450px"}}>
-                    <table className="table table-bordered table-hover tablecss">
+                    <table className="table table-bordered table-hover tablecss" >
                       <thead>
                         <tr style={{textAlign: "center"}}>
                          {this.showListHeader(headerTable)}
@@ -320,6 +302,6 @@ import './table.css';
 }
 
 
-export default Table;
+export default TableTask;
 
 

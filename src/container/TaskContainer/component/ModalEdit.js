@@ -19,14 +19,14 @@ export default class ModalEdit extends Component {
       reposDetail: [],
       editStatus : false,
       name : '',
-      birth : '',
+      leadTask : '',
+      developer : '',
+      descriptions: '',
       address : '',
       level : 'FR' ,
-      email : '' ,
-      education : '',
-      team : '',
+      statusTask : '',
       msg : '',
-      arrayTeam : []
+     
     }
   }
   selectOptionTeam =()=>{
@@ -43,9 +43,6 @@ export default class ModalEdit extends Component {
     
    
     
-  }
-  reset =() =>{
-    this.loadingData();
   }
   edit =() =>{
   if(validateformBlank()){
@@ -64,7 +61,7 @@ export default class ModalEdit extends Component {
     .then(response => {
       this.setState({ 
         editStatus :true , 
-        msg : "Sửa thành công "
+        msg : "Thành công"
         });
   })
   .catch(function (error) {
@@ -86,31 +83,21 @@ export default class ModalEdit extends Component {
   }
 
   loadingData = () => {
-    callApiPaging('developer/'+ this.props.match.params.id,null,null,'1')
+    callApiPaging('task/'+ this.props.match.params.id,null,null,'1')
         .then(response => {
             this.setState({ 
               name: response.data.name,
-              birth : response.data.birth,
-              address : response.data.address,
+              descriptions : response.data.descriptions,
+              status : response.data.status,
               level : response.data.level,
-              email : response.data.email,
-              education : response.data.education,
-              team : response.data.team['name']
+              developer : response.data.developer['name'],
+              leadTask : response.data.leadTask['name']
               });
         })
         .catch(function (error) {
             console.log(error);
         })
-        callApiPaging('teams',null,null,'1')
-        .then(response => {
-            this.setState({ 
-              arrayTeam : response.data.results
-              });
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-
+        
   }
   componentDidMount (){
     this.loadingData();
@@ -121,15 +108,22 @@ export default class ModalEdit extends Component {
       name: e.target.value
     });
   }
-  onChangeBirth =(e)=> {
+  onChangeDescriptions =(e)=> {
     this.setState({
-      birth: e.target.value
+      descriptions: e.target.value
     });
    
   }
-  onChangeEmail=(e)=> {
+  
+  onChangeStatusTask=(e)=> {
     this.setState({
-      email: e.target.value
+      statusTask: e.target.value
+    });
+   
+  }
+  onChangeDeveloper=(e)=> {
+    this.setState({
+      developer: e.target.value
     });
    
   }
@@ -141,26 +135,14 @@ export default class ModalEdit extends Component {
    
   }
 
-  onChangeEducation=(e)=> {
+  onChangeLeadTask=(e)=> {
     this.setState({
-      education: e.target.value
+      leadTask: e.target.value
     });
    
   }
 
-  onChangeAddress=(e)=> {
-    this.setState({
-      address: e.target.value
-    });
-   
-  }
-
-  onChangeTeam=(e)=> {
-    this.setState({
-      team: e.target.value
-    });
-   
-  }
+  
   
 
   render() {
@@ -175,76 +157,79 @@ export default class ModalEdit extends Component {
               <div className="col-md-8">
               <br /> <br /> <br />  <br/>
                  <div className="title">
-                Sửa nhân sự
+                Sửa công việc
                 </div>
-                <div style={{paddingLeft: "200px" ,color : "#01DF01" ,height: "30px" ,fontSize : "16px",fontWeight: "700"}} >  {this.state.msg} </div>
+                <div style={{paddingLeft: "160px" ,color : "red" ,height: "30px"}} >  {this.state.msg} </div>
                 <form  name="myForm">
               <div className="modal-body container">
              
               <div className="row">
-                      <div className="col-md-4">
+                      <div className="col-md-6">
                      
-                        <label >Tên nhân sự</label>
+                        <label >Tên công việc</label>
                         <input type="text" className="form-control" style={{radius :  "10px"}}
                          value={this.state.name} id="name"  onChange={this.onChangeName}
                          ref='name'
                          />
                       </div>
-                      <div className="col-md-2">
-                        <label >Ngày sinh</label>
-                        <input type="date" className="form-control" name="birth" value={this.state.birth}
-                          onChange={this.onChangeBirth}  ref='birth'/>
-                      </div>
+                      
                 </div>
                
                   <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-md-3">
                      
-                     <label >Đội(Nhóm)</label>
-                     <select className="form-control " value={this.state.team} >
-                     {this.selectOptionTeam()}
-                    </select>
+                     <label >Người giao việc</label>
+                     
+                     <input type="text" readOnly className="form-control" name="leadTask" value={this.state.leadTask}
+                      onChange={this.onChangeLeadTask}   ref='leadTask' id="leadTask" />
+                  
                    </div>
-                   <div className="col-md-4">
-                     <label >Email</label>
-                     <input type="text" className="form-control" name="email" value={this.state.email}
-                      onChange={this.onChangeEmail}   ref='email' id="email" />
+                   <div className="col-md-3">
+                     <label >Người nhận việc</label>
+                     <input type="text" className="form-control" name="developer" value={this.state.developer}
+                      onChange={this.onChangeDeveloper}   ref='developer' id="developer" />
                    </div>
                    </div>
 
                    <div className="row">
-                    <div className="col-md-4">
-                     
-                     <label >Tốt nghiệp trường</label>
-                     <input type="text" className="form-control" style={{radius :  "10px"}}
-                      value={this.state.education} onChange={this.onChangeEducation} id='education'   ref='education'/>
-                   </div>
-                   <div className="col-md-2">
-                     <label >Cấp độ</label>
+                   <div className="col-md-3">
+                     <label >Mức độ</label>
                      
                         <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
-                            <option value="Fresher">Fresher</option>
-                            <option value="Junior">Junior</option>
-                            <option value="Senior">Senior</option>
-                            <option value="Software Architecture">Software Architecture</option>
-                            <option value="Team Leader">Team Leader</option>
-                            <option value="Project Manage">Project Manager</option>
+                        <option value="Easy">EASY</option>
+                        <option value="Medium">MEDIUM</option>
+                        <option value="Hard">HARD</option>
+                        <option value="Extreme Hard">EXTREMELY</option>
+                        
+                        
+                      </select>
+                   </div>
+                   <div className="col-md-3">
+                     <label >Trạng thái</label>
+                     
+                        <select className="form-control " value={this.state.statusTask} ref='statusTask' onChange={this.onChangeStatusTask}>
+                        <option value="Active" >ACTIVE</option>
+                        <option value="On Processing">ON PROCESSING</option>
+                        <option value="Pending">PENDING</option>
+                        <option value="Finished">FINISHED</option>
+                        <option value="Closed">CLOSED</option>
+                        
                       </select>
                    </div>
                    </div>
                    <div className="row">
                    <div className="col-md-6">
-                   <label >Địa chỉ </label> <br/>
-                   <textarea rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
-                    {/* <textarea rows={4} classname="form-control" cols={50} ref="address" onchange={this.onChangeAddress} defaultValue={this.state.education} /> */}
+                   <label >Mô tả công việc</label> <br/>
+                   <textarea rows={4} id='address' value={this.state.descriptions} ref='address' onChange={this.onChangeDescriptions} className="form-control" />
+                   
                    </div>
                    </div>
                    </div>
                    
                <br/>
               <div className="bt-action">
-              <button type="reset" className="btn btn-success"  onClick={this.reset}>Làm mới </button>
-              <button type="button" className="btn btn-success" onClick={this.edit}>Sửa </button>
+              <button type="reset" className="btn btn-success">Làm mới </button>
+              <button type="button" className="btn btn-success" onClick={this.edit}>Giao việc </ button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>

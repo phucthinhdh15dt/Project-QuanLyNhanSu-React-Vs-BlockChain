@@ -44,9 +44,6 @@ export default class ModalEdit extends Component {
    
     
   }
-  reset =() =>{
-    this.loadingData();
-  }
   edit =() =>{
   if(validateformBlank()){
     var data = {
@@ -64,7 +61,7 @@ export default class ModalEdit extends Component {
     .then(response => {
       this.setState({ 
         editStatus :true , 
-        msg : "Sửa thành công "
+        msg : "Thành công"
         });
   })
   .catch(function (error) {
@@ -175,9 +172,9 @@ export default class ModalEdit extends Component {
               <div className="col-md-8">
               <br /> <br /> <br />  <br/>
                  <div className="title">
-                Sửa nhân sự
+                Sửa Nhân sự
                 </div>
-                <div style={{paddingLeft: "200px" ,color : "#01DF01" ,height: "30px" ,fontSize : "16px",fontWeight: "700"}} >  {this.state.msg} </div>
+                <div style={{paddingLeft: "160px" ,color : "red" ,height: "30px"}} >  {this.state.msg} </div>
                 <form  name="myForm">
               <div className="modal-body container">
              
@@ -223,12 +220,12 @@ export default class ModalEdit extends Component {
                      <label >Cấp độ</label>
                      
                         <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
-                            <option value="Fresher">Fresher</option>
-                            <option value="Junior">Junior</option>
-                            <option value="Senior">Senior</option>
-                            <option value="Software Architecture">Software Architecture</option>
-                            <option value="Team Leader">Team Leader</option>
-                            <option value="Project Manage">Project Manager</option>
+                        <option value="FR">Fresher</option>
+                        <option value="JR">Junior</option>
+                        <option value="SR">Senior</option>
+                        <option value="SA">Software Architecture</option>
+                        <option value="TD">Team Leader</option>
+                        <option value="PM">Project Manager</option>
                       </select>
                    </div>
                    </div>
@@ -243,7 +240,7 @@ export default class ModalEdit extends Component {
                    
                <br/>
               <div className="bt-action">
-              <button type="reset" className="btn btn-success"  onClick={this.reset}>Làm mới </button>
+              <button type="reset" className="btn btn-success">Làm mới </button>
               <button type="button" className="btn btn-success" onClick={this.edit}>Sửa </button>
               </div>
               <div className="modal-footer">

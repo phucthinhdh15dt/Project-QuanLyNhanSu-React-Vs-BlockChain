@@ -111,7 +111,7 @@ import './table.css';
           result = repos.map((tableJson, index) =>{
            
               return <tr key={tableJson.index}> 
-              <td>{tableJson[prototype[0]]}</td>
+              <td>{index+1}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
               <td>{tableJson[prototype[2]]}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[3]]}</td>
