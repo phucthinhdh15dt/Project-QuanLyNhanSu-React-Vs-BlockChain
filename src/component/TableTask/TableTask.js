@@ -4,7 +4,7 @@ import * as StringNavigation from '../../constants/NavigationConstants';
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
 import './table.css';
-
+import Loading from './../../component/Loading/Loading';
  class TableTask extends Component {
   state = {
     status : '',
@@ -12,7 +12,8 @@ import './table.css';
     msgerr : '',
     page : 1 ,
     search : '',
-    count : 0
+    count : 0 ,
+    zindex : 1
   }
 
  componentDidMount(){
@@ -29,11 +30,14 @@ import './table.css';
   }
 
   loadingDataSearch =async () => {
-     
+    this.setState({ 
+        zindex : 1
+        });
     callApiPaging('tasks',null,null,this.state.page+"&search="+this.refs.search.value)
         .then(async(response) => {
             await this.setState({ 
-              repos: response.data.results
+              repos: response.data.results,
+              zindex : -10000
               });
         })
         .catch(function (error) {
@@ -48,7 +52,8 @@ import './table.css';
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results,
-              count : response.data.count
+              count : response.data.count,
+              zindex : -10000
               });
         })
         .catch(function (error) {
@@ -57,7 +62,6 @@ import './table.css';
 
   }
        confirmDelete =async (idDelete) =>{
-       
           
             await callApiDelete(`tasks`, null, "null",idDelete)
             .then(res => this.setState({ 
@@ -207,8 +211,8 @@ import './table.css';
         return (
           
         <div className="content-wrapper" >
-        
-          <Navigation title={StringNavigation.TITLE_NAVIGATION_TASK} navi={StringNavigation.TITLE_NAVIGATION_TASK} />
+        <Loading  zindex ={this.state.zindex}/>
+          {/* <Navigation title={StringNavigation.TITLE_NAVIGATION_TASK} navi={StringNavigation.TITLE_NAVIGATION_TASK} /> */}
           <section className="content">
             <div className="row">
               <div className="col-xs-12">

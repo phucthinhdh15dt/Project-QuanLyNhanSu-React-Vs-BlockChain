@@ -5,7 +5,7 @@ import * as StringNavigation from '../../constants/NavigationConstants';
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
 import './table.css';
-
+import Loading from './../../component/Loading/Loading';
  class Table extends Component {
   state = {
     status : '',
@@ -13,7 +13,8 @@ import './table.css';
     msgerr : '',
     page : 1 ,
     search : '',
-    count : 0
+    count : 0 ,
+    zindex : 1
   }
 
  componentDidMount(){
@@ -30,11 +31,14 @@ import './table.css';
   }
 
   loadingDataSearch =async () => {
-     
+    this.setState({ 
+        zindex : 1
+        });
     callApiPaging('developers',null,null,this.state.page+"&search="+this.refs.search.value)
         .then(async(response) => {
             await this.setState({ 
-              repos: response.data.results
+              repos: response.data.results,
+              zindex : -1000
               });
         })
         .catch(function (error) {
@@ -49,7 +53,8 @@ import './table.css';
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results,
-              count : response.data.count
+              count : response.data.count ,
+              zindex : -1000
               });
         })
         .catch(function (error) {
@@ -58,12 +63,15 @@ import './table.css';
 
   }
        confirmDelete =async (idDelete) =>{
-       
+        this.setState({ 
+            zindex : 1
+            });
           
             await callApiDelete(`developer`, null, "null",idDelete)
             .then(res => this.setState({ 
                  status: res.status,
-                 msgerr : 'Xóa thành công'
+                 msgerr : 'Xóa thành công',
+                 zindex : -1000
               }))
            .catch(error => console.log("Fetch Error "+ error));
           await this.loadingData();  
@@ -226,7 +234,7 @@ import './table.css';
           
         <div className="content-wrapper" >
         
-          <Navigation title={StringNavigation.TITLE_NAVIGATION_QUANLYNHANSU} navi={StringNavigation.STRING_NAVIGATION_QUANLYNHANSU} />
+        <Loading  zindex ={this.state.zindex}/>
           <section className="content">
             <div className="row">
               <div className="col-xs-12">

@@ -16,7 +16,9 @@ export default class App extends Component {
     
     return (
       <Router history={history}> 
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/Login" component={Login} />
+          <Route exact path="/logout" component={Login} />
           <Route  path="/home" component={Home} />
       </Router > 
     )

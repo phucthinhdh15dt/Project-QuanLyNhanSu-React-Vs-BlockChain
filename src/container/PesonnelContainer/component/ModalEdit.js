@@ -167,18 +167,33 @@ export default class ModalEdit extends Component {
     
     return (
            
-            <div className="container" className="contai">
-            
-              <div className="row"> 
-              <div className="col-md-4">
-              </div>
-              <div className="col-md-8">
-              <br /> <br /> <br />  <br/>
-                 <div className="title">
-                Sửa nhân sự
-                </div>
-                <div style={{paddingLeft: "200px" ,color : "#01DF01" ,height: "30px" ,fontSize : "16px",fontWeight: "700"}} >  {this.state.msg} </div>
-                <form  name="myForm">
+      <div className="container" className="contai" >
+      <br /> <br /> <br />
+        <div className="row" > 
+        <div className="col-md-4">
+        <div className="col-md-4">
+    <div className="col-md-4">
+  
+</div>
+
+</div>
+      </div>
+
+      <div className="col-md-7"  >
+      
+      
+        <form className="form-style-9">
+        <div className="title">
+         
+        Quản lý nhân sự
+  
+         </div>
+         <div style={{paddingLeft: "200px" ,zIndex : "1" ,color : "red" ,height: "13px" ,fontSize : "13px",fontWeight: "700"}} >  {this.state.msg} </div>
+         <br/>
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{height: '70px', width: '100%'}}>
+            <path d="M0.00,92.27 C216.83,192.92 304.30,8.39 500.00,109.03 L500.00,0.00 L0.00,0.00 Z" style={{stroke: 'none', fill: '#e1efe3'}} />
+           
+          </svg>
               <div className="modal-body container">
              
               <div className="row">

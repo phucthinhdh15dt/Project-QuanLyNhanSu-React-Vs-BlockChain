@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link ,Switch } from "react-router-dom";
 import PesonnelContainer from '../container/PesonnelContainer/PesonnelContainer';
 import TeamContainer from '../container/TeamContainer/TeamContainer';
 import Home from '../component/Home/Home';
+
 import Detail from '../container/PesonnelContainer/component/Detail';
 import ModalCreate from '../container/PesonnelContainer/component/ModalCreate';
 import ModalEdit from '../container/PesonnelContainer/component/ModalEdit';
@@ -28,6 +29,7 @@ export default class RouterURL extends Component {
         return (
                 <div>
                     <Switch >
+                    
                         {/* quan ly nhan su */}
                         <Route exact path="/home/nhan-su-chinh-thuc" component={PesonnelContainer} />
                         

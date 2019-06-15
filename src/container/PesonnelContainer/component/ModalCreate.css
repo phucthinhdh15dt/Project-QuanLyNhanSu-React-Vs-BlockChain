@@ -16,7 +16,8 @@ body {
       border-radius: 10px;
 }
 .title{
-    font-size: 26px;
+    /* thinh-np */
+    font-size: 16px; 
     font-weight: 700;
     color: blue;
     padding-left: 180px;
@@ -48,5 +49,17 @@ body {
     box-shadow: 1px 1px;
     border-radius: 2px;
   
-    font-weight: 800 ;
+    font-weight: 500 ;
 }
+.form-style-9{
+	max-width: 650px;
+	background: #FAFAFA;
+    padding: 30px;
+   
+	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+	border-radius: 10px;
+	border: 3px solid #305A72;
+}
+
+
+
