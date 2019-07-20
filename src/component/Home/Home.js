@@ -1,7 +1,85 @@
 import React, { Component } from 'react'
-
+import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+   
+    this.state = {
+      countProjects: 0,
+      countDevelopers : 0,
+      countTeams : 0 ,
+      countTasks : 0 ,
+      countContracts : 0
+    }
+  }
+  loadingDataDev =async () => {
+    callApiPaging('developers',null,null,1)
+        .then(async(response) => {
+            await this.setState({ 
+              countDevelopers : response.data.count ,
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+  }
+
+  loadingDataContracts =async () => {
+    callApiPaging('contract',null,null,1)
+        .then(async(response) => {
+            await this.setState({ 
+              countContracts : response.data.count ,
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+  }
+
+  loadingDataTasks =async () => {
+    callApiPaging('tasks',null,null,1)
+        .then(async(response) => {
+            await this.setState({ 
+              countTasks : response.data.count ,
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+  }
+
+  loadingDataProject =async () => {
+    callApiPaging('projects',null,null,1)
+        .then(async(response) => {
+            await this.setState({ 
+              countProjects : response.data.count ,
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+  }
+
+  loadingDataTeam =async () => {
+    callApiPaging('teams',null,null,1)
+        .then(async(response) => {
+            await this.setState({ 
+              countTeams : response.data.count ,
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+  }
+  componentDidMount (){
+    this.loadingDataProject();
+    this.loadingDataTeam();
+    this.loadingDataDev();
+    this.loadingDataTasks();
+    this.loadingDataContracts();
+  }
   render() {
+    
     return (
         <div className="content-wrapper">
         {/* Content Header (Page header) */}
@@ -19,24 +97,13 @@ export default class Home extends Component {
         <section className="content">
           {/* Info boxes */}
           <div className="row">
-            <div className="col-md-3 col-sm-6 col-xs-12">
-              <div className="info-box">
-                <span className="info-box-icon bg-aqua"><i className="ion ion-ios-gear-outline" /></span>
-                <div className="info-box-content">
-                  <span className="info-box-text">CPU Traffic</span>
-                  <span className="info-box-number">90<small>%</small></span>
-                </div>
-                {/* /.info-box-content */}
-              </div>
-              {/* /.info-box */}
-            </div>
             {/* /.col */}
-            <div className="col-md-3 col-sm-6 col-xs-12">
+            <div className="col-md-4 col-sm-6 col-xs-12">
               <div className="info-box">
-                <span className="info-box-icon bg-red"><i className="fa fa-google-plus" /></span>
+                <span className="info-box-icon bg-red"><i className="fa ion-code-working" /></span>
                 <div className="info-box-content">
-                  <span className="info-box-text">Likes</span>
-                  <span className="info-box-number">41,410</span>
+                  <span className="info-box-text">Tổng số dự án </span>
+                  <span className="info-box-number">{this.state.countProjects}</span>
                 </div>
                 {/* /.info-box-content */}
               </div>
@@ -45,24 +112,24 @@ export default class Home extends Component {
             {/* /.col */}
             {/* fix for small devices only */}
             <div className="clearfix visible-sm-block" />
-            <div className="col-md-3 col-sm-6 col-xs-12">
+            <div className="col-md-4 col-sm-6 col-xs-12">
               <div className="info-box">
-                <span className="info-box-icon bg-green"><i className="ion ion-ios-cart-outline" /></span>
+                <span className="info-box-icon bg-green"><i className="ion ion-ios-contact" /></span>
                 <div className="info-box-content">
-                  <span className="info-box-text">Sales</span>
-                  <span className="info-box-number">760</span>
+                  <span className="info-box-text">Tổng số nhân sự</span>
+                  <span className="info-box-number">{this.state.countDevelopers}</span>
                 </div>
                 {/* /.info-box-content */}
               </div>
               {/* /.info-box */}
             </div>
             {/* /.col */}
-            <div className="col-md-3 col-sm-6 col-xs-12">
+            <div className="col-md-4 col-sm-6 col-xs-12">
               <div className="info-box">
                 <span className="info-box-icon bg-yellow"><i className="ion ion-ios-people-outline" /></span>
                 <div className="info-box-content">
-                  <span className="info-box-text">New Members</span>
-                  <span className="info-box-number">2,000</span>
+                  <span className="info-box-text">Tổng số nhóm</span>
+                  <span className="info-box-number">{this.state.countTeams}</span>
                 </div>
                 {/* /.info-box-content */}
               </div>
@@ -75,7 +142,7 @@ export default class Home extends Component {
             <div className="col-md-12">
               <div className="box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Monthly Recap Report</h3>
+                  <h3 className="box-title">Báo cáo tháng trước</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse"><i className="fa fa-minus" />
                     </button>
@@ -109,35 +176,35 @@ export default class Home extends Component {
                     {/* /.col */}
                     <div className="col-md-4">
                       <p className="text-center">
-                        <strong>Goal Completion</strong>
+                        <strong>Tổng quan</strong>
                       </p>
                       <div className="progress-group">
-                        <span className="progress-text">Add Products to Cart</span>
-                        <span className="progress-number"><b>160</b>/200</span>
+                        <span className="progress-text">Số dự án hoàn thành</span>
+                        <span className="progress-number"><b>30</b>/{this.state.countProjects}</span>
                         <div className="progress sm">
-                          <div className="progress-bar progress-bar-aqua" style={{width: '80%'}} />
+                          <div className="progress-bar progress-bar-aqua" style={{width: '30%'}} />
                         </div>
                       </div>
                       {/* /.progress-group */}
                       <div className="progress-group">
-                        <span className="progress-text">Complete Purchase</span>
-                        <span className="progress-number"><b>310</b>/400</span>
+                        <span className="progress-text">Tổng số công việc</span>
+                        <span className="progress-number"><b>1</b>/{this.state.tasks}</span>
                         <div className="progress sm">
-                          <div className="progress-bar progress-bar-red" style={{width: '80%'}} />
+                          <div className="progress-bar progress-bar-red" style={{width: '50%'}} />
                         </div>
                       </div>
                       {/* /.progress-group */}
                       <div className="progress-group">
-                        <span className="progress-text">Visit Premium Page</span>
-                        <span className="progress-number"><b>480</b>/800</span>
+                        <span className="progress-text">Nhân sự mới trong năm</span>
+                        <span className="progress-number"><b>2/</b>{this.state.countDevelopers}</span>
                         <div className="progress sm">
                           <div className="progress-bar progress-bar-green" style={{width: '80%'}} />
                         </div>
                       </div>
                       {/* /.progress-group */}
                       <div className="progress-group">
-                        <span className="progress-text">Send Inquiries</span>
-                        <span className="progress-number"><b>250</b>/500</span>
+                        <span className="progress-text">Hợp đồng</span>
+                        <span className="progress-number"><b>250</b>/{this.state.countContracts}</span>
                         <div className="progress sm">
                           <div className="progress-bar progress-bar-yellow" style={{width: '80%'}} />
                         </div>
@@ -195,7 +262,7 @@ export default class Home extends Component {
             </div>
            
           </div>
-       }
+       
         
         </section>
       </div>

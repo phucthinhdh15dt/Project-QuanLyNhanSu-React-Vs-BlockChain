@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link ,Switch } from "react-router-dom";
-
 import PesonnelContainer from '../container/PesonnelContainer/PesonnelContainer';
 import TeamContainer from '../container/TeamContainer/TeamContainer';
 import Home from '../component/Home/Home';
@@ -21,6 +20,7 @@ import DetailTask from '../container/TaskContainer/component/Detail';
 import ModalCreateTask from '../container/TaskContainer/component/ModalCreate';
 import ModalEditTask from '../container/TaskContainer/component/ModalEdit';
 
+
 //quan ly du an
 
 import ProjectContainer from '../container/ProjectContainer/ProjectContainer';
@@ -29,7 +29,8 @@ export default class RouterURL extends Component {
         return (
                 <div>
                     <Switch >
-                    
+                    Home
+                    <Route exact path="/home" component={Home} />
                         {/* quan ly nhan su */}
                         <Route exact path="/home/nhan-su-chinh-thuc" component={PesonnelContainer} />
                         

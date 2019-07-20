@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {callApiInfo} from './../../utils/ConnectApi';
 import {callApibyIdHost2} from './../../utils/ConnectApiHost2';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 export default class HeaderTop extends Component {
   constructor(props) {
     super(props);
@@ -99,7 +100,7 @@ export default class HeaderTop extends Component {
             {/* Messages: style can be found in dropdown.less*/}
 
             {/*Notify */}
-            <li className="dropdown tasks-menu">
+            <li className="dropdown tasks-menu"   >
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                 <i className="fa fa-bell" />
                 <span className="label label-danger">{this.state.countListNotify}</span>
@@ -121,12 +122,12 @@ export default class HeaderTop extends Component {
             
             
             {/* Tasks: style can be found in dropdown.less */}
-            <li className="dropdown tasks-menu">
+            <li className="dropdown tasks-menu" style={{marginRight : "100px"}}>
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                 <i className="fa fa-flag-o" />
                 <span className="label label-danger">4</span>
               </a>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu" style={{paddingRight: "70px"}}>
                 <li className="header">Bạn còn 4 công việc chưa hoàn thành </li>
                 <li>
                   {/* inner menu: contains the actual data */}
@@ -194,39 +195,9 @@ export default class HeaderTop extends Component {
                 </li>
               </ul>
             </li>
-            {/* User Account: style can be found in dropdown.less */}
-            <li className="dropdown user user-menu">
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                <img src="../../dist/img/user2-160x160.jpg" className="user-image" alt="User Image" />
-                <span className="hidden-xs">{this.state.reposDetail.username}</span>
-              </a>
-              <ul className="dropdown-menu">
-                {/* User image */}
-                <li className="user-header">
-                  <img src="http://vlkhanhhoa.vieclamvietnam.gov.vn/images/avatar2-large.jpg" className="img-circle" alt="User Image" />
-                  <p>
-                    <small>{this.state.reposDetail.email}</small>
-                  </p>
-                </li>
-               
-                {/* Menu Footer*/}
-                <li className="user-footer">
-                  <div className="pull-left">
-                  <Link to="/profile"><i className="fa fa-circle-o" /> Profile </Link>
-                    
-                  </div>
-                 
-                </li>
-              </ul>
-            </li>
-            {/* Control Sidebar Toggle Button */}
-            <li>
-              <a href="#" data-toggle="control-sidebar"><i className="fa fa-gears" /></a>
-            </li>
           </ul>
         </div>
-      </nav>
-          
+      </nav>          
         )
     }
 }

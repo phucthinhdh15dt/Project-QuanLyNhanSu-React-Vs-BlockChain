@@ -62,9 +62,10 @@ export default class ModalEdit extends Component {
    
     callApiEdit('developer',data ,null, this.props.match.params.id )
     .then(response => {
+      this.showMsg();
       this.setState({ 
         editStatus :true , 
-        msg : "Sửa thành công "
+
         });
   })
   .catch(function (error) {
@@ -84,7 +85,11 @@ export default class ModalEdit extends Component {
   goBack=()=>{
     history.goBack('/home/nhan-su-chinh-thuc');
   }
-
+showMsg = () => {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
   loadingData = () => {
     callApiPaging('developer/'+ this.props.match.params.id,null,null,'1')
         .then(response => {
@@ -264,6 +269,7 @@ export default class ModalEdit extends Component {
               <div className="modal-footer">
                 <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
               </div>
+              <div id="snackbar" >Sửa thành công </div>
               </form>
               </div>
               </div>

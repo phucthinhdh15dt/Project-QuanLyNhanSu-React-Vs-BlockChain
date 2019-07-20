@@ -31,8 +31,8 @@ export default class Login extends Component {
         if(response.status === 200){
          
         localStorage.setItem('token', response.data.access);
-            
-        window.location = "http://localhost:3000/home/nhan-su-chinh-thuc";
+           
+        window.location = "http://" + window.location.host + "/home";
         }else{
           this.setState({
              msgError : "Tài khoản hoặc mật khẩu không đúng" 

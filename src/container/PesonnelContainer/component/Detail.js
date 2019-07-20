@@ -3,6 +3,7 @@ import './Detail.css';
 import {callApi, callApiPaging, callApiDelete } from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {Line} from 'react-chartjs-2';
+import { Link,Redirect,NavLink  } from 'react-router-dom';
 export default class Detail extends Component {
   state = {
     info: [],
@@ -90,6 +91,7 @@ export default class Detail extends Component {
                   <h3><strong> Hợp đồng  </strong></h3>                    
                   <p>Tên : <small>{contract !=null ? contract.name : '' }</small></p>
                   <p>Mô tả  : <small>{contract !=null ? contract.descriptions : ''}</small></p>
+                  <NavLink to={`/home/nhom/hop-dong/${contract !=null ? contract.id : ''}`} activeClassName="active" title="Chi tiết">Chi tiết ... </NavLink>
                   <hr className="pill" />
                 </div>
                 <div className="col-md-9">
@@ -110,6 +112,7 @@ export default class Detail extends Component {
                   <h3><strong> Nhóm   </strong></h3>                    
                   <p>Thuộc nhóm : <small>{team != null ? team.name : ''}</small></p>
                   <p>Mô tả : <small>{team !=null ? team.descriptions : '' }</small></p>
+                  <NavLink to={`/home/nhom/chi-tiet/${team !=null ? team.id : ''}`} activeClassName="active" title="Chi tiết">Chi tiết ... </NavLink>
                   <hr className="pill" />
                 </div>
 

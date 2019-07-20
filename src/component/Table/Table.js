@@ -29,6 +29,11 @@ import Loading from './../../component/Loading/Loading';
   ActionSearch =async() =>{
    await this.loadingDataSearch();
   }
+  showMsg = () => {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
 
   loadingDataSearch =async () => {
     this.setState({ 
@@ -70,11 +75,11 @@ import Loading from './../../component/Loading/Loading';
             await callApiDelete(`developer`, null, "null",idDelete)
             .then(res => this.setState({ 
                  status: res.status,
-                 msgerr : 'Xóa thành công',
                  zindex : -1000
               }))
            .catch(error => console.log("Fetch Error "+ error));
           await this.loadingData();  
+          await this.showMsg();
         
     }
      rederdelete =()=>{
@@ -86,9 +91,11 @@ import Loading from './../../component/Loading/Loading';
        
             
                 await   this.setState({ 
-                    page: this.state.page + 1
+                    page: this.state.page + 1 ,
+                    zindex : 1
                   })
-                await this.loadingData()
+                await this.loadingData() ;
+                
              
           
         
@@ -98,12 +105,15 @@ import Loading from './../../component/Loading/Loading';
         
             if(this.state.page===1){
                 await   this.setState({ 
-                    msgerr: ""
+                    msgerr: "" ,
+                    zindex : -1000
+                  
                   })
             }
             if(this.state.page!==1)
              await   this.setState({ 
-            page: this.state.page - 1
+            page: this.state.page - 1,
+            zindex : 1
           })
       
       await this.loadingData()
@@ -317,6 +327,7 @@ import Loading from './../../component/Loading/Loading';
               </div>
             </div>
           </section>
+          <div id="snackbar">Xóa thành công</div>
         </div>
 
 

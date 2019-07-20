@@ -43,7 +43,7 @@ export default class SideBar extends Component {
                 <img src="../../dist/img/user2-160x160.jpg" className="img-circle" alt="User Image" />
               </div>
               <div className="pull-left info">
-                <p>{this.state.reposDetail.username}</p>
+                <p>{this.state.reposDetail != null ? this.state.reposDetail.username : 'hethantoken'}</p>
                 
                 <a href="#"> Trực tuyến</a>
                 <Link to="/login" onClick={this.logout}><i className="fa fa-circle text-success"  /> Đăng xuất</Link>
