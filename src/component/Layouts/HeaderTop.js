@@ -1,6 +1,6 @@
 // Header.js
 import React, {Component} from 'react';
-import {callApiInfo} from './../../utils/ConnectApi';
+import {callApiInfo, callApiRefresh} from './../../utils/ConnectApi';
 import {callApibyIdHost2} from './../../utils/ConnectApiHost2';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -11,10 +11,18 @@ export default class HeaderTop extends Component {
     this.state = {
       reposDetail: [],
       listNotifi : [],
-      countListNotify : 0
+      countListNotify : 0,
     }
   }
   loadingData = () => {
+    var data = {
+      "refresh": localStorage.getItem('refreshToken')
+      
+    };
+    var username = {
+      "username": localStorage.getItem('username')
+      
+    };
     callApiInfo('me/',null,localStorage.getItem('token'))
         .then(response => {
             this.setState({ 
@@ -22,11 +30,16 @@ export default class HeaderTop extends Component {
               });
         })
         .catch(function (error) {
-            console.log(error);
+          callApiRefresh('api/token/refresh/',data,null)
+          .then(responsere => {
+            localStorage.setItem('token', responsere.data.access);
+          })
+          .catch(function (error) {
+              console.log(error);
+          })
         })
         // get notification
-        callApibyIdHost2('Notification/GetByUsername',null,"thinhnp")
-        
+        callApibyIdHost2('TaskNoti',null,"?userName="+username.username)
         .then(response => {
           this.setState({ 
             listNotifi : response.data
@@ -36,7 +49,7 @@ export default class HeaderTop extends Component {
           console.log(error);
       })
       // get notification
-      callApibyIdHost2('Notification/CountByUsername',null,"thinhnp")
+      callApibyIdHost2('TaskNoti/getNotiCount',null, username.username)
       .then(response => {
         this.setState({ 
           countListNotify : response.data
@@ -53,22 +66,34 @@ export default class HeaderTop extends Component {
       if(this.state.listNotifi.length > 0){
          
           result = this.state.listNotifi.map((tableJson, index) =>{
-           
-              return <li>
-              <a href="#">
-                <h3>
-                  {tableJson['contentNotify']}
+            if(tableJson.status === 0){
+             
+              return <li  ><Link to={`/home/thong-bao/${tableJson.id}`}>
+                <h3><span class="glyphicon glyphicon-eye-open" style={{paddingRight: "10px" , color : "black" }}></span>
+                  {tableJson['contentNotify'].substring(0,30)+"..."}
                   <small className="pull-right"><i class="fa fa-check" aria-hidden="true"></i></small>
+                  
+                  <br/><br/>
+                  <small className="pull-left"> <span class="glyphicon glyphicon-calendar"></span> {tableJson['createDate'].substring(0, 10)}</small>
+                  <small className="pull-right"><i class="fa fa-clock-o"></i> {tableJson['createDate'].substring(11, 20)}</small>
                 </h3>
-                <div className="progress xs">
-                  <div className="progress-bar progress-bar-green" style={{width: '40%'}} role="progressbar" aria-valuenow={20} aria-valuemin={0} aria-valuemax={100}>
-                    <span className="sr-only">40% Complete</span>
-                  </div>
-                </div>
-              </a>
+                  <hr className="pill" />
+              </Link>
             </li>
-              
-              // <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
+            }else{
+              return <li style={{background: "#edf2fa"}} ><Link to={`/home/thong-bao/${tableJson.id}`}>
+              <h3><span class="glyphicon glyphicon-eye-open" style={{paddingRight: "10px" , color : "black" }}></span>
+                {tableJson['contentNotify'].substring(0,30)+"..."}
+                <small className="pull-right"><i class="fa fa-check" aria-hidden="true"></i></small>
+                
+                <br/><br/>
+                <small className="pull-left"> <span class="glyphicon glyphicon-calendar"></span> {tableJson['createDate'].substring(0, 10)}</small>
+                <small className="pull-right"><i class="fa fa-clock-o"></i> {tableJson['createDate'].substring(11, 20)}</small>
+              </h3>
+                <hr className="pill" />
+            </Link>
+          </li>
+            }
               
               
            
@@ -89,12 +114,12 @@ export default class HeaderTop extends Component {
         
         <nav className="navbar navbar-static-top">
       
-        <a href="#" className="sidebar-toggle" data-toggle="push-menu" role="button">
+        {/* <a href="#" className="sidebar-toggle" data-toggle="push-menu" role="button">
           <span className="sr-only">Toggle navigation</span>
           <span className="icon-bar" />
           <span className="icon-bar" />
           <span className="icon-bar" />
-        </a>
+        </a> */}
         <div className="navbar-custom-menu">
           <ul className="nav navbar-nav">
             {/* Messages: style can be found in dropdown.less*/}
@@ -103,7 +128,7 @@ export default class HeaderTop extends Component {
             <li className="dropdown tasks-menu"   >
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                 <i className="fa fa-bell" />
-                <span className="label label-danger">{this.state.countListNotify}</span>
+                <span className="label label-danger"></span>
               </a>
               <ul className="dropdown-menu">
                 {/* <li className="header">Bạn có {this.state.countListNotify} thông báo mới </li> */}
@@ -115,7 +140,7 @@ export default class HeaderTop extends Component {
                   </ul>
                 </li>
                 <li className="footer">
-                  <a href="#">View all tasks</a>
+                  <a href="#">Xem tất cả công việc</a>
                 </li>
               </ul>
             </li>
@@ -125,73 +150,19 @@ export default class HeaderTop extends Component {
             <li className="dropdown tasks-menu" style={{marginRight : "100px"}}>
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                 <i className="fa fa-flag-o" />
-                <span className="label label-danger">4</span>
+                <span className="label label-danger">{this.state.countListNotify}</span>
               </a>
-              <ul className="dropdown-menu" style={{paddingRight: "70px"}}>
-                <li className="header">Bạn còn 4 công việc chưa hoàn thành </li>
+              <ul className="dropdown-menu" style={{paddingRight: "10px"}}>
+                <li className="header"> Bạn còn <span className="label label-danger">{this.state.countListNotify}</span> thông báo mới . </li>
                 <li>
                   {/* inner menu: contains the actual data */}
                   <ul className="menu">
-                    <li>{/* Task item */}
-                      <a href="#">
-                        <h3>
-                          Design some buttons
-                          <small className="pull-right">20%</small>
-                        </h3>
-                        <div className="progress xs">
-                          <div className="progress-bar progress-bar-aqua" style={{width: '20%'}} role="progressbar" aria-valuenow={20} aria-valuemin={0} aria-valuemax={100}>
-                            <span className="sr-only">20% Complete</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    {/* end task item */}
-                    <li>{/* Task item */}
-                      <a href="#">
-                        <h3>
-                          Create a nice theme
-                          <small className="pull-right">40%</small>
-                        </h3>
-                        <div className="progress xs">
-                          <div className="progress-bar progress-bar-green" style={{width: '40%'}} role="progressbar" aria-valuenow={20} aria-valuemin={0} aria-valuemax={100}>
-                            <span className="sr-only">40% Complete</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    {/* end task item */}
-                    <li>{/* Task item */}
-                      <a href="#">
-                        <h3>
-                          Some task I need to do
-                          <small className="pull-right">60%</small>
-                        </h3>
-                        <div className="progress xs">
-                          <div className="progress-bar progress-bar-red" style={{width: '60%'}} role="progressbar" aria-valuenow={20} aria-valuemin={0} aria-valuemax={100}>
-                            <span className="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    {/* end task item */}
-                    <li>{/* Task item */}
-                      <a href="#">
-                        <h3>
-                          Make beautiful transitions
-                          <small className="pull-right">80%</small>
-                        </h3>
-                        <div className="progress xs">
-                          <div className="progress-bar progress-bar-yellow" style={{width: '80%'}} role="progressbar" aria-valuenow={20} aria-valuemin={0} aria-valuemax={100}>
-                            <span className="sr-only">80% Complete</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
+                    {this.getNotifi()}
                     {/* end task item */}
                   </ul>
                 </li>
                 <li className="footer">
-                  <a href="#">View all tasks</a>
+                  <Link to="home/tat-ca-thong-bao" >Xem tất cả thông báo</Link>
                 </li>
               </ul>
             </li>

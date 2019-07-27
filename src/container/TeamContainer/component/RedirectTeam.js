@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './ModalCreate.css';
+import './Redirec.css';
 import { callApiPaging, callApibyId, callApiEdit } from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
@@ -162,10 +162,6 @@ export default class RedirectTeam extends Component {
          </div>
          <div style={{paddingLeft: "200px" ,zIndex : "1" ,color : "red" ,height: "13px" ,fontSize : "13px",fontWeight: "700"}} >  {this.state.msg} </div>
          <br/>
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{height: '70px', width: '100%'}}>
-            <path d="M0.00,92.27 C216.83,192.92 304.30,8.39 500.00,109.03 L500.00,0.00 L0.00,0.00 Z" style={{stroke: 'none', fill: '#e1efe3'}} />
-           
-          </svg>
               <div className="modal-body container">
                
               <div className="row">

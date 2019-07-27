@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from "react-redux";
 // import products  from './reducers/index';
 
-
+// import "./css/js/adminlte.min";
 import { createStore, applyMiddleware ,compose} from 'redux'; 
 import appReducers from './redux/ReducersRoot';
 

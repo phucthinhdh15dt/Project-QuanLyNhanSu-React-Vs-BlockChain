@@ -1,0 +1,28 @@
+.detail{
+    padding-left: 120px;
+    width: 100%;
+    height: 100%;
+
+    color: black;
+}
+ img {
+    border-radius: 4px;
+    height: 160px;
+    width : 150px ;
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 8px 10px #888888;
+
+}
+#box-title{
+    font-weight :'bold' ;
+    color : 'blue';
+}
+.pill {
+    
+    height:0px;
+    border-radius: 2px;
+    color: teal;
+    border: 1px solid currentColor;
+    width: 100%;
+  }

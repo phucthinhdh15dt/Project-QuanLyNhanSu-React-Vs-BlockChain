@@ -20,17 +20,26 @@ import DetailTask from '../container/TaskContainer/component/Detail';
 import ModalCreateTask from '../container/TaskContainer/component/ModalCreate';
 import ModalEditTask from '../container/TaskContainer/component/ModalEdit';
 
+//
+import PositionContainer from '../container/PositionContainer/PositionContainer';
+import DetailPosition from '../container/PositionContainer/component/Detail';
+import ModalCreatePosition from '../container/PositionContainer/component/ModalCreate';
+import ModalEditPosition from '../container/PositionContainer/component/ModalEdit';
 
 //quan ly du an
 
 import ProjectContainer from '../container/ProjectContainer/ProjectContainer';
+
+//Notification
+import NotificationDetail from '../container/NotificationContainer/component/NotificationDetail';
 export default class RouterURL extends Component {
     render(){
         return (
                 <div>
                     <Switch >
-                    Home
-                    <Route exact path="/home" component={Home} />
+                   
+                    {/* <Route exact path="/home" component={Home} /> */}
+                    {/* <Route exact path="/" component={Home} /> */}
                         {/* quan ly nhan su */}
                         <Route exact path="/home/nhan-su-chinh-thuc" component={PesonnelContainer} />
                         
@@ -54,17 +63,28 @@ export default class RouterURL extends Component {
                         <Route exact path="/home/giao-viec"  component={ModalCreateTask}/>}/>
 
                         {/* quan ly Project */}
-                        {/* <Route exact path="/home/du-an" component={TaskContainer} /> */}
-                        <Route exact path="/home/du-an/tien-do-du-an" component={ProjectContainer} />
-                        {/* <Route exact path="/home/du-an/them"  component={ModalCreateTask}/>}/>
-                        <Route exact path="/home/du-an/chi-tiet/:id" component={DetailTask} />
-                        <Route exact path="/home/du-an/sua/:id"  component={ModalEditTask}/>}/> */}
+                        <Route exact path="/home/du-an/danh-sach-du-an" component={ProjectContainer} />
                         
+                        <Route exact path="/home/du-an/them"  component={ModalCreateTask}/>}/>
+                        <Route exact path="/home/du-an/chi-tiet/:id" component={DetailTask} />
+                        <Route exact path="/home/du-an/sua/:id"  component={ModalEditTask}/>}/>
+                        <Route exact path="/home/tat-ca-thong-bao" component={NotificationDetail} />
+
+                           {/* Position  */}
+                           <Route exact path="/home/chuc-vu" component={PositionContainer} />
+                        
+                        <Route exact path="/home/chuc-vu/them"  component={ModalCreatePosition}/>}/>
+                        <Route exact path="/home/chuc-vu/chi-tiet/:id" component={DetailPosition} />
+                        <Route exact path="/home/chucvu/sua/:id"  component={ModalEditPosition}/>}/>
+                        
+                        <Route exact path="/home/danh-gia" component={NotificationDetail} />
                         
                         {/* trang chu */}
                         <Route path="/home" component={Home} />
                         
                         <Route component={Home} />
+                        {/* Notification  */}
+                      
                         
                     </Switch>
                 </div>

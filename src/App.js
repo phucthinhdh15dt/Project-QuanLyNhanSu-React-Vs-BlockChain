@@ -10,13 +10,16 @@ import "./css/bower_components/bootstrap/dist/css/bootstrap.min.css";
 import "./css/bower_components/font-awesome/css/font-awesome.min.css";
 import "./css/bower_components/Ionicons/css/ionicons.min.css";
 import "./css/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css";
-export default class App extends Component {
 
+export default class App extends Component {
+  componentDidMount() {
+  }
   render() {
     
     return (
       <Router history={history}> 
-          <Route exact path="/" component={Login} />
+
+          <Route exact path="/" component={Home} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/logout" component={Login} />
           <Route  path="/home" component={Home} />

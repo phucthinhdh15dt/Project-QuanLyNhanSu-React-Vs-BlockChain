@@ -6,4 +6,5 @@ export const API_URL_INFO ="http://128.199.198.52:8000";
 
 // host thu 2 :
 
-export const API_URL_HOST_2 ="http://localhost:5000";
+// export const API_URL_HOST_2 ="https://localhost:5001";
+export const API_URL_HOST_2 ="https://demowe.azurewebsites.net";

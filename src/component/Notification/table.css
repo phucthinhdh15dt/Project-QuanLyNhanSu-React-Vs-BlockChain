@@ -2,13 +2,6 @@ body{
 /* margin-bottom: 300px; */
 display: block;
 }
-.content-title{
-  display: block;
-  text-align: center;
-  padding: 0;
-  margin: 0 0 20px 0;
-  font-size: x-large;
-}
 .search{
   display: flex;
 }
@@ -76,4 +69,3 @@ display: block;
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
   }
-  

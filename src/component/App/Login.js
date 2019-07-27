@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import {Connect} from 'react-redux';
 import "./style.css";
 import "./loginValidate.js";
-import {callApiToken} from './../../utils/ConnectApi';
+import {callApiToken,callApiInfo} from './../../utils/ConnectApi';
 import history from './../../RouterURL/history';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 export default class Login extends Component {
-  
+  state = {
+    redirect: false
+  }
   constructor(props) {
     super(props);
     this.state = { width: 0, height: 0 ,checkLogin : false ,msgError : '' };
@@ -27,12 +29,18 @@ export default class Login extends Component {
       };
       callApiToken('token',data ,null)
       .then(response => {
-        
         if(response.status === 200){
-         
         localStorage.setItem('token', response.data.access);
-           
-        window.location = "http://" + window.location.host + "/home";
+        localStorage.setItem('refreshToken', response.data.refresh);
+        callApiInfo('me/',null,localStorage.getItem('token'))
+        .then(response => {
+          localStorage.setItem('username',response.data.username)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        this.setState({ redirect: true });
+       
         }else{
           this.setState({
              msgError : "Tài khoản hoặc mật khẩu không đúng" 
@@ -58,6 +66,11 @@ export default class Login extends Component {
     render(){
       const {height} = this.state ;
       const {msg} = this.state.msgError ;
+      const { redirect } = this.state;
+
+      if (redirect) {
+        return <Redirect  to='/home'/>;
+      }
         return (
           
           <div className="background_content" style={{
@@ -98,6 +111,7 @@ export default class Login extends Component {
                         {/* /.col */}
                         <div className="col-xs-4">
                           <button type="button"  className="btn btn-primary btn-block btn-flat" onClick={this.checkLogin}>Đăng nhập</button>
+                          
                         </div>
                         {/* /.col */}
                       </div>

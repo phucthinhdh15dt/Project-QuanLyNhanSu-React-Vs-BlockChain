@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import Navigation from '../Layouts/Navigation';
+import Pagination from './Pagination';
 import * as StringNavigation from '../../constants/NavigationConstants';
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
 import './table.css';
 import Loading from './../../component/Loading/Loading';
- class TableTask extends Component {
+ class Notification extends Component {
   state = {
     status : '',
     repos: 0 ,
@@ -28,16 +29,21 @@ import Loading from './../../component/Loading/Loading';
   ActionSearch =async() =>{
    await this.loadingDataSearch();
   }
+  showMsg = () => {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
 
   loadingDataSearch =async () => {
     this.setState({ 
         zindex : 1
         });
-    callApiPaging('tasks',null,null,this.state.page+"&search="+this.refs.search.value)
+    callApiPaging('developers',null,null,this.state.page+"&search="+this.refs.search.value)
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results,
-              zindex : -10000
+              zindex : -1000
               });
         })
         .catch(function (error) {
@@ -48,12 +54,12 @@ import Loading from './../../component/Loading/Loading';
  
   loadingData =async () => {
      
-    callApiPaging('tasks',null,null,this.state.page)
+    callApiPaging('developers',null,null,this.state.page)
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results,
-              count : response.data.count,
-              zindex : -10000
+              count : response.data.count ,
+              zindex : -1000
               });
         })
         .catch(function (error) {
@@ -62,14 +68,18 @@ import Loading from './../../component/Loading/Loading';
 
   }
        confirmDelete =async (idDelete) =>{
+        this.setState({ 
+            zindex : 1
+            });
           
-            await callApiDelete(`tasks`, null, "null",idDelete)
+            await callApiDelete(`developer`, null, "null",idDelete)
             .then(res => this.setState({ 
                  status: res.status,
-                 msgerr : 'Xóa thành công'
+                 zindex : -1000
               }))
            .catch(error => console.log("Fetch Error "+ error));
           await this.loadingData();  
+          await this.showMsg();
         
     }
      rederdelete =()=>{
@@ -81,22 +91,29 @@ import Loading from './../../component/Loading/Loading';
        
             
                 await   this.setState({ 
-                    page: this.state.page + 1
+                    page: this.state.page + 1 ,
+                    zindex : 1
                   })
-                await this.loadingData()
+                await this.loadingData() ;
+                
              
           
         
     }
     setPage =async()=>{
+
+        
             if(this.state.page===1){
                 await   this.setState({ 
-                    msgerr: ""
+                    msgerr: "" ,
+                    zindex : -1000
+                  
                   })
             }
             if(this.state.page!==1)
              await   this.setState({ 
-            page: this.state.page - 1
+            page: this.state.page - 1,
+            zindex : 1
           })
       
       await this.loadingData()
@@ -116,15 +133,32 @@ import Loading from './../../component/Loading/Loading';
               <td>{tableJson[prototype[2]]}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[3]]}</td>
               <td>{tableJson[prototype[4]]}</td>
-              <td>{tableJson.leadTask.name}</td>
-              <td>{tableJson.developer.name}</td>
-              <td>{tableJson.date_start.substring(0,10)}</td>
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
                 
-                <NavLink to={`/home/cong-viec/sua/${tableJson[prototype[0]]}`} activeClassName="active" ><button className="btn btn-primary btn-xs madow" title="Sửa" disabled={ tableJson[prototype[3]] ==="Active" ? true :false} ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
-               
+                <NavLink to={`/home/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
+                 <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
+                <NavLink to={`/home/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"> <span class="glyphicon glyphicon-info-sign"></span> </NavLink>
+                
+                <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Xóa nhân sự</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn có chắc chắn xóa</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"  onClick={()=>this.confirmDelete(tableJson[prototype[0]])} id="confirm">Delete</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
             </td>
             
           </tr>
@@ -209,8 +243,8 @@ import Loading from './../../component/Loading/Loading';
         return (
           
         <div className="content-wrapper" >
+        
         <Loading  zindex ={this.state.zindex}/>
-          {/* <Navigation title={StringNavigation.TITLE_NAVIGATION_TASK} navi={StringNavigation.TITLE_NAVIGATION_TASK} /> */}
           <section className="content">
             <div className="row">
               <div className="col-xs-12">
@@ -230,10 +264,10 @@ import Loading from './../../component/Loading/Loading';
                   </div>
                   <div className="col-xs-1" >
                   
-                   {/* <NavLink to={`/home/nhan-su-chinh-thuc/them`} activeClassName="active" >
+                   <NavLink to={`/home/nhan-su-chinh-thuc/them`} activeClassName="active" >
                    <button className="btn btn-success btn-md madow" name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
                   
-                    </NavLink> */}
+                    </NavLink>
                     <br />
                     <br />
 
@@ -249,7 +283,7 @@ import Loading from './../../component/Loading/Loading';
                   <br/>
                   <div className="box-body" >
                   <div style={{height:"450px"}}>
-                    <table className="table table-bordered table-hover tablecss" >
+                    <table className="table table-bordered table-hover tablecss">
                       <thead>
                         <tr style={{textAlign: "center"}}>
                          {this.showListHeader(headerTable)}
@@ -293,6 +327,7 @@ import Loading from './../../component/Loading/Loading';
               </div>
             </div>
           </section>
+          <div id="snackbar">Xóa thành công</div>
         </div>
 
 
@@ -304,6 +339,6 @@ import Loading from './../../component/Loading/Loading';
 }
 
 
-export default TableTask;
+export default Notification;
 
 

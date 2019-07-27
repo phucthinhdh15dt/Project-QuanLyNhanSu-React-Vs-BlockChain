@@ -72,7 +72,7 @@ import Loading from './../../component/Loading/Loading';
             zindex : 1
             });
           
-            await callApiDelete(`developer`, null, "null",idDelete)
+            await callApiDelete(`developers`, null, "null",idDelete)
             .then(res => this.setState({ 
                  status: res.status,
                  zindex : -1000
@@ -260,7 +260,8 @@ import Loading from './../../component/Loading/Loading';
                   
                 </div>
                   <div className="col-xs-7">
-                  <p style={{fontWeight :'700' ,color : 'red' ,textAlign : 'center'}}> {msgerr}</p>
+                  
+                  <div className="content-title">Quản lý nhân sự </div> 
                   </div>
                   <div className="col-xs-1" >
                   

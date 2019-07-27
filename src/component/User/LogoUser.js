@@ -4,9 +4,9 @@ export default class LogoUser extends Component {
         return (
         <div >
             <a href="../../index2.html" className="logo">
-              <span className="logo-mini"><b>A</b>LT</span>
+              <span className="logo-mini"><b>LV</b>BC</span>
              
-              <span className="logo-lg"><b>Admin</b>BC</span>
+              <span className="logo-lg"><b>Luan</b>Van</span>
             </a>
         </div>
 

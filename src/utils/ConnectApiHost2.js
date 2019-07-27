@@ -37,14 +37,14 @@ export  function callApiInfo(endpoint, body, accesstoken) {
 };
 
 
-export function callApiPaging(endpoint, body, accesstoken ,page) {
+export function callApiPagingHost2(endpoint, body, accesstoken ,page) {
     var method ='GET' ;
     return axios({
         url: `${config.API_URL_HOST_2}/${endpoint}/${"?format=json&"}${"page="+ page}`,
         method,
         headers:{
             // 'access-control-request-origin':'*',
-             'content-type' : 'application/json-patch+json',
+             'content-type' : 'application/json',
              'accept':'application/json',
             // 'Authorization': 'Bearer ' + accesstoken,
         },
@@ -58,12 +58,12 @@ export function callApiPaging(endpoint, body, accesstoken ,page) {
 
 export function callApibyIdHost2(endpoint, body ,id) {
     var method ='GET' ;
-    return axios({
+    return axios({  
         url: `${config.API_URL_HOST_2}/${endpoint}/${id}`,
         method,
         headers:{
             // 'access-control-request-origin':'*',
-             'content-type' : 'application/json-patch+json',
+             'content-type' : 'application/json',
              'accept':'application/json',
             // 'Authorization': 'Bearer ' + accesstoken,
         },
@@ -73,7 +73,7 @@ export function callApibyIdHost2(endpoint, body ,id) {
     });
 };
 
-export  function callApiEdit(endpoint, body, accesstoken,idEdit) {
+export  function callApiEditHost2(endpoint, body, accesstoken,idEdit) {
     var method ='PUT' ;
     return axios({
         url: `${config.API_URL_HOST_2}/${endpoint}/${idEdit}/`,
@@ -90,7 +90,8 @@ export  function callApiEdit(endpoint, body, accesstoken,idEdit) {
     });
 };
 
-export  function callApiAdd(endpoint, body, accesstoken) {
+export  function callApiAddHost2
+(endpoint, body, accesstoken) {
     var method ='POST' ;
     return axios({
         url: `${config.API_URL_HOST_2}/${endpoint}/`,
