@@ -137,9 +137,9 @@ import Loading from './../../component/Loading/Loading';
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
                 
-                <NavLink to={`/home/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
+                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
                  <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
-                <NavLink to={`/home/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"> <span class="glyphicon glyphicon-info-sign"></span> </NavLink>
+                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"> <span class="glyphicon glyphicon-info-sign"></span> </NavLink>
                 
                 <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -264,7 +264,7 @@ import Loading from './../../component/Loading/Loading';
                   </div>
                   <div className="col-xs-1" >
                   
-                   <NavLink to={`/home/nhan-su-chinh-thuc/them`} activeClassName="active" >
+                   <NavLink to={`/trang-chu/nhan-su-chinh-thuc/them`} activeClassName="active" >
                    <button className="btn btn-success btn-md madow" name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
                   
                     </NavLink>

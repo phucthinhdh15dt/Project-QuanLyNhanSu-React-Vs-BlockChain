@@ -129,7 +129,7 @@ import Loading from './../../component/Loading/Loading';
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
                 
-                <NavLink to={`/home/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Xem tiến độ"> <span class="glyphicon glyphicon-signal" style={{fontSize:"20px"}}></span> </NavLink>
+                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Xem tiến độ"> <span class="glyphicon glyphicon-signal" style={{fontSize:"20px"}}></span> </NavLink>
                 
                 <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -254,7 +254,7 @@ import Loading from './../../component/Loading/Loading';
                   </div>
                   <div className="col-xs-1" >
                   
-                   <NavLink to={`/home/nhan-su-chinh-thuc/them`} activeClassName="active" >
+                   <NavLink to={`/trang-chu/nhan-su-chinh-thuc/them`} activeClassName="active" >
                    <button className="btn btn-success btn-md madow" name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
                   
                     </NavLink>

@@ -16,7 +16,7 @@ export default class Detail extends Component {
     team: [],
   }
   goBack=()=>{
-    history.goBack('/home/nhan-su-chinh-thuc');
+    history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
   showListTableReview = (repos) =>{
     var result =[] ;
@@ -200,7 +200,7 @@ showListTableDegree =(repos) =>{
                   <h3><strong> Nhóm   </strong></h3>                    
                   <p>Thuộc nhóm : <small>{team != null ? team.name : ''}</small></p>
                   <p>Mô tả : <small>{team !=null ? team.descriptions : '' }</small></p>
-                  <NavLink to={`/home/nhom/chi-tiet/${team !=null ? team.id : ''}`} activeClassName="active" title="Chi tiết">Chi tiết ... </NavLink>
+                  <NavLink to={`/trang-chu/nhom/chi-tiet/${team !=null ? team.id : ''}`} activeClassName="active" title="Chi tiết">Chi tiết ... </NavLink>
                   <hr className="pill" />
                 </div>
 

@@ -83,7 +83,7 @@ export default class ModalEdit extends Component {
 }
   }
   goBack=()=>{
-    history.goBack('/home/nhan-su-chinh-thuc');
+    history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
 showMsg = () => {
     var x = document.getElementById("snackbar");
@@ -190,15 +190,10 @@ showMsg = () => {
         <form className="form-style-9">
         <div className="title">
          
-        Quản lý nhân sự
+        Sửa nhân sự
   
          </div>
-         <div style={{paddingLeft: "200px" ,zIndex : "1" ,color : "red" ,height: "13px" ,fontSize : "13px",fontWeight: "700"}} >  {this.state.msg} </div>
-         <br/>
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{height: '70px', width: '100%'}}>
-            <path d="M0.00,92.27 C216.83,192.92 304.30,8.39 500.00,109.03 L500.00,0.00 L0.00,0.00 Z" style={{stroke: 'none', fill: '#e1efe3'}} />
-           
-          </svg>
+
               <div className="modal-body container">
              
               <div className="row">
@@ -255,14 +250,14 @@ showMsg = () => {
                    <div className="row">
                    <div className="col-md-6">
                    <label >Địa chỉ </label> <br/>
-                   <textarea rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
+                   <textarea style={{height : "50px"}}  rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
                     {/* <textarea rows={4} classname="form-control" cols={50} ref="address" onchange={this.onChangeAddress} defaultValue={this.state.education} /> */}
                    </div>
                    </div>
                    </div>
                    
                <br/>
-              <div className="bt-action">
+              <div className="bt-action" style={{height: '10px', marginTop : "100px" }}>
               <button type="reset" className="btn btn-success"  onClick={this.reset}>Làm mới </button>
               <button type="button" className="btn btn-success" onClick={this.edit}>Sửa </button>
               </div>
@@ -271,6 +266,7 @@ showMsg = () => {
               </div>
               <div id="snackbar" >Sửa thành công </div>
               </form>
+              <br/>
               </div>
               </div>
             </div>

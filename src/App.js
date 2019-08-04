@@ -15,14 +15,13 @@ export default class App extends Component {
   componentDidMount() {
   }
   render() {
-    
     return (
       <Router history={history}> 
 
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/logout" component={Login} />
-          <Route  path="/home" component={Home} />
+          <Route  path="/trang-chu" component={Home} />
       </Router > 
     )
   }

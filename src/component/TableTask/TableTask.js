@@ -123,7 +123,7 @@ import Loading from './../../component/Loading/Loading';
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
                 
-                <NavLink to={`/home/cong-viec/sua/${tableJson[prototype[0]]}`} activeClassName="active" ><button className="btn btn-primary btn-xs madow" title="Sửa" disabled={ tableJson[prototype[3]] ==="Active" ? true :false} ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
+                <NavLink to={`/trang-chu/cong-viec/sua/${tableJson[prototype[0]]}`} activeClassName="active" ><button className="btn btn-primary btn-xs madow" title="Sửa" disabled={ tableJson[prototype[3]] ==="Active" ? true :false} ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
                
             </td>
             
@@ -230,7 +230,7 @@ import Loading from './../../component/Loading/Loading';
                   </div>
                   <div className="col-xs-1" >
                   
-                   {/* <NavLink to={`/home/nhan-su-chinh-thuc/them`} activeClassName="active" >
+                   {/* <NavLink to={`/trang-chu/nhan-su-chinh-thuc/them`} activeClassName="active" >
                    <button className="btn btn-success btn-md madow" name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
                   
                     </NavLink> */}

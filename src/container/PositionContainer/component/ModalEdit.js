@@ -83,7 +83,7 @@ export default class ModalEdit extends Component {
 }
   }
   goBack=()=>{
-    history.goBack('/home/nhan-su-chinh-thuc');
+    history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
 showMsg = () => {
     var x = document.getElementById("snackbar");

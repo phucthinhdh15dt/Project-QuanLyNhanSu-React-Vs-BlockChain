@@ -69,7 +69,7 @@ export default class Login extends Component {
       const { redirect } = this.state;
 
       if (redirect) {
-        return <Redirect  to='/home'/>;
+        return <Redirect  to='/trang-chu'/>;
       }
         return (
           
@@ -81,13 +81,13 @@ export default class Login extends Component {
            
                   {/* /.login-logo */}
                   <div className="login-box-body">
-                  <div className="login-logo">
-                    <a href="../../index2.html"><b>ADMIN</b></a>
+                  <div className="login-logo" style={{color: "#2e6da4", height : "30px"}}>
+                    <b>PMBC</b>
                   </div>
                   <div style={{height : "20px" ,textAlign:"center",color: "red"}}>
                   {this.state.msgError}
                   </div>
-                    <p className="login-box-msg">Xin vui lòng đăng nhập để sữ dụng hệ thống</p>
+                    <p className="login-box-msg">Xin vui lòng đăng nhập để sử dụng hệ thống</p>
                     <form>
                       <div className="form-group has-feedback">
                         <input type="email" className="form-control username" placeholder="Tài khoản" autoFocus ref="username" />

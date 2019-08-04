@@ -68,7 +68,7 @@ export default class HeaderTop extends Component {
           result = this.state.listNotifi.map((tableJson, index) =>{
             if(tableJson.status === 0){
              
-              return <li  ><Link to={`/home/thong-bao/${tableJson.id}`}>
+              return <li  ><Link to={`/trang-chu/thong-bao/${tableJson.id}`}>
                 <h3><span class="glyphicon glyphicon-eye-open" style={{paddingRight: "10px" , color : "black" }}></span>
                   {tableJson['contentNotify'].substring(0,30)+"..."}
                   <small className="pull-right"><i class="fa fa-check" aria-hidden="true"></i></small>
@@ -81,7 +81,7 @@ export default class HeaderTop extends Component {
               </Link>
             </li>
             }else{
-              return <li style={{background: "#edf2fa"}} ><Link to={`/home/thong-bao/${tableJson.id}`}>
+              return <li style={{background: "#edf2fa"}} ><Link to={`/trang-chu/thong-bao/${tableJson.id}`}>
               <h3><span class="glyphicon glyphicon-eye-open" style={{paddingRight: "10px" , color : "black" }}></span>
                 {tableJson['contentNotify'].substring(0,30)+"..."}
                 <small className="pull-right"><i class="fa fa-check" aria-hidden="true"></i></small>
@@ -144,10 +144,8 @@ export default class HeaderTop extends Component {
                 </li>
               </ul>
             </li>
-            
-            
             {/* Tasks: style can be found in dropdown.less */}
-            <li className="dropdown tasks-menu" style={{marginRight : "100px"}}>
+            <li className="dropdown tasks-menu" >
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                 <i className="fa fa-flag-o" />
                 <span className="label label-danger">{this.state.countListNotify}</span>
@@ -162,10 +160,35 @@ export default class HeaderTop extends Component {
                   </ul>
                 </li>
                 <li className="footer">
-                  <Link to="home/tat-ca-thong-bao" >Xem tất cả thông báo</Link>
+                  <Link to="trang-chu/tat-ca-thong-bao" >Xem tất cả thông báo</Link>
                 </li>
               </ul>
             </li>
+            <li className="dropdown user user-menu">
+        <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-user" style ={{fontSize:"20px"}} aria-hidden="true"></i>
+          <span className="hidden-xs">Hồ sơ</span>
+        </a>
+        <ul className="dropdown-menu">
+          {/* User image */}
+          <li className="user-header">
+            <img src="../../dist/img/user2-160x160.jpg" className="img-circle" alt="User Image" />
+            <p>
+              Alexander Pierce - Web Developer
+              <small>Member since Nov. 2012</small>
+            </p>
+          </li>
+          {/* Menu Footer*/}
+          <li className="user-footer">
+            <div className="pull-left">
+              <a href="#" className="btn btn-default btn-flat">Hồ sơ</a>
+            </div>
+            <div className="pull-right">
+              <a href="#" className="btn btn-default btn-flat">Đăng xuất</a>
+            </div>
+          </li>
+        </ul>
+      </li>
           </ul>
         </div>
       </nav>          

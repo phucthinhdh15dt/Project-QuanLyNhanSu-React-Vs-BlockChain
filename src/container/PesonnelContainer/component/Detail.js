@@ -16,7 +16,7 @@ export default class Detail extends Component {
     team: [],
   }
   goBack=()=>{
-    history.goBack('/home/nhan-su-chinh-thuc');
+    history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
   showListTableReview = (repos) =>{
     var result =[] ;
@@ -47,6 +47,27 @@ showListTableProject =(repos) =>{
           <td>{tableJson.leader}</td>
           <td>{tableJson.date_start.substring(0,10)}</td>
       </tr>
+      } );
+  }
+
+  return  result;
+}    
+showListTableTasks =(repos) =>{
+  var result =[] ;
+  
+  if(repos.length > 0){
+      result = repos.map((tableJson, index) =>{
+          return <tr key={tableJson.index}>
+      <td>{index+1}.</td>
+      <td>{tableJson.name}</td>
+      <td>{tableJson.status === "On Processing" ? <span class='label label-warning'>On Processing</span> : tableJson.status === "Finished" ? <span class='label label-success'>Finished</span> :  tableJson.status ==="Closed" ?<span class='label label-danger'>Closed</span> : tableJson.status }</td>
+      <td>
+        <div className="progress progress-xs">
+          <div className="progress-bar progress-striped" style={{width: tableJson.developer}} />
+        </div>
+      </td>
+      <td><span className="badge bg-light-blue">{tableJson.developer}%</span></td>
+    </tr>
       } );
   }
 
@@ -94,7 +115,7 @@ showListTableDegree =(repos) =>{
               info: response.data,
               contract: response.data.contract,
               review: response.data.review ,
-              task: response.data.task[0] ,
+              task: response.data.task ,
               project: response.data.project ,
               experience: response.data.experience[0] ,
               degree: response.data.degree ,
@@ -200,7 +221,7 @@ showListTableDegree =(repos) =>{
                   <h3><strong> Nhóm   </strong></h3>                    
                   <p>Thuộc nhóm : <small>{team != null ? team.name : ''}</small></p>
                   <p>Mô tả : <small>{team !=null ? team.descriptions : '' }</small></p>
-                  <NavLink to={`/home/nhom/chi-tiet/${team !=null ? team.id : ''}`} activeClassName="active" title="Chi tiết">Chi tiết ... </NavLink>
+                  <NavLink to={`/trang-chu/nhom/chi-tiet/${team !=null ? team.id : ''}`} activeClassName="active" title="Chi tiết">Chi tiết ... </NavLink>
                   <hr className="pill" />
                 </div>
 
@@ -266,6 +287,86 @@ showListTableDegree =(repos) =>{
                       {this.showListTableProject(project)}
                     </tbody>
                   </table>
+                </div>
+
+                <div className="col-md-11">                 
+                  <div className="box">
+                  <div className="box-header">
+                    <h3 className="box-title">Công việc</h3>
+                    <div className="box-tools">
+                      <ul className="pagination pagination-sm no-margin pull-right">
+                        <li><a href="#">«</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">»</a></li>
+                      </ul>
+                    </div>
+                  </div>
+        {/* /.box-header */}
+        <div className="box-body no-padding">
+          <table className="table">
+            <tbody>
+              <tr>
+                <th style={{width: '10px'}}>#</th>
+                <th>Tên công việc</th>
+                <th>Trạng thái</th>
+                <th>Tiến độ</th>
+                <th style={{width: '40px'}}></th>
+              </tr>
+              {this.showListTableTasks(task)}
+            </tbody></table>
+        </div>
+      </div>
+                </div>
+                {/* review */}
+                <div className="col-md-11">
+                <div className="box box-success">
+        <div className="box-header">
+          <i className="fa fa-comments-o" />
+          <h3 className="box-title">Đánh giá công việc, thái độ</h3>
+          <div className="box-tools pull-right" data-toggle="tooltip" title="Status">
+            <div className="btn-group" data-toggle="btn-toggle">
+              <button type="button" className="btn btn-default btn-sm active"><i className="fa fa-square text-green" />
+              </button>
+              <button type="button" className="btn btn-default btn-sm"><i className="fa fa-square text-red" /></button>
+            </div>
+          </div>
+        </div>
+        <div className="box-body chat" id="chat-box">
+        <div className="item" style={{paddingTop : "30px"}}>
+          
+          <p className="message">
+            <a href="#" className="name">
+              <small className="text-muted pull-right"><i className="fa fa-clock-o" /> 5:15</small>
+              <i className="fa fa-square text-green" /> Nguyễn Văn Hoàng
+            </a>
+            Tích cực làm việc , thái độ kỹ luật tốt, đáng khen thưởng .
+          </p>
+        </div>
+        <div className="item" style={{paddingTop : "30px"}}>
+          
+          <p className="message">
+            <a href="#" className="name">
+              <small className="text-muted pull-right"><i className="fa fa-clock-o" /> 6:40</small>
+              <i className="fa fa-square text-green" /> Nguyễn Văn Không
+            </a>
+            Tích cực làm việc ,Đi làm thường trễ giờ.
+          </p>
+        </div>
+          
+          {/* /.item */}
+        </div>
+        {/* /.chat */}
+        <div className="box-footer">
+          <div className="input-group">
+            <input className="form-control" placeholder="Bạn muốn đánh giá nhân viên ...." />
+            <div className="input-group-btn">
+              <button type="button" className="btn btn-success">Đánh giá</button>
+            </div>
+          </div>
+        </div>
+      </div>
                 </div>
                
                 <div className="col-md-1"></div>

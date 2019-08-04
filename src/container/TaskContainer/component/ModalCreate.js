@@ -79,7 +79,7 @@ export default class ModalCreate extends Component {
 }
   }
   goBack=()=>{
-    history.goBack('/home/nhan-su-chinh-thuc');
+    history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
 
   loadingData = () => {
@@ -223,6 +223,7 @@ export default class ModalCreate extends Component {
                    <textarea rows={4} id='address' value={this.state.descriptions} ref='address' onChange={this.onChangeDescriptions} className="form-control" />
                    
                    </div>
+                   
                    </div>
                    </div>
                    

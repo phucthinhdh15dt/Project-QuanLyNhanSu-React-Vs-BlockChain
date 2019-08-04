@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Navigation from '../Layouts/Navigation';
-import Pagination from './Pagination';
 import * as StringNavigation from '../../constants/NavigationConstants';
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
@@ -137,9 +136,9 @@ import Loading from './../../component/Loading/Loading';
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
                 
-                <NavLink to={`/home/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
+                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
                  <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
-                <NavLink to={`/home/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"> <span class="glyphicon glyphicon-info-sign"></span> </NavLink>
+                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"> <span class="glyphicon glyphicon-info-sign"></span> </NavLink>
                 
                 <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -148,7 +147,7 @@ import Loading from './../../component/Loading/Loading';
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title">Xóa nhân sự</h4>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" style={{height: "60px"}}>
                         <p>Bạn có chắc chắn xóa</p>
                     </div>
                     <div class="modal-footer">
@@ -265,7 +264,7 @@ import Loading from './../../component/Loading/Loading';
                   </div>
                   <div className="col-xs-1" >
                   
-                   <NavLink to={`/home/nhan-su-chinh-thuc/them`} activeClassName="active" >
+                   <NavLink to={`/trang-chu/nhan-su-chinh-thuc/them`} activeClassName="active" >
                    <button className="btn btn-success btn-md madow" name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
                   
                     </NavLink>

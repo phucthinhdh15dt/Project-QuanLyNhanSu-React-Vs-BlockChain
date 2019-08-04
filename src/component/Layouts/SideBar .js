@@ -53,7 +53,6 @@ export default class SideBar extends Component {
   }
   logout = () =>{
     localStorage.removeItem('token');
-    localStorage.removeItem('username');
     localStorage.removeItem('refreshToken');
   }
 
@@ -94,58 +93,51 @@ export default class SideBar extends Component {
               <li className="header">THANH ĐIỀU HƯỚNG</li>
               <li className="treeview" style={{textAlign: 'left'}}>
               <Link className="slide1">
-                  <i className="fa fa-dashboard" /> <span>Quản lý công việc</span>
+                  <i className="fa fa-tasks" /> <span>Quản lý công việc</span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />
                   </span>
                 </Link>
                 <ul className="treeview-menu1" >
-                  <li><Link to="/home/cong-viec-cua-toi"><i className="fa fa-circle-o" /> Công việc của tôi </Link></li>
-                  <li><Link to="/home/cong-viec"><i className="fa fa-circle-o" /> Danh sách công viêc </Link></li>
-                  <li><Link to="/home/giao-viec"><i className="fa fa-circle-o" /> Giao việc </Link></li>
+                  <li><Link to="/trang-chu/cong-viec-cua-toi"><i className="fa fa-circle-o" /> Công việc của tôi </Link></li>
+                  <li><Link to="/trang-chu/cong-viec"><i className="fa fa-circle-o" /> Danh sách công viêc </Link></li>
+                  <li><Link to="/trang-chu/giao-viec"><i className="fa fa-circle-o" /> Giao việc </Link></li>
                 </ul>
               </li>
               <li className="slide2" style={{textAlign: 'left'}}>
               <Link  className="slide2">
-                  <i className="fa fa-dashboard" /> <span>Quản lý dự án</span>
+                  <i className="fa fa-file-code-o" /> <span>Quản lý dự án</span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />
                   </span>
                 </Link>
                 <ul className="treeview-menu2">
-                <li><Link to="/home/du-an/danh-sach-du-an"><i className="fa fa-circle-o" /> Danh sách dự án </Link></li>
-                  <li><Link to="/home/du-an/cap-nhat-tien-do"><i className="fa fa-circle-o" /> Cập nhật tiến độ </Link></li>
+                <li><Link to="/trang-chu/du-an/danh-sach-du-an"><i className="fa fa-circle-o" /> Danh sách dự án </Link></li>
+                  <li><Link to="/trang-chu/du-an/cap-nhat-tien-do"><i className="fa fa-circle-o" /> Cập nhật tiến độ </Link></li>
                 </ul>
               </li>
               <li className="slide3" style={{textAlign: 'left'}}> 
               <Link  className="slide3">
-                  <i className="fa fa-files-o" />
-                  <span>Quản lý nhân sự </span>
+                  <i className="fa fa-users" />
+                  <span>Quản lý lập trình viên </span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />
                   </span>
                 </Link>
                 <ul className="treeview-menu3">
-                  <li><Link to="/home/nhan-su-chinh-thuc"><i className="fa fa-circle-o" />Nhân sự chính thức</Link></li>
-                  <li><Link to="/home/chuyen-nhom"><i className="fa fa-circle-o" />Chuyển nhóm làm việc</Link></li>
+                  <li><Link to="/trang-chu/nhan-su-chinh-thuc"><i className="fa fa-circle-o" /> Danh sách lập trình viên</Link></li>
+                  <li><Link to="/trang-chu/chuyen-nhom"><i className="fa fa-circle-o" /> Chuyển nhóm làm việc</Link></li>
+                  <li><Link to="/trang-chu/nhom"><i className="fa fa-circle-o" /> Quản lý nhóm</Link></li>
                 </ul>
               </li>
               <li className="treeview" style={{textAlign: 'left'}}> 
-              <Link to="/home/nhom">
-                  <i className="fa fa-files-o" />
-                  <span>Quản lý Đội nhóm </span>
-                  <span className="pull-right-container">
-                    <i className="fa fa-angle-left pull-right" />
-                  </span>
-                  
-                </Link>
                 <ul className="treeview-menu">
-                <li><Link to="/home/nhom"><i className="fa fa-circle-o" />Quản lý</Link></li>
+                <li><Link to="/trang-chu/nhom"><i className="fa fa-circle-o" />Quản lý</Link></li>
                   
                 </ul>
               </li>
               <li style={{textAlign: 'left'}}>
-              <Link ><i className="fa fa-circle-o" />
+              <Link >
                   <i className="fa fa-th" /> <span>Quản Lý hợp đồng </span>
                   <span className="pull-right-container">
                     <small className="label pull-right bg-green">new</small>
@@ -153,8 +145,8 @@ export default class SideBar extends Component {
                 </Link>
               </li>
               <li className="treeview" style={{textAlign: 'left'}}>
-              <Link to="/home/chuc-vu"><i className="fa fa-circle-o" />
-                  <i className="fa fa-pie-chart" />
+              <Link to="/trang-chu/chuc-vu">
+                  <i className="fa  fa-id-card-o" />
                   <span>Quản lý chức vụ</span>
                 
                 </Link>
@@ -162,14 +154,22 @@ export default class SideBar extends Component {
               </li>
               <li className="treeview" style={{textAlign: 'left'}}>
               <Link>
-                  <i className="fa fa-laptop" />
+                  <i className="fa fa-book" />
                   <span>Quản lý bằng cấp </span>
                   
                 </Link>
                
               </li>
               <li className="treeview" style={{textAlign: 'left'}}>
-              <Link to="/home/danh-gia">
+              <Link  to="/trang-chu/thong-ke">
+                  <i className="fa fa-bar-chart" />
+                  <span>Thống kê </span>
+                  
+                </Link>
+               
+              </li>
+              <li className="treeview" style={{textAlign: 'left'}}>
+              <Link to="/trang-chu/danh-gia">
                   <i className="fa fa-edit" /> <span>Đánh giá</span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />

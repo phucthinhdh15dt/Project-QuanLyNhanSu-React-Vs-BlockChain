@@ -7,7 +7,7 @@ export default class Detail extends Component {
     reposDetail: []
   }
   goBack=()=>{
-    history.goBack('/home/nhan-su-chinh-thuc');
+    history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
 
   loadingData = () => {

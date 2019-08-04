@@ -65,17 +65,17 @@ export default class ModalCreate extends Component {
   
   this.setState({ 
      
-    msg : "Có trường không hợp lệ ,xin kiểm tra lại"
+    msg : "Có trường không hợp lệ, xin kiểm tra lại !"
     });
 }
   }
   goBack=()=>{
-    history.goBack('/home/nhan-su-chinh-thuc');
+    history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
 showMsg = () => {
     var x = document.getElementById("snackbar");
     x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
   }
   loadingData = () => {
     
@@ -176,6 +176,7 @@ showMsg = () => {
             <div className="title">
             Thêm nhân sự mới
               </div>
+              <div style={{paddingLeft: "160px" ,color : "red" ,height: "15px"}} >  {this.state.msg} </div>
               <br/>
           <div className="container">
           
