@@ -127,7 +127,7 @@ export default class HeaderTop extends Component {
             {/*Notify */}
             <li className="dropdown tasks-menu"   >
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                <i className="fa fa-bell" />
+              <i className="fa fa-flag-o" />
                 <span className="label label-danger"></span>
               </a>
               <ul className="dropdown-menu">
@@ -147,7 +147,7 @@ export default class HeaderTop extends Component {
             {/* Tasks: style can be found in dropdown.less */}
             <li className="dropdown tasks-menu" >
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                <i className="fa fa-flag-o" />
+                <i className="fa fa-bell" />
                 <span className="label label-danger">{this.state.countListNotify}</span>
               </a>
               <ul className="dropdown-menu" style={{paddingRight: "10px"}}>
@@ -160,7 +160,7 @@ export default class HeaderTop extends Component {
                   </ul>
                 </li>
                 <li className="footer">
-                  <Link to="trang-chu/tat-ca-thong-bao" >Xem tất cả thông báo</Link>
+                  <Link to="/trang-chu/tat-ca-thong-bao" >Xem tất cả thông báo</Link>
                 </li>
               </ul>
             </li>
@@ -181,7 +181,7 @@ export default class HeaderTop extends Component {
           {/* Menu Footer*/}
           <li className="user-footer">
             <div className="pull-left">
-              <a href="#" className="btn btn-default btn-flat">Hồ sơ</a>
+              <Link to="/trang-chu/ho-so" className="btn btn-default btn-flat"> Hồ sơ </Link>
             </div>
             <div className="pull-right">
               <a href="#" className="btn btn-default btn-flat">Đăng xuất</a>

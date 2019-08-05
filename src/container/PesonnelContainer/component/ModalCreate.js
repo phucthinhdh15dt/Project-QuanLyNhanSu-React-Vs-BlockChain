@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './ModalCreate.css';
-import {callApi, callApiPaging, callApiDelete, callApiAdd } from './../../../utils/ConnectApi';
+import {callApi, callApiPaging, callApiDelete, callApiAdd ,callApiRefresh ,registerUser} from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 import Loading from './../../../component/Loading/Loading';
@@ -17,6 +17,9 @@ export default class ModalCreate extends Component {
 
     this.state = {
       reposDetail: [],
+      username: '',
+      pass: '',
+      repass: '',
       editStatus : false,
       name : '',
       birth : '',
@@ -32,9 +35,16 @@ export default class ModalCreate extends Component {
   }
   add =() =>{
   if(validateformBlank()){
+    var dataRegister = {
+      "email":this.refs.email.value,
+      "username" : this.refs.username.value,
+      "password" : this.refs.pass.value,
+    }
    
     var data = {
+      "project": 4,
       "name": this.refs.name.value,
+      "username" : this.refs.username.value,
       "birth": this.refs.birth.value,
       "address": this.refs.address.value,
       "level": this.refs.level.value,
@@ -42,7 +52,7 @@ export default class ModalCreate extends Component {
       "education": this.refs.education.value,
       "day_of_work": 0,
       "day_of_thinking": 0,
-      "team_id" : this.refs.team.value
+      "team_id" : this.refs.team.value,
     };
     
     callApiAdd('developers',data ,localStorage.getItem('token'))
@@ -61,7 +71,26 @@ export default class ModalCreate extends Component {
      
       msg : "bug"
       });
-})}else{
+})
+//login
+registerUser('users/',dataRegister ,"null")
+.then(response => {
+  this.showMsg();
+  this.setState({ 
+   
+    editStatus :true , 
+  
+    
+    });
+})
+.catch(function (error) {
+console.log(error);
+this.setState({ 
+ 
+  msg : "bug"
+  });
+})
+}else{
   
   this.setState({ 
      
@@ -153,6 +182,24 @@ showMsg = () => {
     });
    
   }
+  onChangeUserName=(e)=> {
+    this.setState({
+      username: e.target.username
+    });
+   
+  }
+  onChangePassword=(e)=> {
+    this.setState({
+      pass: e.target.pass
+    });
+   
+  }
+  onChangeRePassword=(e)=> {
+    this.setState({
+      repass: e.target.repass
+    });
+   
+  }
 
   render() {
     
@@ -195,6 +242,33 @@ showMsg = () => {
                       onChange={this.onChangeBirth}  ref='birth'/>
                   </div>
             </div>
+
+          
+
+            <div className="row">
+            <div className="col-md-2">
+                  
+                  <label >Tên đăng nhập</label>
+                  <input type="text" className="form-control" style={{radius :  "10px"}}
+                    id="name"  onChange={this.onChangeUserName}
+                    ref='username'
+                    />
+                </div>
+                  <div className="col-md-2">
+                  
+                    <label >Mật khẩu</label>
+                    <input type="password" className="form-control" style={{radius :  "10px"}}
+                      id="pass"  onChange={this.onChangePassword}
+                      ref='pass'
+                      />
+                  </div>
+                  <div className="col-md-2">
+                    <label >Nhập lại mật khẩu</label>
+                    <input type="password" className="form-control" id="repass"
+                      onChange={this.onChangeRePassword}  ref='repass'/>
+                  </div>
+            </div>
+            
             
               <div className="row">
                 <div className="col-md-3">
@@ -240,10 +314,10 @@ showMsg = () => {
                 </div>
                 
             <br/>
-          <div className="bt-action col-md-12" >
+          <div className="bt-action col-md-12 conten-button">
           <center> 
-          <button type="reset" className="btn btn-success">Làm mới </button>
-          <button type="button" className="btn btn-success" onClick={this.add}>Thêm </button>
+          <button type="reset" className="btn btn-primary btn-block margin-bottom">Làm mới </button>
+          <button type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.add}>Thêm </button>
           </center>
           </div>
           

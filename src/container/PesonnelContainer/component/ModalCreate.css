@@ -1,5 +1,6 @@
 body {
    height:500px;
+   font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif  !important;
 }
 .contai{
     background-color:aliceblue
@@ -17,12 +18,17 @@ body {
 }
 .title{
     /* thinh-np */
-    font-size: 22px; 
-    font-weight: 700;
-    color: blue;
+    font-size: 25px !important; 
+    font-weight: 700 !important;
+    color: #337ab7 !important;
     padding-left: 0px;
-    text-align: left;
+    text-align: left !important;
     
+}
+.conten-button button{
+   width: 100px !important;
+   display: inline !important;
+   font-size: 16px !important;
 }
 .modal-footer{
     padding-right: 160px;

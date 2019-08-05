@@ -5,6 +5,7 @@ import TeamContainer from '../container/TeamContainer/TeamContainer';
 import Home from '../component/Home/Home';
 
 import ThongKe from '../component/ThongKe/ThongKe';
+import profileComponent from '../component/Profile/profileComponent'; 
 
 import Detail from '../container/PesonnelContainer/component/Detail';
 import ModalCreate from '../container/PesonnelContainer/component/ModalCreate';
@@ -80,9 +81,11 @@ export default class RouterURL extends Component {
                         <Route exact path="/trang-chu/chucvu/sua/:id"  component={ModalEditPosition}/>}/>
                         
                         <Route exact path="/trang-chu/danh-gia" component={NotificationDetail} />
+                         {/* profile */}
+                         <Route exact path="/trang-chu/ho-so" component={profileComponent} />
                         {/* //thongke */}
                         <Route exact path="/trang-chu/thong-ke" component={ThongKe} />
-                        
+                       
                         {/* trang chu */}
                         <Route exact path="/trang-chu" component={Home} />
                         
