@@ -3,13 +3,8 @@ import './ModalCreate.css';
 import {callApi, callApiPaging, callApiDelete, callApiEdit } from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
-
-
-//js 
-
-
-
-
+import { ProgressBar, Step } from "react-step-progress-bar";
+import "react-step-progress-bar/styles.css";
 export default class ModalEdit extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +21,8 @@ export default class ModalEdit extends Component {
       education : '',
       team : '',
       msg : '',
-      arrayTeam : []
+      arrayTeam : [],
+      progress: 0
     }
   }
   selectOptionTeam =()=>{
@@ -44,6 +40,9 @@ export default class ModalEdit extends Component {
    
     
   }
+  reset =() =>{
+    this.loadingData();
+  }
   edit =() =>{
   if(validateformBlank()){
     var data = {
@@ -59,9 +58,10 @@ export default class ModalEdit extends Component {
    
     callApiEdit('developer',data ,null, this.props.match.params.id )
     .then(response => {
+      this.showMsg();
       this.setState({ 
         editStatus :true , 
-        msg : "Thành công"
+
         });
   })
   .catch(function (error) {
@@ -81,7 +81,11 @@ export default class ModalEdit extends Component {
   goBack=()=>{
     history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
-
+showMsg = () => {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
   loadingData = () => {
     callApiPaging('developer/'+ this.props.match.params.id,null,null,'1')
         .then(response => {
@@ -130,6 +134,13 @@ export default class ModalEdit extends Component {
     });
    
   }
+  onChangeProgress=(e)=> {
+    this.setState({
+      progress: e.target.value
+    });
+   
+  }
+  
 
   onChangeLevel=(e)=> {
     this.setState({
@@ -182,86 +193,97 @@ export default class ModalEdit extends Component {
         <form className="form-style-9">
         <div className="title">
          
-        Quản lý nhân sự
+        Cập nhập dự án
   
          </div>
-         <div style={{paddingLeft: "200px" ,zIndex : "1" ,color : "red" ,height: "13px" ,fontSize : "13px",fontWeight: "700"}} >  {this.state.msg} </div>
-         <br/>
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{height: '70px', width: '100%'}}>
-            <path d="M0.00,92.27 C216.83,192.92 304.30,8.39 500.00,109.03 L500.00,0.00 L0.00,0.00 Z" style={{stroke: 'none', fill: '#e1efe3'}} />
-           
-          </svg>
+
               <div className="modal-body container">
              
               <div className="row">
-                      <div className="col-md-4">
+                      <div className="col-md-6">
                      
-                        <label >Tên nhân sự</label>
+                        <label >Tên dự án</label>
                         <input type="text" className="form-control" style={{radius :  "10px"}}
                          value={this.state.name} id="name"  onChange={this.onChangeName}
                          ref='name'
                          />
-                      </div>
-                      <div className="col-md-2">
-                        <label >Ngày sinh</label>
-                        <input type="date" className="form-control" name="birth" value={this.state.birth}
-                          onChange={this.onChangeBirth}  ref='birth'/>
-                      </div>
+                      </div> 
                 </div>
                
                   <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-md-4">
                      
-                     <label >Đội(Nhóm)</label>
+                     <label >Nhóm nhận dự án</label>
                      <select className="form-control " value={this.state.team} >
                      {this.selectOptionTeam()}
                     </select>
-                   </div>
-                   <div className="col-md-4">
-                     <label >Email</label>
-                     <input type="text" className="form-control" name="email" value={this.state.email}
-                      onChange={this.onChangeEmail}   ref='email' id="email" />
-                   </div>
-                   </div>
-
-                   <div className="row">
-                    <div className="col-md-4">
-                     
-                     <label >Tốt nghiệp trường</label>
-                     <input type="text" className="form-control" style={{radius :  "10px"}}
-                      value={this.state.education} onChange={this.onChangeEducation} id='education'   ref='education'/>
                    </div>
                    <div className="col-md-2">
                      <label >Cấp độ</label>
                      
                         <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
-                        <option value="FR">Fresher</option>
-                        <option value="JR">Junior</option>
-                        <option value="SR">Senior</option>
-                        <option value="SA">Software Architecture</option>
-                        <option value="TD">Team Leader</option>
-                        <option value="PM">Project Manager</option>
+                        <option value="Active">ACTIVE</option>
+                  <option value="On Processing">ON PROCESSING</option>
+                  <option value="Pending">PENDING</option>
+                  <option value="Finished">FINISHED</option>
+                  <option value="Closed">CLOSED</option>
                       </select>
                    </div>
                    </div>
+
+          
                    <div className="row">
                    <div className="col-md-6">
-                   <label >Địa chỉ </label> <br/>
-                   <textarea rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
+                   <label >Mô tả dự án </label> <br/>
+                   <textarea style={{height : "50px"}}  rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
                     {/* <textarea rows={4} classname="form-control" cols={50} ref="address" onchange={this.onChangeAddress} defaultValue={this.state.education} /> */}
                    </div>
+                  
                    </div>
+
+                   <div className="row">
+                   <div className="col-md-2">
+                   <label >Cập nhật tiến độ </label> <br/>
+                   <input type="number" className="form-control" style={{radius :  "10px"}} min="1" max="100" 
+                         value={this.state.progress} id="progress"  onChange={this.onChangeProgress}
+                         ref='progress'/>
+                   </div>
+                   <div className="col-md-4">
+                     <input type="checkbox" defaultChecked data-toggle="toggle" />
+                   <label  style={{marginBottom: "14px"}}>Tiến độ (%) </label> <br/>
+                   <div className="progress progress-xs progress-striped active" >
+                <div className="progress-bar progress-bar-primary" style={{width: this.state.progress+"%"}}  />
+                <p style={{color : "#337ab7"}}> {this.state.progress}%</p>
+               </div>
+                   </div>
+                   </div>
+
+                   <div className="row">
+                   <div className="col-md-6">
+                   <label >Mô tả cập nhật </label> <br/>
+                   <textarea style={{height : "50px"}}  rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
+                    {/* <textarea rows={4} classname="form-control" cols={50} ref="address" onchange={this.onChangeAddress} defaultValue={this.state.education} /> */}
+                   </div>
+                  
+                   </div>
+                  
+
+                   
                    </div>
                    
                <br/>
-              <div className="bt-action">
-              <button type="reset" className="btn btn-success">Làm mới </button>
-              <button type="button" className="btn btn-success" onClick={this.edit}>Sửa </button>
-              </div>
+              <div className="bt-action col-md-12 conten-button">
+          <center> 
+          <button type="reset" className="btn btn-primary btn-block margin-bottom" onClick={this.reset}>Làm mới </button>
+          <button type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.edit}>Sửa </button>
+          </center>
+          </div>
               <div className="modal-footer">
                 <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
               </div>
+              <div id="snackbar" >Sửa thành công </div>
               </form>
+              <br/>
               </div>
               </div>
             </div>

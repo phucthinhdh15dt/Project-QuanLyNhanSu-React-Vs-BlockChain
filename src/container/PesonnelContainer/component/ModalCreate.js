@@ -42,7 +42,6 @@ export default class ModalCreate extends Component {
     }
    
     var data = {
-      "project": 4,
       "name": this.refs.name.value,
       "username" : this.refs.username.value,
       "birth": this.refs.birth.value,

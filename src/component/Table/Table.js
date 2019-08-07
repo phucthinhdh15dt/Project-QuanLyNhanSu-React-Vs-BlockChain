@@ -71,7 +71,7 @@ import Loading from './../../component/Loading/Loading';
             zindex : 1
             });
           
-            await callApiDelete(`developers`, null, "null",idDelete)
+            await callApiDelete(`developer`, null, "null",idDelete)
             .then(res => this.setState({ 
                  status: res.status,
                  zindex : -1000
@@ -86,8 +86,6 @@ import Loading from './../../component/Loading/Loading';
       this.loadingData();
      }
      setPagePlus =async()=>{
-            
-       
             
                 await   this.setState({ 
                     page: this.state.page + 1 ,
@@ -128,17 +126,18 @@ import Loading from './../../component/Loading/Loading';
           result = repos.map((tableJson, index) =>{
               return <tr key={tableJson.index}> 
               <td>{index+1}</td>
-              <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
-              <td>{tableJson[prototype[2]]}</td>
-              <td style={{textAlign : "left"}}>{tableJson[prototype[3]]}</td>
-              <td>{tableJson[prototype[4]]}</td>
+              <td>{tableJson[prototype[1]]}</td>
+              <td style={{textAlign : "left"}}>{tableJson[prototype[2]]}</td>
+              <td>{tableJson[prototype[3]]}</td>
+              <td style={{textAlign : "left"}}>{tableJson[prototype[4]]}</td>
+              <td>{tableJson[prototype[5]]}</td>
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
-                
+                {console.log(tableJson[prototype[0]]) }
                 <NavLink to={`/trang-chu/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
                  <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
-                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"> <span class="glyphicon glyphicon-info-sign" style={{fontSize : "15 px"}}></span> </NavLink>
+                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"><i class="fa fa-search-plus" aria-hidden="true" style={{fontSize: "15px"}}></i> </NavLink>
                 
                 <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -306,7 +305,7 @@ import Loading from './../../component/Loading/Loading';
                         <div className="col-sm-7"></div>
                         <div className="col-sm-5 pull-right" >
                             <nav aria-label="Page navigation example" >
-                                <ul class="pagination pull-right">
+                                <ul class="pagination pull-right" style={{marginTop: "10px"}}>
                                 <li class="page-item"  className="col-sm-5" style={{ width: "160px"}}>
                                     <button className="btn btn-primary btn-block margin-bottom"  onClick={this.setPage}>
                                     <span class="glyphicon glyphicon-fast-backward"></span> Trước đó 

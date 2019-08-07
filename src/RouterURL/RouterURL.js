@@ -32,6 +32,9 @@ import ModalEditPosition from '../container/PositionContainer/component/ModalEdi
 //quan ly du an
 
 import ProjectContainer from '../container/ProjectContainer/ProjectContainer';
+import ProjectCreate from '../container/ProjectContainer/component/ModalCreate';
+import ProjectEdit from '../container/ProjectContainer/component/ModalEdit';
+import ProjectDetail from '../container/ProjectContainer/component/Detail';
 
 //Notification
 import NotificationDetail from '../container/NotificationContainer/component/NotificationDetail';
@@ -67,6 +70,9 @@ export default class RouterURL extends Component {
 
                         {/* quan ly Project */}
                         <Route exact path="/trang-chu/du-an/danh-sach-du-an" component={ProjectContainer} />
+                        <Route exact path="/trang-chu/du-an/them"  component={ProjectCreate}/>}/>
+                        <Route exact path="/trang-chu/du-an/chi-tiet/:id" component={ProjectEdit} />
+                        <Route exact path="/trang-chu/du-an/sua/:id"  component={ProjectEdit}/>}/>
                         
                         <Route exact path="/trang-chu/du-an/them"  component={ModalCreateTask}/>}/>
                         <Route exact path="/trang-chu/du-an/chi-tiet/:id" component={DetailTask} />
@@ -82,7 +88,7 @@ export default class RouterURL extends Component {
                         
                         <Route exact path="/trang-chu/danh-gia" component={NotificationDetail} />
                          {/* profile */}
-                         <Route exact path="/trang-chu/ho-so" component={profileComponent} />
+                         <Route exact path="/trang-chu/ho-so/:profileId" component={profileComponent} />
                         {/* //thongke */}
                         <Route exact path="/trang-chu/thong-ke" component={ThongKe} />
                        

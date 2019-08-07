@@ -54,6 +54,8 @@ export default class SideBar extends Component {
   logout = () =>{
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
+    localStorage.setItem('username','');
+    localStorage.setItem('id','');
   }
 
     render(){
@@ -68,7 +70,7 @@ export default class SideBar extends Component {
             {/* Sidebar user panel */}
             <div className="user-panel" >
               <div className="pull-left image">
-                <img src="../../dist/img/user2-160x160.jpg" className="img-circle" alt="User Image" />
+              <i className="fa fa-user-circle" aria-hidden="true" style={{fontSize : "50px" , color: "#3c8dbc"}}></i>
               </div>
               <div className="pull-left info">
                 <p>{this.state.reposDetail != null ? this.state.reposDetail.username : 'hethantoken'}</p>

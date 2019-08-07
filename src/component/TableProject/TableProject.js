@@ -119,17 +119,23 @@ import Loading from './../../component/Loading/Loading';
           result = repos.map((tableJson, index) =>{
               return <tr key={tableJson.index}> 
               <td>{index+1}</td>
-              <td style={{textAlign : "left"}}>{tableJson[prototype[0]]}</td>
-              <td>{tableJson[prototype[1]]}</td>
-              <td>{tableJson.team.name}</td>
-              {/* <td style={{textAlign : "left"}}>{tableJson[prototype[2]]}</td> */}
+              <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
+              <td>{tableJson[prototype[2]]}</td>
               <td>{tableJson[prototype[3]]}</td>
+              <td>{tableJson[prototype[4]].substr(0,10)}</td>
+              <td style={{width: "200px"}}>
+                 <div className="progress progress-xs progress-striped active" >
+                <div className="progress-bar progress-bar-primary" style={{width: tableJson[prototype[5]]}}  />
+                <p style={{color : "#337ab7"}}> {tableJson[prototype[5]]}%</p>
+               </div>
+               
+              </td>
              
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
-                
-                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Xem tiến độ"> <span class="glyphicon glyphicon-signal" style={{fontSize:"20px"}}></span> </NavLink>
+                <NavLink to={`/trang-chu/du-an/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
+                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Xem tiến độ"> <i class="fa fa-line-chart" aria-hidden="true" style={{fontSize : "18px"}}></i> </NavLink>
                 
                 <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -251,11 +257,11 @@ import Loading from './../../component/Loading/Loading';
                   </div>
                     <div className="col-xs-7">
                     
-                    <div className="title">Quản lý nhân sự </div> 
+                    <div className="title">Quản lý dự án </div> 
                     </div>
                     <div className="col-xs-1" >
                     
-                     <NavLink to={`/trang-chu/nhan-su-chinh-thuc/them`} activeClassName="active" >
+                     <NavLink to={`/trang-chu/du-an/them`} activeClassName="active" >
                      <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "80px"}} name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
                     
                       </NavLink>
@@ -294,17 +300,17 @@ import Loading from './../../component/Loading/Loading';
                           </div>
                       </div>
                       <div className="row">
-                          <div className="col-sm-8"></div>
-                          <div className="col-sm-4">
+                          <div className="col-sm-7"></div>
+                          <div className="col-sm-5 pull-right" >
                               <nav aria-label="Page navigation example" >
-                                  <ul class="pagination">
-                                  <li class="page-item"  className="col-sm-6" style={{width: "50%"}}>
+                                  <ul class="pagination pull-right" style={{marginTop: "10px"}}>
+                                  <li class="page-item"  className="col-sm-5" style={{ width: "160px"}}>
                                       <button className="btn btn-primary btn-block margin-bottom"  onClick={this.setPage}>
                                       <span class="glyphicon glyphicon-fast-backward"></span> Trước đó 
                                       </button>
                                   </li>
                                   
-                                  <li class="page-item"  className="col-sm-6" style={{width: "50%"}}>
+                                  <li class="page-item"  className="col-sm-5" style={{width: "160px"}}>
                                       <button className="btn btn-primary btn-block margin-bottom"  onClick={this.setPagePlus} >
                                       Tiếp theo  <span class="glyphicon glyphicon-fast-forward"></span>
                                       </button>
@@ -320,7 +326,6 @@ import Loading from './../../component/Loading/Loading';
             </section>
             <div id="snackbar">Xóa thành công</div>
           </div>
-
 
         )
        

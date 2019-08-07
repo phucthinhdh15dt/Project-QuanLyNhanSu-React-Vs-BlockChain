@@ -4,12 +4,6 @@ import {callApi, callApiPaging, callApiDelete, callApiEdit } from './../../../ut
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 
-
-//js 
-
-
-
-
 export default class ModalEdit extends Component {
   constructor(props) {
     super(props);
@@ -229,7 +223,7 @@ showMsg = () => {
 
                    <div className="row">
                     <div className="col-md-4">
-                     
+                     <input type="checkbox" defaultChecked data-toggle="toggle" />
                      <label >Tốt nghiệp trường</label>
                      <input type="text" className="form-control" style={{radius :  "10px"}}
                       value={this.state.education} onChange={this.onChangeEducation} id='education'   ref='education'/>
@@ -257,10 +251,12 @@ showMsg = () => {
                    </div>
                    
                <br/>
-              <div className="bt-action" style={{height: '10px', marginTop : "100px" }}>
-              <button type="reset" className="btn btn-success"  onClick={this.reset}>Làm mới </button>
-              <button type="button" className="btn btn-success" onClick={this.edit}>Sửa </button>
-              </div>
+              <div className="bt-action col-md-12 conten-button">
+          <center> 
+          <button type="reset" className="btn btn-primary btn-block margin-bottom" onClick={this.reset}>Làm mới </button>
+          <button type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.edit}>Sửa </button>
+          </center>
+          </div>
               <div className="modal-footer">
                 <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
               </div>

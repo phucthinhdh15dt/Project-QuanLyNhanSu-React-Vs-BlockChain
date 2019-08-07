@@ -35,6 +35,7 @@ export default class Login extends Component {
         callApiInfo('me/',null,localStorage.getItem('token'))
         .then(response => {
           localStorage.setItem('username',response.data.username)
+          localStorage.setItem('id',response.data.id)
         })
         .catch(function (error) {
             console.log(error);

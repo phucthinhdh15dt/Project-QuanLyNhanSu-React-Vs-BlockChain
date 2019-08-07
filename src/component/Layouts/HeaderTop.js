@@ -12,9 +12,15 @@ export default class HeaderTop extends Component {
       reposDetail: [],
       listNotifi : [],
       countListNotify : 0,
+      profileid: localStorage.getItem('id')
     }
   }
-  loadingData = () => {
+  setprofile(){
+    this.setState({ 
+      profileid: localStorage.getItem('id')
+      });
+  }
+  loadingData =async () => {
     var data = {
       "refresh": localStorage.getItem('refreshToken')
       
@@ -26,13 +32,18 @@ export default class HeaderTop extends Component {
     callApiInfo('me/',null,localStorage.getItem('token'))
         .then(response => {
             this.setState({ 
-              reposDetail : response.data.results[0]
+              reposDetail : response.data.results[0],
+              profileid : response.data.results[0].id
               });
         })
         .catch(function (error) {
           callApiRefresh('api/token/refresh/',data,null)
           .then(responsere => {
             localStorage.setItem('token', responsere.data.access);
+            this.setState({ 
+              reposDetail : responsere.data.results[0],
+              profileid : responsere.data.results[0].id
+              });
           })
           .catch(function (error) {
               console.log(error);
@@ -113,7 +124,7 @@ export default class HeaderTop extends Component {
       
         
         <nav className="navbar navbar-static-top">
-      
+          {this.setprofile}
         {/* <a href="#" className="sidebar-toggle" data-toggle="push-menu" role="button">
           <span className="sr-only">Toggle navigation</span>
           <span className="icon-bar" />
@@ -181,7 +192,7 @@ export default class HeaderTop extends Component {
           {/* Menu Footer*/}
           <li className="user-footer">
             <div className="pull-left">
-              <Link to="/trang-chu/ho-so" className="btn btn-default btn-flat"> Hồ sơ </Link>
+              <Link  to={`/trang-chu/ho-so/${this.state.profileid !=null ? this.state.profileid : ''}`} className="btn btn-default btn-flat"> Hồ sơ </Link>
             </div>
             <div className="pull-right">
               <a href="#" className="btn btn-default btn-flat">Đăng xuất</a>

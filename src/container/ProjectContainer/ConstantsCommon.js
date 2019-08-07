@@ -1,5 +1,5 @@
  // PERSONNEL Table
- export const PROJECT_TABLE_STRING =[ "STT","TÊN DỰ ÁN","MÔ TẢ DỰ ÁN","NHÓM NHẬN DỰ ÁN","NGÀY BẮT ĐẦU","XEM TIẾN ĐỘ"];
+ export const PROJECT_TABLE_STRING =[ "STT","TÊN DỰ ÁN","MÔ TẢ DỰ ÁN","TRẠNG THÁI","NGÀY BẮT ĐẦU","TIẾN ĐỘ", "THAO TÁC"];
  export const PROJECT_TITLE_STRING = "QUẢN LÝ NHÂN SỰ";
  //Modal
 //From delete Personnel 
@@ -15,7 +15,7 @@ export const PERSONNEL_MODAL_EDIT_TYPE  =["text","date","date","numbe","number",
 export const PERSONNEL_MODAL_EDIT_LAYOUT =["col-md-4"," col-md-2 "," col-md-2 "," col-md-2 ", "col-md-3 ", "col-md-3"];
 export const PERSONNEL_MODAL_EDIT_TITLE ="SỬA NHÂN SỰ";
 
-export const PROJECT_TABLE_PROTOTYPE = ["name", "descriptions", "level","date_start"]
+export const PROJECT_TABLE_PROTOTYPE = ["id","name", "descriptions", "status","date_start","process"]
 
 //Form project
 
