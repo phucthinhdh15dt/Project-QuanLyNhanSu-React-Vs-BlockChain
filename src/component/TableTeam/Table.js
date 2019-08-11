@@ -124,7 +124,7 @@ import Loading from './../../component/Loading/Loading';
               <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
               <td>{tableJson[prototype[2]]}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[3]]}</td>
-              <td>{tableJson[prototype[4]]}</td>
+              <td>{tableJson[prototype[4]].substr(0,10)}</td>
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
@@ -232,10 +232,9 @@ import Loading from './../../component/Loading/Loading';
         var msgerr =this.state.msgerr;
          
         return (
-          
         <div className="content-wrapper" >
+        
         <Loading  zindex ={this.state.zindex}/>
-          {/* <Navigation title={StringNavigation.TITLE_NAVIGATION_TEAM} navi={StringNavigation.TITLE_NAVIGATION_TEAM} /> */}
           <section className="content">
             <div className="row">
               <div className="col-xs-12">
@@ -246,26 +245,28 @@ import Loading from './../../component/Loading/Loading';
                    
                   </div>
                   <div className="form-group has-warning has-feedback col-xs-3 search">
-                    <input type="text" ref='search' onChange={this.onChangeSearch}  className="form-control" id="inputWarning" placeholder="Tìm kiếm" />
-                   <button className="btn-warning" onClick={this.ActionSearch} > <span class="glyphicon glyphicon-search" > </span></button>
+                    <input type="text" ref='search' onChange={this.onChangeSearch} style={{border : "1px solid #3c8dbc"}}  className="form-control" id="inputWarning" placeholder="Tìm kiếm" />
+                   <button className="btn btn-primary btn-block margin-bottom" style={{width : "40px"}} onClick={this.ActionSearch} > <span class="glyphicon glyphicon-search" > </span></button>
                   
                 </div>
                   <div className="col-xs-7">
-                  <p style={{fontWeight :'700' ,color : 'red' ,textAlign : 'center'}}> {msgerr}</p>
+                  
+                  <div className="title">Quản lý nhóm </div> 
                   </div>
                   <div className="col-xs-1" >
                   
-                   <NavLink to={`/trang-chu/nhom/them`} activeClassName="active" >
-                   <button className="btn btn-success btn-md madow" name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
-                  
-                    </NavLink>
+                 
+                    <NavLink to={`/trang-chu/nhom/them`}activeClassName="active" >
+                     <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "80px"}} name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
+                    
+                      </NavLink>
                     <br />
                     <br />
 
                   </div>
                   <div className="col-xs-1" >
                   
-                  <button  className="btn btn-success btn-md " title="download CSV" onClick={()=>this.downloadCSV({ filename: StringNavigation.TITLE_NAVIGATION_TEAM.replace(/ /g, '-')+"-DATA.csv"})}  ><span class="glyphicon glyphicon-save-file"></span></button>
+                  <button  className="btn btn-primary btn-block margin-bottom " title="download CSV" onClick={()=>this.downloadCSV({ filename: StringNavigation.TITLE_NAVIGATION_QUANLYNHANSU.replace(/ /g, '-')+"-DATA.csv"})}  ><span class="glyphicon glyphicon-save-file"></span></button>
                    
                    <br />
                    <br />
@@ -294,18 +295,18 @@ import Loading from './../../component/Loading/Loading';
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-sm-8"></div>
-                        <div className="col-sm-4">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                <li class="page-item">
-                                    <button className="btn btn-success"  onClick={this.setPage}>
+                        <div className="col-sm-7"></div>
+                        <div className="col-sm-5 pull-right" >
+                            <nav aria-label="Page navigation example" >
+                                <ul class="pagination pull-right" style={{marginTop: "10px"}}>
+                                <li class="page-item"  className="col-sm-5" style={{ width: "160px"}}>
+                                    <button className="btn btn-primary btn-block margin-bottom"  onClick={this.setPage}>
                                     <span class="glyphicon glyphicon-fast-backward"></span> Trước đó 
                                     </button>
                                 </li>
-                                <li>  </li>
-                                <li   class="page-item">
-                                    <button className="btn btn-success"  onClick={this.setPagePlus} >
+                                
+                                <li class="page-item"  className="col-sm-5" style={{width: "160px"}}>
+                                    <button className="btn btn-primary btn-block margin-bottom"  onClick={this.setPagePlus} >
                                     Tiếp theo  <span class="glyphicon glyphicon-fast-forward"></span>
                                     </button>
                                 </li>
@@ -318,10 +319,10 @@ import Loading from './../../component/Loading/Loading';
               </div>
             </div>
           </section>
-
-                
-
+          <div id="snackbar">Xóa thành công</div>
         </div>
+
+
 
 
         )

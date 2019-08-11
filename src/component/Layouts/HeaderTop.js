@@ -12,7 +12,8 @@ export default class HeaderTop extends Component {
       reposDetail: [],
       listNotifi : [],
       countListNotify : 0,
-      profileid: localStorage.getItem('id')
+      profileid: localStorage.getItem('id'),
+      reload: 0
     }
   }
   setprofile(){
@@ -20,7 +21,8 @@ export default class HeaderTop extends Component {
       profileid: localStorage.getItem('id')
       });
   }
-  loadingData =async () => {
+  loadingData = () => {
+    
     var data = {
       "refresh": localStorage.getItem('refreshToken')
       
@@ -31,19 +33,17 @@ export default class HeaderTop extends Component {
     };
     callApiInfo('me/',null,localStorage.getItem('token'))
         .then(response => {
+          
             this.setState({ 
-              reposDetail : response.data.results[0],
-              profileid : response.data.results[0].id
+              reposDetail : response.data,
+              
               });
         })
         .catch(function (error) {
           callApiRefresh('api/token/refresh/',data,null)
           .then(responsere => {
             localStorage.setItem('token', responsere.data.access);
-            this.setState({ 
-              reposDetail : responsere.data.results[0],
-              profileid : responsere.data.results[0].id
-              });
+          
           })
           .catch(function (error) {
               console.log(error);
@@ -118,6 +118,7 @@ export default class HeaderTop extends Component {
   }
   componentDidMount (){
     this.loadingData();
+    setTimeout(this.loadingData(), 4000);
   }
     render(){
       return (
@@ -183,10 +184,13 @@ export default class HeaderTop extends Component {
         <ul className="dropdown-menu">
           {/* User image */}
           <li className="user-header">
-            <img src="../../dist/img/user2-160x160.jpg" className="img-circle" alt="User Image" />
+        
+          <center>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsN7_4Pzpjqf1SvLhu6F3aaeayGXE-cCoY5FX-3szRmW7DPKPZ" alt style={{width: "100px", height: "100px"}} className="img-circle img-responsive" />
+            </center>
             <p>
-              Alexander Pierce - Web Developer
-              <small>Member since Nov. 2012</small>
+              {this.state.reposDetail.username != null ? this.state.reposDetail.username : "" }
+              <small> {this.state.reposDetail.email != null ? this.state.reposDetail.email : "" }</small>
             </p>
           </li>
           {/* Menu Footer*/}

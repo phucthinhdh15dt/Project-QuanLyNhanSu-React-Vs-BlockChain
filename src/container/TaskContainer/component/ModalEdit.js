@@ -4,16 +4,9 @@ import {callApi, callApiPaging, callApiDelete, callApiEdit } from './../../../ut
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 
-
-//js 
-
-
-
-
 export default class ModalEdit extends Component {
   constructor(props) {
     super(props);
-   
 
     this.state = {
       reposDetail: [],
@@ -149,36 +142,29 @@ export default class ModalEdit extends Component {
     
     return (
            
-      <div className="container" className="contai" >
+     <div className="container" className="contai" >
       <br /> <br /> <br />
         <div className="row" > 
-        <div className="col-md-4">
-        <div className="col-md-4">
-    <div className="col-md-4">
+          <div className="col-md-4">
+            <div className="col-md-4">
+      <div className="col-md-4">
+    
+  </div>
   
 </div>
-
-</div>
-      </div>
-
-      <div className="col-md-7"  >
-      
-      
-        <form className="form-style-9">
-        <div className="title">
-         
-        Sửa công việc
-  
-         </div>
-         <div style={{paddingLeft: "200px" ,zIndex : "1" ,color : "red" ,height: "13px" ,fontSize : "13px",fontWeight: "700"}} >  {this.state.msg} </div>
-         <br/>
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{height: '70px', width: '100%'}}>
-            <path d="M0.00,92.27 C216.83,192.92 304.30,8.39 500.00,109.03 L500.00,0.00 L0.00,0.00 Z" style={{stroke: 'none', fill: '#e1efe3'}} />
-           
-          </svg>
-              <div className="modal-body container">
-             
-              <div className="row">
+          </div>
+          <div className="col-md-7"  >
+          
+          
+            <form className="form-style-9">
+            <div className="title">
+            Sửa công việc 
+              </div>
+              <div style={{paddingLeft: "160px" ,color : "red" ,height: "15px"}} >  {this.state.msg} </div>
+              <br/>
+          <div className="container">
+          
+          <div className="row">
                       <div className="col-md-6">
                      
                         <label >Tên công việc</label>
@@ -241,18 +227,26 @@ export default class ModalEdit extends Component {
                    </div>
                    </div>
                    
-               <br/>
-              <div className="bt-action">
-              <button type="reset" className="btn btn-success">Làm mới </button>
-              <button type="button" className="btn btn-success" onClick={this.edit}>Giao việc </ button>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
-              </div>
-              </form>
-              </div>
-              </div>
-            </div>
+              <br/>
+          <div className="bt-action col-md-12 conten-button">
+          <center> 
+          <button type="reset" className="btn btn-primary btn-block margin-bottom">Làm mới </button>
+          <button type="button" className="btn btn-primary btn-block margin-bottom"  onClick={this.edit}>Giao việc </button>
+          </center>
+          </div>
+          
+          <div className="modal-footer" >
+            <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
+          </div>
+          </form>
+
+          </div>
+          <div className="col-md-2">
+        <br/>
+        <div id="snackbar" >Thêm thành công </div>
+        </div>
+        </div>
+      </div>
           
         
     )

@@ -176,22 +176,11 @@ showMsg = () => {
             <div className="title">
             Thêm chức vụ
               </div>
+              <div style={{paddingLeft: "160px" ,color : "red" ,height: "15px"}} >  {this.state.msg} </div>
               <br/>
           <div className="container">
           
           <div className="row">
-                  <div className="col-md-6">
-                  
-                    <label >Tên chức vụ</label>
-                    <input type="text" className="form-control" style={{radius :  "10px"}}
-                      id="name"  onChange={this.onChangeName}
-                      ref='name'
-                      />
-                  </div>
-                  
-            </div>
-            
-              <div className="row">
               <div className="col-md-2">
                   <label >Lương cơ bản </label>
                   <div className="input-group"> 
@@ -220,11 +209,11 @@ showMsg = () => {
                 </div>
                 </div>
                 
-            <br/>
-          <div className="bt-action col-md-12" >
+                <br/>
+          <div className="bt-action col-md-12 conten-button">
           <center> 
-          <button type="reset" className="btn btn-success">Làm mới </button>
-          <button type="button" className="btn btn-success" onClick={this.add}>Thêm </button>
+          <button type="reset" className="btn btn-primary btn-block margin-bottom">Làm mới </button>
+          <button type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.add}>Thêm </button>
           </center>
           </div>
           
@@ -232,6 +221,7 @@ showMsg = () => {
             <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
           </div>
           </form>
+
           </div>
           <div className="col-md-2">
         <br/>

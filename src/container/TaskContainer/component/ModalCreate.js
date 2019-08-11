@@ -149,21 +149,29 @@ export default class ModalCreate extends Component {
     
     return (
            
-            <div className="container" className="contai">
-            
-              <div className="row"> 
-              <div className="col-md-4">
+      <div className="container" className="contai" >
+      <br /> <br /> <br />
+        <div className="row" > 
+          <div className="col-md-4">
+            <div className="col-md-4">
+      <div className="col-md-4">
+    
+  </div>
+  
+</div>
+          </div>
+          <div className="col-md-7"  >
+          
+          
+            <form className="form-style-9">
+            <div className="title">
+            Giao công việc 
               </div>
-              <div className="col-md-8">
-              <br /> <br /> <br />  <br/>
-                 <div className="title">
-                Giao công việc
-                </div>
-                <div style={{paddingLeft: "160px" ,color : "red" ,height: "30px"}} >  {this.state.msg} </div>
-                <form  name="myForm">
-              <div className="modal-body container">
-             
-              <div className="row">
+              <div style={{paddingLeft: "160px" ,color : "red" ,height: "15px"}} >  {this.state.msg} </div>
+              <br/>
+          <div className="container">
+          
+          <div className="row">
                       <div className="col-md-6">
                      
                         <label >Tên công việc</label>
@@ -227,18 +235,26 @@ export default class ModalCreate extends Component {
                    </div>
                    </div>
                    
-               <br/>
-              <div className="bt-action">
-              <button type="reset" className="btn btn-success">Làm mới </button>
-              <button type="button" className="btn btn-success" onClick={this.edit}>Giao việc </ button>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
-              </div>
-              </form>
-              </div>
-              </div>
-            </div>
+                   <br/>
+          <div className="bt-action col-md-12 conten-button">
+          <center> 
+          <button type="reset" className="btn btn-primary btn-block margin-bottom">Làm mới </button>
+          <button type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.add}>Thêm </button>
+          </center>
+          </div>
+          
+          <div className="modal-footer" >
+            <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
+          </div>
+          </form>
+
+          </div>
+          <div className="col-md-2">
+        <br/>
+        <div id="snackbar" >Thêm thành công </div>
+        </div>
+        </div>
+      </div>
           
         
     )

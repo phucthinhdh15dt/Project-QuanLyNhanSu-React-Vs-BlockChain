@@ -13,11 +13,11 @@ import "./css/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.cs
 
 export default class App extends Component {
   componentDidMount() {
+  
   }
   render() {
     return (
       <Router history={history}> 
-
           <Route exact path="/" component={Login} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/logout" component={Login} />

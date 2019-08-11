@@ -1,0 +1,76 @@
+body {
+   height:500px;
+   font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif  !important;
+}
+.contai{
+    background-color:aliceblue
+}
+.form-control  input {
+
+    margin-bottom: 8px;
+    border-radius: 2px;
+    width: 60%;
+      height: 5px;
+      margin: 0 auto;
+      border: none; /* <-- This thing here */
+      border:solid 1px #ccc;
+      border-radius: 10px;
+}
+.title{
+    /* thinh-np */
+    font-size: 25px !important; 
+    font-weight: 700 !important;
+    color: #337ab7 !important;
+    padding-left: 0px;
+    text-align: left !important;
+    
+}
+.conten-button button{
+   width: 100px !important;
+   display: inline !important;
+   font-size: 16px !important;
+}
+.modal-footer{
+    padding-right: 160px;
+}
+.bt-action {
+    padding-left: 150px;
+}
+.modal-footer button{
+   width: 100px;
+   height: 40px;
+   box-shadow: 5px 5px #888888;
+   border: 2px solid;
+  
+}
+.bt-action{
+    padding-top: 10px;
+}
+.bt-action button{
+   width: 70px;
+   height: 40px;
+   margin-right: 30px;
+   box-shadow: 5px 5px #888888;
+   border: 1px solid;
+  
+}
+.form-control{
+    font-size: 14px;
+    border: 2px solid #8181F7 ;
+    box-shadow: 1px 1px;
+    border-radius: 2px;
+  
+    font-weight: 500 ;
+}
+.form-style-9{
+	max-width: 650px;
+	background: #FAFAFA;
+    padding: 30px;
+   
+	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+	border-radius: 10px;
+	border: 3px solid #305A72;
+}
+
+
+

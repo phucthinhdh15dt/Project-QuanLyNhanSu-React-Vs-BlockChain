@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Navigation from '../Layouts/Navigation';
 import * as StringNavigation from '../../constants/NavigationConstants';
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
+import {authorization, DEVERLOPER, LEADER ,ADMIN} from './../../utils/authoze';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
 import './table.css';
 import Loading from './../../component/Loading/Loading';
@@ -136,12 +137,15 @@ import Loading from './../../component/Loading/Loading';
                
                 {console.log(tableJson[prototype[0]]) }
                 <NavLink to={`/trang-chu/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
+           
                  <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
+               
                 <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"><i class="fa fa-search-plus" aria-hidden="true" style={{fontSize: "15px"}}></i> </NavLink>
                 
                 <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
+                   
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title">Xóa nhân sự</h4>
@@ -241,7 +245,6 @@ import Loading from './../../component/Loading/Loading';
         return (
           
         <div className="content-wrapper" >
-        
         <Loading  zindex ={this.state.zindex}/>
           <section className="content">
             <div className="row">
@@ -264,8 +267,9 @@ import Loading from './../../component/Loading/Loading';
                   <div className="col-xs-1" >
                   
                    <NavLink to={`/trang-chu/nhan-su-chinh-thuc/them`} activeClassName="active" >
-                   <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "80px"}} name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
-                  
+                   {(authorization() == ADMIN) ?
+                   <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "80px"}} name="BUTTON_EDIT" ><span class="glyphicon glyphicon-plus"></span> Thêm </button>
+                   : ''}
                     </NavLink>
                     <br />
                     <br />

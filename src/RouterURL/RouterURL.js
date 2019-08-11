@@ -35,6 +35,9 @@ import ProjectContainer from '../container/ProjectContainer/ProjectContainer';
 import ProjectCreate from '../container/ProjectContainer/component/ModalCreate';
 import ProjectEdit from '../container/ProjectContainer/component/ModalEdit';
 import ProjectDetail from '../container/ProjectContainer/component/Detail';
+//review
+import ReviewContainer from '../container/ReviewContainer/ReviewContainer';
+
 
 //Notification
 import NotificationDetail from '../container/NotificationContainer/component/NotificationDetail';
@@ -86,7 +89,8 @@ export default class RouterURL extends Component {
                         <Route exact path="/trang-chu/chuc-vu/chi-tiet/:id" component={DetailPosition} />
                         <Route exact path="/trang-chu/chucvu/sua/:id"  component={ModalEditPosition}/>}/>
                         
-                        <Route exact path="/trang-chu/danh-gia" component={NotificationDetail} />
+
+                        <Route exact path="/trang-chu/danh-gia" component={ReviewContainer} />
                          {/* profile */}
                          <Route exact path="/trang-chu/ho-so/:profileId" component={profileComponent} />
                         {/* //thongke */}

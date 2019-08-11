@@ -34,13 +34,23 @@ export default class Login extends Component {
         localStorage.setItem('refreshToken', response.data.refresh);
         callApiInfo('me/',null,localStorage.getItem('token'))
         .then(response => {
-          localStorage.setItem('username',response.data.username)
-          localStorage.setItem('id',response.data.id)
+          localStorage.setItem('username',response.data.username);
+          localStorage.setItem('id',response.data.id);
+          localStorage.setItem('is_active',response.data.is_active);
+          localStorage.setItem('is_staff',response.data.is_staff);
+          localStorage.setItem('is_superuser',response.data.is_superuser);
         })
         .catch(function (error) {
             console.log(error);
         })
-        this.setState({ redirect: true });
+        setTimeout(
+          function() {
+            this.setState({ redirect: true });
+          }
+          .bind(this),
+          1000
+      );
+        
        
         }else{
           this.setState({

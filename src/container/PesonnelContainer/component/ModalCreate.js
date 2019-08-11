@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import './ModalCreate.css';
+
 import {callApi, callApiPaging, callApiDelete, callApiAdd ,callApiRefresh ,registerUser} from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 import Loading from './../../../component/Loading/Loading';
-
+import {refreshToken} from './../../../utils/token';
 //js 
 
 
@@ -33,6 +34,14 @@ export default class ModalCreate extends Component {
       zindex : -1000 
     }
   }
+ ramdomMS=()=>  {
+    
+    var random = "1513" ;
+    for(var i=0 ;i<6 ;i++){
+      random = random+ Math.floor(Math.random() * 9) ;
+    }
+    return  random ;
+  }
   add =() =>{
   if(validateformBlank()){
     var dataRegister = {
@@ -42,6 +51,7 @@ export default class ModalCreate extends Component {
     }
    
     var data = {
+      "dev_id" : this.ramdomMS(),
       "name": this.refs.name.value,
       "username" : this.refs.username.value,
       "birth": this.refs.birth.value,
@@ -119,9 +129,11 @@ showMsg = () => {
 
   }
   componentDidMount (){
+
+    refreshToken();
     this.loadingData();
-  
   }
+   
 
   selectOptionTeam =()=>{
 

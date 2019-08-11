@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Redirec.css';
+// import './Redirec.css';
 import { callApiPaging, callApibyId, callApiEdit } from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
@@ -142,42 +142,49 @@ export default class RedirectTeam extends Component {
       <div className="container" className="contai" >
       <br /> <br /> <br />
         <div className="row" > 
-        <div className="col-md-4">
-        <div className="col-md-4">
-    <div className="col-md-4">
+          <div className="col-md-4">
+            <div className="col-md-4">
+      <div className="col-md-4">
+    
+  </div>
   
 </div>
-
-</div>
-      </div>
-
-      <div className="col-md-7"  >
-      
-      
-        <form className="form-style-9">
-        <div className="title">
-         
-        Chuyển nhóm
-  
-         </div>
-         <div style={{paddingLeft: "200px" ,zIndex : "1" ,color : "red" ,height: "13px" ,fontSize : "13px",fontWeight: "700"}} >  {this.state.msg} </div>
-         <br/>
-              <div className="modal-body container">
-               
-              <div className="row">
-                    <div className="col-md-1">
-                    {/* can le */}
-                    </div>
-                      <div className="col-md-4">
+          </div>
+          <div className="col-md-7"  >
+          
+            <form className="form-style-9">
+            <div className="title">
+            Chuyển nhóm
+              </div>
+              <div style={{paddingLeft: "160px" ,color : "red" ,height: "15px"}} >  {this.state.msg} </div>
+              <br/>
+          <div className="container" style={{height: "350px"}}>
+          
+          <div className="row">
+                      <div className="col-md-6">
+                   
                      
+                        <label >Tên công việc</label>
+                        <input type="text" className="form-control" style={{radius :  "10px"}}
+                         value={this.state.name} id="name"  onChange={this.onChangeName}
+                         ref='name'
+                         />
+                       </div>
+                      
+                      </div>
+                <br/>
+               
+                <div className="row">
+                    <div className="col-md-4">
                         <label >Nhập mã nhân viên </label>
                         <input type="text" className="form-control" style={{radius :  "10px"}}
                           id="id"  
                          />
                       </div>
-                      <div className="col-md-1">
-                      <label >&nbsp; &nbsp;   </label>
-                      <button type="button" className="btn btn-success" onClick={this.search}>Truy vấn</button>
+
+                      <div className="col-md-2">
+                      <label style={{visibility: "hidden"}} >Nhập mã nhân viên </label><br/>
+                      <button type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.search}>Truy vấn</button>
                      
                    </div>
                    
@@ -186,10 +193,7 @@ export default class RedirectTeam extends Component {
                 </div>
                <br/>
                 <div className="row">
-                <div className="col-md-1">
-                    {/* can le */}
-                    </div>
-                <div className="col-md-4">
+                <div className="col-md-3">
                      
                      <label >Chọn Đội(Nhóm) làm việc mới</label>
                      <select className="form-control " value={this.state.team} onChange={this.onChangeTeam}
@@ -198,12 +202,18 @@ export default class RedirectTeam extends Component {
                     </select>
                    </div>
                      
+                </div><br/>
+                <div className="row">
+                <div className="col-md-6">
+                <label >Mô tả công việc </label> <br/>
+                <textarea style={{height : "50px"}} rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
+                </div>
                 </div>
                 <br/>
                
-                <div className="row" style={{visibility : '' + this.state.visibility }}  >
+                {/* <div className="row" style={{dis : '' + this.state.visibility }}  >
                 <div className="col-md-1">
-                    {/* can le */}
+                    
                     </div>
                     <div className="col-md-5" style={{paddingLeft: "20px"}}>
                 <label > Thông tin truy vấn</label>
@@ -214,24 +224,31 @@ export default class RedirectTeam extends Component {
                         <p> <u> Tốt nghiệp </u>  : {this.state.reposDetail  !== '' ?this.state.reposDetail.education : ''} </p>
                           
                 </div>
-                </div>
+                </div> */}
                   
                    
                  
                    </div>
-                   
-               <br/>
-              <div className="bt-action" style={{marginTop : "50px"}}>
-              <button type="reset" className="btn btn-success">Làm mới </button>
-              <button type="button" className="btn btn-success" onClick={this.redir}>Chuyển </button>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
-              </div>
-              </form>
-              </div>
-              </div>
-            </div>
+             <br/>
+          <div className="bt-action col-md-12 conten-button">
+          <center> 
+          <button type="reset" className="btn btn-primary btn-block margin-bottom">Làm mới </button>
+          <button type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.redir}>Chuyển </button>
+          </center>
+          </div>
+          
+          <div className="modal-footer" >
+            <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
+          </div>
+          </form>
+
+          </div>
+          <div className="col-md-2">
+        <br/>
+        <div id="snackbar" >Chuyển nhóm thành công </div>
+        </div>
+        </div>
+      </div>
           
         
     )
