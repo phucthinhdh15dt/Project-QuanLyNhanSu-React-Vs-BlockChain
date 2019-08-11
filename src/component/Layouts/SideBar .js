@@ -147,16 +147,19 @@ export default class SideBar extends Component {
                   
                 </ul>
               </li>
-              {(authorization() == ADMIN) ? 
-              <li style={{textAlign: 'left'}}>
-              <Link >
+             
+            
+
+              {(authorization() == ADMIN) ?
+              <li className="treeview" style={{textAlign: 'left'}}>
+              <Link to="/trang-chu/hop-dong">
                   <i className="fa fa-th" /> <span>Quản Lý hợp đồng </span>
-                  <span className="pull-right-container">
-                    <small className="label pull-right bg-green">new</small>
-                  </span>
+                
                 </Link>
+              
               </li>
               : ''}
+             
               {(authorization() == ADMIN) ?
               <li className="treeview" style={{textAlign: 'left'}}>
               <Link to="/trang-chu/chuc-vu">
@@ -170,7 +173,7 @@ export default class SideBar extends Component {
 
               {(authorization() == ADMIN) ?
               <li className="treeview" style={{textAlign: 'left'}}>
-              <Link>
+              <Link to="/trang-chu/hop-dong">
                   <i className="fa fa-book" />
                   <span>Quản lý bằng cấp </span>
                   

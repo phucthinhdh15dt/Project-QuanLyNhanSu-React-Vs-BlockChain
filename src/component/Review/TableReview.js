@@ -133,6 +133,7 @@ import Loading from './../../component/Loading/Loading';
               <td>{tableJson['task'].name}</td>
               <td>{tableJson[prototype[3]]}</td>
               <td  style={{width : '350px'}}>{tableJson[prototype[4]]}</td>
+
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
@@ -261,15 +262,26 @@ import Loading from './../../component/Loading/Loading';
                    <button className="btn btn-primary btn-block margin-bottom" style={{width : "40px"}} onClick={this.ActionSearch} > <span class="glyphicon glyphicon-search" > </span></button>
                   
                 </div>
-                  <div className="col-xs-7">
+                  <div className="col-xs-5">
                   
                   <div className="title">Đánh giá nhân viên </div> 
                   </div>
                   <div className="col-xs-1" >
                   
-                   <NavLink to={`/trang-chu/nhan-su-chinh-thuc/them`} activeClassName="active" >
+                   <NavLink to={`/ethereum/payment`} activeClassName="active" >
                    
-                   <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "80px"}} name="BUTTON_EDIT" ><span class="glyphicon glyphicon-plus"></span> Thêm </button>
+                   <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "95px"}} name="BUTTON_EDIT" ><i class="fa fa-money" aria-hidden="true"></i> Trả Lương </button>
+                 
+                    </NavLink>
+                    <br />
+                    <br />
+
+                  </div>
+                  <div className="col-xs-2" >
+                  
+                   <NavLink to={`/ethereum/reviews`} activeClassName="active" >
+                   
+                   <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "165px"}} name="BUTTON_EDIT" ><span class="glyphicon glyphicon-plus"></span> Thêm Vào Blockchain </button>
                  
                     </NavLink>
                     <br />

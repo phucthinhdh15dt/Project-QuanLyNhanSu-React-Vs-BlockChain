@@ -39,7 +39,7 @@ import Loading from './../../component/Loading/Loading';
     this.setState({ 
         zindex : 1
         });
-    callApiPaging('reviews',null,null,this.state.page+"&search="+this.refs.search.value)
+    callApiPaging('contract',null,null,this.state.page+"&search="+this.refs.search.value)
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results,
@@ -54,7 +54,7 @@ import Loading from './../../component/Loading/Loading';
  
   loadingData =async () => {
      
-    callApiPaging('reviews',null,null,this.state.page)
+    callApiPaging('contract',null,null,this.state.page)
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results,
@@ -72,7 +72,7 @@ import Loading from './../../component/Loading/Loading';
             zindex : 1
             });
           
-            await callApiDelete(`review`, null, "null",idDelete)
+            await callApiDelete(`contract`, null, "null",idDelete)
             .then(res => this.setState({ 
                  status: res.status,
                  zindex : -1000
@@ -127,12 +127,13 @@ import Loading from './../../component/Loading/Loading';
           result = repos.map((tableJson, index) =>{
               return <tr key={tableJson.index}> 
               <td>{index+1}</td>
+              <td>{tableJson['name']}</td>
+              <td>{tableJson['descriptions']}</td>
+              
               <td style={{width : '50px'}}>{tableJson['developer'].dev_id}</td>
               <td>{tableJson['developer'].name}</td>
-              <td>{tableJson['project'].name}</td>
-              <td>{tableJson['task'].name}</td>
-              <td>{tableJson[prototype[3]]}</td>
-              <td  style={{width : '350px'}}>{tableJson[prototype[4]]}</td>
+              <td>{tableJson['date_start'].substr(0,10)}</td>
+         
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
@@ -263,7 +264,7 @@ import Loading from './../../component/Loading/Loading';
                 </div>
                   <div className="col-xs-7">
                   
-                  <div className="title">Đánh giá nhân viên </div> 
+                  <div className="title">Quản lý hợp đồng </div> 
                   </div>
                   <div className="col-xs-1" >
                   

@@ -1,12 +1,11 @@
  // PERSONNEL Table
  export const PERSONNEL_TABLE_STRING = [
     "STT",
+    "TÊN HỢP ĐỒNG",
+    "NỘI DUNG HỢP ĐỒNG",
     "MÃ SỐ NHÂN VIÊN",
-    "TÊN",
-    "DỰ ÁN",
-    "CÔNG VIỆC",
-    "NGƯỜI ĐÁNH GIÁ",
-    "NỘI DUNG",
+    "TÊN NHÂN VIÊN",
+    "NGÀY KÍ HỢP ĐỒNG",
     "THAO TÁC"
   ];
  export const PERSONNEL_TITLE_STRING = "QUẢN LÝ NHÂN SỰ";
@@ -24,4 +23,4 @@ export const PERSONNEL_MODAL_EDIT_TYPE  =["text","date","date","numbe","number",
 export const PERSONNEL_MODAL_EDIT_LAYOUT =["col-md-4"," col-md-2 "," col-md-2 "," col-md-2 ", "col-md-3 ", "col-md-3"];
 export const PERSONNEL_MODAL_EDIT_TITLE ="SỬA NHÂN SỰ";
 
-export const PERSONNEL_TABLE_PROTOTYPE = [ "id", "dev_id", "name", "author", "content" ]
+export const PERSONNEL_TABLE_PROTOTYPE = [ "id", "name", "descriptions", "date_start", "content" ]
