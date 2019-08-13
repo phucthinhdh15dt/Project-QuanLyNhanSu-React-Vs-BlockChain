@@ -161,15 +161,7 @@ export default class RedirectTeam extends Component {
           <div className="container" style={{height: "350px"}}>
           
           <div className="row">
-                      <div className="col-md-6">
-                   
                      
-                        <label >Tên công việc</label>
-                        <input type="text" className="form-control" style={{radius :  "10px"}}
-                         value={this.state.name} id="name"  onChange={this.onChangeName}
-                         ref='name'
-                         />
-                       </div>
                       
                       </div>
                 <br/>
@@ -205,7 +197,7 @@ export default class RedirectTeam extends Component {
                 </div><br/>
                 <div className="row">
                 <div className="col-md-6">
-                <label >Mô tả công việc </label> <br/>
+                <label >Nội dung </label> <br/>
                 <textarea style={{height : "50px"}} rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
                 </div>
                 </div>

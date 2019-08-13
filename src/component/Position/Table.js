@@ -248,7 +248,6 @@ import Loading from './../../component/Loading/Loading';
                     <div className="box-header">
                      <center> <div style={{fontWeight :'bold' ,color : 'blue' ,fontSize : '20px'}} className="box-title">{title}</div> </center>
                      <br />
-                     
                     </div>
                     <div className="form-group has-warning has-feedback col-xs-3 search">
                       <input type="text" ref='search' onChange={this.onChangeSearch} style={{border : "1px solid #3c8dbc"}}  className="form-control" id="inputWarning" placeholder="Tìm kiếm" />

@@ -273,7 +273,7 @@ showMsg = () => {
                 <div className="row">
                 <div className="col-md-6">
                 <label >Mô tả dự án </label> <br/>
-                <textarea style={{height : "50px"}} rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
+                <textarea style={{height : "100px"}} rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
                 </div>
                 </div>
                 </div>

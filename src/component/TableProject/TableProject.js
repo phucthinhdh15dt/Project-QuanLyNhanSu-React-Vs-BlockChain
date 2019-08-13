@@ -120,7 +120,7 @@ import Loading from './../../component/Loading/Loading';
               return <tr key={tableJson.index}> 
               <td>{index+1}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
-              <td>{tableJson[prototype[2]]}</td>
+              <td style={{width : "400px"}}>{tableJson[prototype[2]]}</td>
               <td>{tableJson[prototype[3]]}</td>
               <td>{tableJson[prototype[4]].substr(0,10)}</td>
               <td style={{width: "200px"}}>
@@ -131,11 +131,12 @@ import Loading from './../../component/Loading/Loading';
                
               </td>
              
-            <td> 
+            <td  style={{width : "100px"}}> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
                 <NavLink to={`/trang-chu/du-an/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
-                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Xem tiến độ"> <i class="fa fa-line-chart" aria-hidden="true" style={{fontSize : "18px"}}></i> </NavLink>
+                <NavLink to={`/trang-chu/du-an/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Xem tiến độ" ><i class="fa fa-line-chart" aria-hidden="true" ></i>  </button> </NavLink>  
+               
                 
                 <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -248,15 +249,12 @@ import Loading from './../../component/Loading/Loading';
                     <div className="box-header">
                      <center> <div style={{fontWeight :'bold' ,color : 'blue' ,fontSize : '20px'}} className="box-title">{title}</div> </center>
                      <br />
-                     
                     </div>
                     <div className="form-group has-warning has-feedback col-xs-3 search">
                       <input type="text" ref='search' onChange={this.onChangeSearch} style={{border : "1px solid #3c8dbc"}}  className="form-control" id="inputWarning" placeholder="Tìm kiếm" />
                      <button className="btn btn-primary btn-block margin-bottom" style={{width : "40px"}} onClick={this.ActionSearch} > <span class="glyphicon glyphicon-search" > </span></button>
-                    
                   </div>
                     <div className="col-xs-7">
-                    
                     <div className="title">Quản lý dự án </div> 
                     </div>
                     <div className="col-xs-1" >

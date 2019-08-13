@@ -165,7 +165,7 @@ export default class ModalCreate extends Component {
           
             <form className="form-style-9">
             <div className="title">
-            Giao công việc 
+            Giao công việc
               </div>
               <div style={{paddingLeft: "160px" ,color : "red" ,height: "15px"}} >  {this.state.msg} </div>
               <br/>
