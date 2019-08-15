@@ -40,6 +40,8 @@ import ReviewContainer from '../container/ReviewContainer/ReviewContainer';
 //Contract
 import ContractContainer from '../container/ContractContainer/ContractContainer';
 
+import DegreesContainer from '../container/DegreesContainer/DegreesContainer';
+
 
 //Notification
 import NotificationDetail from '../container/NotificationContainer/component/NotificationDetail';
@@ -76,12 +78,12 @@ export default class RouterURL extends Component {
                         {/* quan ly Project */}
                         <Route exact path="/trang-chu/du-an/danh-sach-du-an" component={ProjectContainer} />
                         <Route exact path="/trang-chu/du-an/them"  component={ProjectCreate}/>}/>
-                        <Route exact path="/trang-chu/du-an/chi-tiet/:id" component={ProjectEdit} />
+                        <Route exact path="/trang-chu/du-an/chi-tiet/:id" component={ProjectDetail} />
                         <Route exact path="/trang-chu/du-an/sua/:id"  component={ProjectEdit}/>}/>
                         
-                        <Route exact path="/trang-chu/du-an/them"  component={ModalCreateTask}/>}/>
+                        {/* <Route exact path="/trang-chu/du-an/them"  component={ModalCreateTask}/>}/>
                         <Route exact path="/trang-chu/du-an/chi-tiet/:id" component={DetailTask} />
-                        <Route exact path="/trang-chu/du-an/sua/:id"  component={ModalEditTask}/>}/>
+                        <Route exact path="/trang-chu/du-an/sua/:id"  component={ModalEditTask}/>}/> */}
                         <Route exact path="/trang-chu/tat-ca-thong-bao" component={NotificationDetail} />
 
                            {/* Position  */}
@@ -93,6 +95,10 @@ export default class RouterURL extends Component {
                         
                             {/* review */}
                         <Route exact path="/trang-chu/danh-gia" component={ReviewContainer} />
+                        
+
+                        <Route exact path="/trang-chu/bang-cap" component={DegreesContainer} />
+                        
                         
                         <Route exact path="/trang-chu/hop-dong" component={ContractContainer} />
                          {/* profile */}

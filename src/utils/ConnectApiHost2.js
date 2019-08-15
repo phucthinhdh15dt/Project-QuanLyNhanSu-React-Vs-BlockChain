@@ -108,6 +108,24 @@ export  function callApiAddHost2
     });
 };
 
+export  function callApiUpdateProject
+(endpoint, body) {
+    var method ='POST' ;
+    return axios({
+        url: `${config.API_URL_HOST_2}/${endpoint}/`,
+        method,
+        headers:{
+            // 'access-control-request-origin':'*',
+             'content-type' : 'application/json',
+             'accept':'application/json',
+            //  'Authorization': 'Bearer ' + accesstoken,
+        },
+        data: body
+    }).catch(err => {
+        return (err); 
+    });
+};
+
 export  function callApiToken(endpoint, body, accesstoken) {
     var method ='POST';
     return axios({

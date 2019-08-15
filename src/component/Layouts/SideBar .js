@@ -173,7 +173,7 @@ export default class SideBar extends Component {
 
               {(authorization() == ADMIN) ?
               <li className="treeview" style={{textAlign: 'left'}}>
-              <Link to="/trang-chu/hop-dong">
+              <Link to="/trang-chu/bang-cap">
                   <i className="fa fa-book" />
                   <span>Quản lý bằng cấp </span>
                   

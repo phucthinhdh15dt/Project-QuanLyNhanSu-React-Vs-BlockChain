@@ -199,7 +199,7 @@ export default class HeaderTop extends Component {
               <Link  to={`/trang-chu/ho-so/${this.state.profileid !=null ? this.state.profileid : ''}`} className="btn btn-default btn-flat"> Hồ sơ </Link>
             </div>
             <div className="pull-right">
-              <a href="#" className="btn btn-default btn-flat">Đăng xuất</a>
+              <a href="http://128.199.198.52:8000/admin" target="_blank" className="btn btn-default btn-flat">Trang Quản trị hệ thống</a>
             </div>
           </li>
         </ul>

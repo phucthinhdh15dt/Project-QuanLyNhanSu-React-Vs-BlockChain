@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import './ModalCreate.css';
 import {callApi, callApiPaging, callApiDelete, callApiEdit } from './../../../utils/ConnectApi';
+import {callApiUpdateProject } from './../../../utils/ConnectApiHost2';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 import { ProgressBar, Step } from "react-step-progress-bar";
 import "react-step-progress-bar/styles.css";
+
 export default class ModalEdit extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +23,7 @@ export default class ModalEdit extends Component {
       team : '',
       msg : '',
       arrayTeam : [],
+      descriptionsUpdate: ''
     }
   }
   selectOptionTeam =()=>{
@@ -41,26 +44,48 @@ export default class ModalEdit extends Component {
   reset =() =>{
     this.loadingData();
   }
+   formatDate(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+  }
   edit =() =>{
-  if(validateformBlank()){
-    var data = {
-      "name": this.refs.name.value,
-      "birth": this.refs.birth.value,
-      "address": this.refs.address.value,
-      "level": this.refs.level.value,
-      "email":this.refs.email.value,
-      "education": this.refs.education.value,
-      "day_of_work": 0,
-      "day_of_thinking": 0
-    };
-   
-    callApiEdit('project',data ,null, this.props.match.params.id )
+    var d = new Date();
+    var time = this.formatDate(d);
+
+    var updateData = {
+      "process" : 1,
+      "contentUpdateProject": this.refs.descriptionsUpdate.value,
+      "username" : localStorage.getItem("username"),
+      "status" : 1,
+      "dateUpdate" : time,
+      "idProject" : this.props.match.params.id,
+      "numberUpdateProject" : this.refs.process.value
+    }
+    // var data = {
+    //   "name": this.refs.name.value,
+    //   "birth": this.refs.birth.value,
+    //   "address": this.refs.address.value,
+    //   "level": this.refs.level.value,
+    //   "email":this.refs.email.value,
+    //   "education": this.refs.education.value,
+    //   "day_of_work": 0,
+    //   "day_of_thinking": 0
+    // };
+
+    callApiUpdateProject('UpdateProject',updateData )
     .then(response => {
       this.showMsg();
       this.setState({ 
         editStatus :true , 
 
         });
+     
   })
   .catch(function (error) {
     console.log(error);
@@ -68,13 +93,24 @@ export default class ModalEdit extends Component {
      
       msg : "bug"
       });
-})}else{
-  
-  this.setState({ 
-     
-    msg : "Có trường không hợp lệ ,xin kiểm tra lại"
-    });
 }
+   
+//     callApiEdit('project',data ,null, this.props.match.params.id )
+//     .then(response => {
+//       this.showMsg();
+//       this.setState({ 
+//         editStatus :true , 
+
+//         });
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//     this.setState({ 
+     
+//       msg : "bug"
+//       });
+// }
+)
   }
   goBack=()=>{
     history.goBack('/trang-chu/nhan-su-chinh-thuc');
@@ -129,6 +165,12 @@ showMsg = () => {
   onChangeBirth =(e)=> {
     this.setState({
       birth: e.target.value
+    });
+   
+  }
+  onChangedescriptionsUpdate =(e)=> {
+    this.setState({
+      descriptionsUpdate: e.target.value
     });
    
   }
@@ -331,7 +373,7 @@ showMsg = () => {
                    <div className="row">
                    <div className="col-md-6">
                    <label >Mô tả cập nhật </label> <br/>
-                   <textarea style={{height : "50px"}}  rows={4} id='update' value={this.state.descriptionsUpdate} ref='descriptionsUpdate' onChange={this.onChangedescriptionsUpdate} className="form-control" />
+                   <textarea style={{height : "50px"}}  rows={4} id='update'  ref='descriptionsUpdate' onChange={this.onChangedescriptionsUpdate} className="form-control" />
                     {/* <textarea rows={4} classname="form-control" cols={50} ref="address" onchange={this.onChangeAddress} defaultValue={this.state.education} /> */}
                    </div>
                   
@@ -345,13 +387,13 @@ showMsg = () => {
               <div className="bt-action col-md-12 conten-button">
           <center> 
           <button id="reset" type="reset" className="btn btn-primary btn-block margin-bottom" onClick={this.reset}>Làm mới </button>
-          <button id="edit" type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.edit}>Sửa </button>
+          <button id="edit" type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.edit}> Cập nhật </button>
           </center>
           </div>
               <div className="modal-footer">
                 <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
               </div>
-              <div id="snackbar" >Sửa thành công </div>
+              <div id="snackbar" >Cập nhật thành công </div>
               </form>
               <br/>
               </div>
