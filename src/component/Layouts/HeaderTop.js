@@ -80,7 +80,7 @@ export default class HeaderTop extends Component {
             if(tableJson.status === 0){
              
               return <li  ><Link to={`/trang-chu/thong-bao/${tableJson.id}`}>
-                <h3><span class="glyphicon glyphicon-eye-open" style={{paddingRight: "10px" , color : "black" }}></span>
+                <h3><i className="fa fa-envelope-o text-blue" style={{paddingRight: "10px" , color : "black" }}> </i>
                   {tableJson['contentNotify'].substring(0,30)+"..."}
                   <small className="pull-right"><i class="fa fa-check" aria-hidden="true"></i></small>
                   
@@ -93,7 +93,7 @@ export default class HeaderTop extends Component {
             </li>
             }else{
               return <li style={{background: "#edf2fa"}} ><Link to={`/trang-chu/thong-bao/${tableJson.id}`}>
-              <h3><span class="glyphicon glyphicon-eye-open" style={{paddingRight: "10px" , color : "black" }}></span>
+              <h3><i className="fa fa-check-square-o text-blue" style={{paddingRight: "10px" , color : "black" }}></i>
                 {tableJson['contentNotify'].substring(0,30)+"..."}
                 <small className="pull-right"><i class="fa fa-check" aria-hidden="true"></i></small>
                 
@@ -138,10 +138,7 @@ export default class HeaderTop extends Component {
 
             {/*Notify */}
             <li className="dropdown tasks-menu"   >
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-              <i className="fa fa-flag-o" />
-                <span className="label label-danger"></span>
-              </a>
+             
               <ul className="dropdown-menu">
                 {/* <li className="header">Bạn có {this.state.countListNotify} thông báo mới </li> */}
                 <li>
@@ -196,7 +193,7 @@ export default class HeaderTop extends Component {
           {/* Menu Footer*/}
           <li className="user-footer">
             <div className="pull-left">
-              <Link  to={`/trang-chu/ho-so/${this.state.profileid !=null ? this.state.profileid : ''}`} className="btn btn-default btn-flat"> Hồ sơ </Link>
+              <Link  to={`/trang-chu/ho-so`} className="btn btn-default btn-flat"> Hồ sơ </Link>
             </div>
             <div className="pull-right">
               <a href="http://128.199.198.52:8000/admin" target="_blank" className="btn btn-default btn-flat">Trang Quản trị hệ thống</a>

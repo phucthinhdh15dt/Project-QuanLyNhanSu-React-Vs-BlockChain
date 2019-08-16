@@ -138,7 +138,7 @@ import Loading from './../../component/Loading/Loading';
                 {console.log(tableJson[prototype[0]]) }
                 <NavLink to={`/trang-chu/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
            
-                 <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
+                 <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   disabled ={tableJson[prototype['username']] == localStorage.getItem('username') ? true : false} className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
                
                 <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"><i class="fa fa-search-plus" aria-hidden="true" style={{fontSize: "15px"}}></i> </NavLink>
                 

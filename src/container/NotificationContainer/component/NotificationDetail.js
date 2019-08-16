@@ -76,20 +76,23 @@ export default class NotificationDetail extends Component {
              
               return <tr>
                       <td><input type="checkbox" /></td>
-                      <td className="mailbox-star"><a href="#"><i className="fa fa-calendar text-blue" /> {tableJson['createDate'].substring(0, 10)}</a></td>
-                      <td className="mailbox-name"><a href="read-mail.html"></a></td>
-                      <td className="mailbox-subject"> <i class="fa fa-star-o text-yellow"></i> {tableJson['contentNotify']}
-                      </td>
+              <td className="mailbox-subject"><i className=" fa fa-envelope-o text-blue" aria-hidden="true"></i>  {tableJson['contentNotify']}
+              </td>
+              
+              <td className="mailbox-name"></td>
+              <td className="mailbox-star"><i className="fa fa-calendar text-blue" /> {tableJson['createDate'].substring(0, 10)}</td>
+              
                       <td className="mailbox-attachment" />
-                      <td className="mailbox-date"> <i className="fa fa-clock-o text-blue" /> {tableJson['createDate'].substring(11, 16)}</td>
+                      <td className="mailbox-date"> <i class="fa fa-clock-o text-blue" aria-hidden="true"></i> {tableJson['createDate'].substring(11, 16)}</td>
                     </tr>
             } if(tableJson.status === 1){
               return <tr>
               <td><input type="checkbox" /></td>
-              <td className="mailbox-star"><a href="#"><i className="fa fa-calendar text-blue" /> {tableJson['createDate'].substring(0, 10)}</a></td>
-              <td className="mailbox-name"><a href="read-mail.html"></a></td>
-              <td className="mailbox-subject"><i class="fa fa-star text-yellow"></i>  {tableJson['contentNotify']}
+              <td className="mailbox-subject"> <i class="fa fa-check-square-o text-blue" aria-hidden="true"></i>  {tableJson['contentNotify']}
               </td>
+              
+              <td className="mailbox-name"></td>
+              <td className="mailbox-star"><i className="fa fa-calendar text-blue" /> {tableJson['createDate'].substring(0, 10)}</td>
               <td className="mailbox-attachment" />
               <td className="mailbox-date"> <i className="fa fa-clock-o text-blue" /> {tableJson['createDate'].substring(11, 16)}</td>
             </tr>
@@ -132,10 +135,10 @@ export default class NotificationDetail extends Component {
                 <div className="box-body no-padding">
                   <ul className="nav nav-pills nav-stacked">
                     <li className="active"><a href="#"><i className="fa fa-inbox" /> Thông báo của tôi
-                        <span className="label label-primary pull-right">12</span></a></li>
+                        </a></li>
                     <li><a href="#"><i className="fa fa-envelope-o" /> Thông báo công việc</a></li>
                     <li><a href="#"><i className="fa fa-file-text-o" /> Thông báo cá nhân</a></li>
-                    <li><a href="#"><i className="fa fa-filter" /> Tất cả thông báo chưa đọc <span className="label label-warning pull-right">65</span></a>
+                    <li><a href="#"><i className="fa fa-filter" /> Tất cả thông báo chưa đọc </a>
                     </li>
                     <li><a href="#"><i className="fa fa-trash-o" /> Thùng rác</a></li>
                   </ul>
@@ -153,8 +156,8 @@ export default class NotificationDetail extends Component {
                 </div>
                 <div className="box-body no-padding">
                   <ul className="nav nav-pills nav-stacked">
-                  <li><a href="#"><i class="fa fa-star-o text-yellow"></i> Chưa đọc</a></li>
-                    <li><a href="#"><i class="fa fa-star text-yellow"></i> Đã đọc </a></li>
+                  <li><a href="#"><i className=" fa fa-envelope-o text-blue" aria-hidden="true"></i> Chưa đọc</a></li>
+                    <li><a href="#"><i class="fa fa-check-square-o text-blue" aria-hidden="true"></i> Đã đọc </a></li>
                     
                     
                   </ul>
@@ -170,7 +173,7 @@ export default class NotificationDetail extends Component {
                   <h3 className="box-title">Thông báo của tôi</h3>
                   <div className="box-tools pull-right">
                     <div className="has-feedback">
-                      <input type="text" className="form-control input-sm" placeholder="Search Mail" />
+                      <input type="text" className="form-control input-sm" placeholder="Tìm kiếm thông báo" />
                       <span className="glyphicon glyphicon-search form-control-feedback" />
                     </div>
                   </div>
@@ -189,7 +192,7 @@ export default class NotificationDetail extends Component {
                     {/* /.btn-group */}
                     <button type="button" className="btn btn-default btn-sm"><i className="fa fa-refresh" /></button>
                     <div className="pull-right">
-                      1-50/200
+                    Trang : 1  &nbsp;
                       <div className="btn-group">
                         <button type="button" className="btn btn-default btn-sm"><i className="fa fa-chevron-left" /></button>
                         <button type="button" className="btn btn-default btn-sm"><i className="fa fa-chevron-right" /></button>
@@ -209,21 +212,7 @@ export default class NotificationDetail extends Component {
                   {/* /.mail-box-messages */}
                 </div>
                 {/* /.box-body */}
-                <div className="box-footer no-padding">
-                  <div className="mailbox-controls">
-                   
-                    
-                    <div className="pull-right">
-                      1-50/200
-                      <div className="btn-group">
-                        <button type="button" className="btn btn-default btn-sm"><i className="fa fa-chevron-left" /></button>
-                        <button type="button" className="btn btn-default btn-sm"><i className="fa fa-chevron-right" /></button>
-                      </div>
-                      {/* /.btn-group */}
-                    </div>
-                    {/* /.pull-right */}
-                  </div>
-                </div>
+              
               </div>
               {/* /. box */}
             </div>

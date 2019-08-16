@@ -40,15 +40,19 @@ export default class ModalCreate extends Component {
   
    
     var data = {
-        "name": this.refs.name.value,
-        "descriptions": this.refs.address.value,
-        "status": "Active",
-        "process": 1,
-        "num_member": 0,
-        "leader": "Đàm Quang Khoa",
-        "level": this.refs.level.value,
-        "developers": "1",
-
+      "name": this.refs.name.value,
+      "descriptions": this.refs.address.value,
+      "status": this.refs.level.value,
+      "level": "Easy",
+      "process": 1,
+      "num_member": 0,
+      "leader": "Đàm Quang Khoa",
+      "developers": [
+        "33"
+      ],
+      "team": [
+        this.refs.team.value
+      ]
     };
     
     callApiAdd('projects',data ,localStorage.getItem('token'))

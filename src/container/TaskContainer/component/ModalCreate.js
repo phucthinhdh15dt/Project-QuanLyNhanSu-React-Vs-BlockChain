@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './ModalCreate.css';
-import {callApi, callApiPaging, callApiDelete, callApiEdit } from './../../../utils/ConnectApi';
+import {callApi, callApiPaging, callApiDelete, callApiEdit,callApiPagingProfile ,callApiAdd} from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 
@@ -26,6 +26,13 @@ export default class ModalCreate extends Component {
       level : 'FR' ,
       statusTask : '',
       msg : '',
+      nameAssignTask : "",
+      MSNVAssigTask : "",
+      project : [],
+      arrayname: [],
+      arrayid: [],
+      team: "" ,
+      arrayDev : [],
      
     }
   }
@@ -38,10 +45,7 @@ export default class ModalCreate extends Component {
               return <option value={item.id}>{item.name}</option>
           } );
       }
-   
       return  result;
-    
-   
     
   }
   edit =() =>{
@@ -82,6 +86,32 @@ export default class ModalCreate extends Component {
     history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
 
+  LoadingProfile = async()=>{
+    var team = '';
+  
+     await callApiPagingProfile('developer/'+localStorage.getItem('username'))
+      .then( response => {
+        team = response.data.team;
+          this.setState({
+            nameAssignTask : response.data.name ,
+            MSNVAssigTask : response.data.dev_id,
+            project  : response.data.project,
+          });
+      })
+      .catch(function (error) {
+          console.log(error);
+      })
+      await callApiPaging('team/'+ team,null,null,'1')
+      .then( async response => {
+          this.setState({
+            arrayDev: response.data.dev
+          })
+      })
+      .catch(function (error) {
+          console.log(error);
+      })
+    
+  }
   loadingData = () => {
     callApiPaging('task/'+ this.props.match.params.id,null,null,'1')
         .then(response => {
@@ -141,12 +171,91 @@ export default class ModalCreate extends Component {
     });
    
   }
+componentDidMount=()=>{
+   this.LoadingProfile();
+  this.showListTableProject();
+}
+ showListTableProject = async(repos) =>{
+   var arrayProjectname =[];
+   var arrayProjectid =[];
+   var arrayProject = [];
+ await callApiPagingProfile('developer/'+localStorage.getItem('username'))
+  .then( response => {
+    arrayProject =response.data.project;
+  })
+  .catch(function (error) {
+      console.log(error);
+  })
+    for(var i =0 ;i <arrayProject.length ;i++ ){
+  
+    await callApiPaging('project/'+ arrayProject[i],null,null,'1')
+  .then( async response => {
+    arrayProjectid.push(response.data.id );
+    arrayProjectname.push(response.data.name);
+  })
+  .catch(function (error) {
+      console.log(error);
+  })
+
+}
+await this.setState({
+  arrayid: arrayProjectid,
+  arrayname: arrayProjectname
+});
 
   
   
+
+}
+
+add =() =>{
+    
+    var data = {
+      "name": "12312",
+       "descriptions" : "123123",
+    };
+    
+    callApiAdd('tasks',data ,localStorage.getItem('token'))
+    .then(response => {
+      // this.showMsg();
+      this.setState({ 
+       
+        editStatus :true , 
+      
+        
+        });
+  })
+  .catch(function (error) {
+    console.log(error);
+})
+
+  }
+
+  showTeam=(repos)=>{
+    var result =[] ;
+      
+    if(repos.length > 0){
+        result = repos.map((tableJson, index) =>{
+            return <option value={tableJson.id}>{tableJson.name + " - " + tableJson.dev_id}  </option>
+        } );
+    }
+ 
+    return  result;
+  
+  }
+  
+  showListProject=(id,name)=>{
+    var result = [];
+    if(id.length > 0){
+      result = id.map((tableJson, index) =>{
+         return <option value={tableJson[index]}>{name[index]}</option>
+      } );
+  }
+  return  result;
+  }
 
   render() {
-    
+    const  project =this.state.project;
     return (
            
       <div className="container" className="contai" >
@@ -188,15 +297,33 @@ export default class ModalCreate extends Component {
                      
                      <label >Người giao việc</label>
                      
-                     <input type="text" readOnly className="form-control" name="leadTask" value={this.state.leadTask}
+                     <input type="text" readOnly className="form-control" name="leadTask" value={this.state.nameAssignTask+' - ' + this.state.MSNVAssigTask}
                       onChange={this.onChangeLeadTask}   ref='leadTask' id="leadTask" />
                   
                    </div>
                    <div className="col-md-3">
-                     <label >Người nhận việc</label>
-                     <input type="text" className="form-control" name="developer" value={this.state.developer}
-                      onChange={this.onChangeDeveloper}   ref='developer' id="developer" />
+                     <label >Người nhận việc(Mã số nhân viên)</label>
+                     {/* <input type="text" className="form-control" name="developer" value={this.state.developer}
+                      onChange={this.onChangeDeveloper}   ref='developer' id="developer" /> */}
+                       <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
+                        {this.showTeam(this.state.arrayDev)}
+                        
+                      </select>
                    </div>
+                   </div>
+
+                   <div className="row">
+                   <div className="col-md-6">
+                     <label >Dự án</label>
+                     
+                        <select className="form-control "  ref='project' onChange={this.onChangeProject}>
+                        {this.showListProject(this.state.arrayid,this.state.arrayname)}
+                        
+                        
+                        
+                      </select>
+                   </div>
+                  
                    </div>
 
                    <div className="row">

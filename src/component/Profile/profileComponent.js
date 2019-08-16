@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {callApi, callApiPaging, callApiDelete } from '../../utils/ConnectApi';
+import {callApi, callApiPaging, callApiDelete,callApiPagingProfile } from '../../utils/ConnectApi';
 import history from '../../RouterURL/history';
 import {Line, Bar} from 'react-chartjs-2';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { Link,Redirect,NavLink  } from 'react-router-dom';
     experience: [],
     degree: [] ,
     team: [],
+    idProfile: ''
   }
   goBack=()=>{
     history.goBack('/trang-chu/nhan-su-chinh-thuc');
@@ -173,10 +174,41 @@ showListTableDegree =(repos) =>{
 
   return  result;
 }  
+searchProfile = async()=>{
+  
+  callApiPagingProfile('developer/'+localStorage.getItem('username'))
+  .then(async response1 => {
+    await callApiPaging('developer/'+ response1.data.id+"",null,null,'1')
+    .then(async response => {
+      
+      await this.setState({ 
+          info: response.data,
+          contract: response.data.contract,
+          review: response.data.review ,
+          task: response.data.task ,
+          project: response.data.project ,
+          experience: response.data.experience ,
+          degree: response.data.degree ,
+          team: response.data.team ,
+          });
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+    
+ 
+   
+  })
+  .catch(function (error) {
+      console.log(error);
+  })
+}
 
   loadingData = () => {
+
+  
     
-    callApiPaging('developer/'+ this.props.match.params.profileId,null,null,'1')
+    callApiPaging('developer/'+ this.searchProfile(),null,null,'1')
         .then(response => {
             this.setState({ 
               info: response.data,
@@ -300,19 +332,19 @@ showListTableDegree =(repos) =>{
                       <li className="active"><a href="#activity" data-toggle="tab">Đánh giá</a></li>
                     </ul>
                     <div className="tab-content">
-                      <div className="active tab-pane" id="activity">
+                      <div className="active tab-pane" id="activity" style={{height: "450px", overflow : "scroll"}}>
                       
                         {this.showListTableReview(review)}
                        
                       </div>
                       {/* /.tab-pane */}
-                      <div className="tab-pane" id="timeline">
+                      <div className="tab-pane" id="timeline" style={{height: "450px", overflow : "scroll"}}>
                        {this.showListTableTasks(task)}
                         
                         
                       </div>
                       {/* /.tab-pane */}
-                      <div className="tab-pane" id="settings">
+                      <div className="tab-pane" id="settings" style={{height: "450px", overflow : "scroll"}}>
                       {this.showListTableProject(project)}
                       </div>
                       {/* /.tab-pane */}

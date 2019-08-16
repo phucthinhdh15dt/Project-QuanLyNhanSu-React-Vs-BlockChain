@@ -42,6 +42,13 @@ export default class ModalCreate extends Component {
     }
     return  random ;
   }
+
+  clear = () =>{
+    this.setState({
+      address: ''
+    });
+  }
+
   add =() =>{
   if(validateformBlank()){
     var dataRegister = {
@@ -312,7 +319,7 @@ showMsg = () => {
                   <option value="Senior">Senior</option>
                   <option value="Software Architecture">Software Architecture</option>
                   <option value="Leader">Team Leader</option>
-                  <option value="Project Manage">Project Manager</option>
+                  <option value="Project Manager">Project Manager</option>
                 </select>
             </div>
                 </div>
@@ -327,7 +334,7 @@ showMsg = () => {
             <br/>
           <div className="bt-action col-md-12 conten-button">
           <center> 
-          <button type="reset" className="btn btn-primary btn-block margin-bottom">Làm mới </button>
+          <button type="reset" className="btn btn-primary btn-block margin-bottom"  onClick={this.clear}>Làm mới </button>
           <button type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.add}>Thêm </button>
           </center>
           </div>

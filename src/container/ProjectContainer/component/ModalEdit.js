@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './ModalCreate.css';
-import {callApi, callApiPaging, callApiDelete, callApiEdit } from './../../../utils/ConnectApi';
+import {callApi, callApiPaging, callApiDelete, callApiEdit,callApiPatch } from './../../../utils/ConnectApi';
 import {callApiUpdateProject } from './../../../utils/ConnectApiHost2';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
@@ -55,6 +55,10 @@ export default class ModalEdit extends Component {
     return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
   }
   edit =() =>{
+    var check1 = document.getElementById('someSwitchOptionPrimary1').checked; 
+    var check = document.getElementById('someSwitchOptionPrimary').checked; 
+
+    if(check==false){
     var d = new Date();
     var time = this.formatDate(d);
 
@@ -67,16 +71,14 @@ export default class ModalEdit extends Component {
       "idProject" : this.props.match.params.id,
       "numberUpdateProject" : this.refs.process.value
     }
-    // var data = {
-    //   "name": this.refs.name.value,
-    //   "birth": this.refs.birth.value,
-    //   "address": this.refs.address.value,
-    //   "level": this.refs.level.value,
-    //   "email":this.refs.email.value,
-    //   "education": this.refs.education.value,
-    //   "day_of_work": 0,
-    //   "day_of_thinking": 0
-    // };
+    var editProcess = {
+      "process" : this.refs.process.value
+    }
+    callApiPatch('project',editProcess,this.props.match.params.id)
+    .then(response => {
+  
+  })
+  .catch(function (error) {})
 
     callApiUpdateProject('UpdateProject',updateData )
     .then(response => {
@@ -87,31 +89,27 @@ export default class ModalEdit extends Component {
         });
      
   })
-  .catch(function (error) {
-    console.log(error);
-    this.setState({ 
-     
-      msg : "bug"
-      });
-}
-   
-//     callApiEdit('project',data ,null, this.props.match.params.id )
-//     .then(response => {
-//       this.showMsg();
-//       this.setState({ 
-//         editStatus :true , 
+  .catch(function (error) {})
 
-//         });
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//     this.setState({ 
-     
-//       msg : "bug"
-//       });
-// }
-)
+
+ }
+   
+
+ if(check1 == false){
+
+  var editProcess1 = {
+    "name": this.refs.name.value,
+    "descriptions":  this.refs.descriptions.value,
+    "status": this.refs.status.value,
   }
+  callApiPatch('project',editProcess1,this.props.match.params.id)
+  .then(response => {
+
+})
+.catch(function (error) {})
+  
+}
+}
   goBack=()=>{
     history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
@@ -241,13 +239,13 @@ showMsg = () => {
     if(document.getElementById('someSwitchOptionPrimary1').checked === true){
       document.getElementById('name').disabled =true ;
       document.getElementById('team').disabled =true ;
-      document.getElementById('level').disabled =true ;
+      document.getElementById('status').disabled =true ;
       document.getElementById('descriptions').disabled =true ;
       
     }else{
       document.getElementById('name').disabled =false ;
       document.getElementById('team').disabled =false ;
-      document.getElementById('level').disabled =false ;
+      document.getElementById('status').disabled =false ;
       document.getElementById('descriptions').disabled =false ;
     }
     this.disableEdit();
@@ -318,7 +316,7 @@ showMsg = () => {
                    <div className="col-md-2">
                      <label >Cấp độ</label>
                      
-                        <select className="form-control " id="level" value={this.state.status} ref='status' onChange={this.onChangeLevel}>
+                        <select className="form-control " id="status" value={this.state.status} ref='status' onChange={this.onChangeLevel}>
                         <option value="Active">ACTIVE</option>
                   <option value="On Processing">ON PROCESSING</option>
                   <option value="Pending">PENDING</option>

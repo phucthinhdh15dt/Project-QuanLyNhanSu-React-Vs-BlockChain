@@ -336,18 +336,18 @@ showListTableDegree =(repos) =>{
                   <div className="nav-tabs-custom">
                     <ul className="nav nav-tabs">
                     
-                      <li><Link to="#timeline" data-toggle="tab">Quá trình hoàn thành dự án</Link></li>
-                      <li><Link to="#settings" data-toggle="tab">Các thành viên đảm nhiệm dự án</Link></li>
+                      <li><Link to="#timeline" data-toggle="tab">Quá trình cập nhật tiến độ dự án</Link></li>
+                      <li><Link to="#settings" data-toggle="tab">Quá trình hoàn thành dự án</Link></li>
                       {/* <li className="active"><Link to="#activity" data-toggle="tab">Đánh giá</Link></li> */}
                     </ul>
                     <div className="tab-content">
-                      <div className="active tab-pane" id="activity">
+                      <div className="active tab-pane" id="activity" style={{height: "450px", overflow : "scroll"}}>
                       
                       {this.showListUpdateProject(this.state.updateProjectState)}
                        
                       </div>
                       {/* /.tab-pane */}
-                      <div className="tab-pane" id="timeline">
+                      <div className="tab-pane" id="timeline" style={{height: "450px", overflow : "scroll"}}>
                        
                       {this.showListUpdateProject(this.state.updateProjectState)}
                         

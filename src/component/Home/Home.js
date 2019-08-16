@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {callApi, callApiPaging, callApiDelete, callApiGetAllAll } from './../../utils/ConnectApi';
+import LineDetailProject from "../../container/ProjectContainer/component/LineDetailProject";
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +11,11 @@ export default class Home extends Component {
       countDevelopers : 0,
       countTeams : 0 ,
       countTasks : 0 ,
-      countContracts : 0
+      countContracts : 0,
+      
+      reposProject :[],
+      count : 0 ,
+      data : []
     }
   }
   loadingDataDev =async () => {
@@ -49,10 +55,11 @@ export default class Home extends Component {
   }
 
   loadingDataProject =async () => {
-    callApiPaging('projects',null,null,1)
+    
+    callApiGetAllAll('projects',null)
         .then(async(response) => {
             await this.setState({ 
-              countProjects : response.data.count ,
+              reposProject : response.data.results ,
               });
         })
         .catch(function (error) {
@@ -64,13 +71,47 @@ export default class Home extends Component {
     callApiPaging('teams',null,null,1)
         .then(async(response) => {
             await this.setState({ 
-              countTeams : response.data.count ,
+              repos: response.data.results,
+              count : response.data.count ,
               });
         })
         .catch(function (error) {
             console.log(error);
         })
   }
+
+  loadingData =async () => {
+     
+    callApiPaging('projects',null,null,this.state.page)
+        .then(async(response) => {
+            await this.setState({ 
+              reposProject: response.data.results,
+              count : response.data.count
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+
+  }
+
+  showListTable = (repos) =>{
+    var result =[] ;
+    if(repos.length > 0){
+        result = repos.map((tableJson, index) =>{
+          if(index >= repos.length-8 ){
+            return <tr key={tableJson.index}> 
+            <td style={{width : "250px"}}>{tableJson['name']}</td>
+            <td>{tableJson['status']}</td>
+            <td>{tableJson['date_start'].substr(0,10)}</td>
+        </tr>
+          }
+        } );
+    }
+ 
+    return  result;
+}    
+
   componentDidMount (){
     this.loadingDataProject();
     this.loadingDataTeam();
@@ -78,8 +119,21 @@ export default class Home extends Component {
     this.loadingDataTasks();
     this.loadingDataContracts();
   }
-  render() {
+
+  converData(){
+    var data = [];
     
+    
+    data.push(
+      {name: "2016", uv: 100000},
+      {name: "2017", uv: 150000},
+      {name: "2018", uv: 300000},
+      {name: "2019", uv: 250000},
+      );
+    return data;
+  }
+  render() {
+    var repos = this.state.reposProject;
     return (
         <div className="content-wrapper">
         {/* Content Header (Page header) */}
@@ -163,18 +217,17 @@ export default class Home extends Component {
                 {/* /.box-header */}
                 <div className="box-body">
                   <div className="row">
-                    <div className="col-md-8">
+                    <div className="col-md-9">
                       <p className="text-center">
-                        <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                        <strong>Doanh thu theo từng năm</strong>
                       </p>
                       <div className="chart">
-                        {/* Sales Chart Canvas */}
-                        <canvas id="salesChart" style={{height: '180px'}} />
+                      <LineDetailProject data={this.converData()} /> 
                       </div>
                       {/* /.chart-responsive */}
                     </div>
                     {/* /.col */}
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                       <p className="text-center">
                         <strong>Tổng quan</strong>
                       </p>
@@ -188,7 +241,7 @@ export default class Home extends Component {
                       {/* /.progress-group */}
                       <div className="progress-group">
                         <span className="progress-text">Tổng số công việc</span>
-                        <span className="progress-number"><b>1</b>/{this.state.tasks}</span>
+                        <span className="progress-number">400</span>
                         <div className="progress sm">
                           <div className="progress-bar progress-bar-red" style={{width: '50%'}} />
                         </div>
@@ -218,42 +271,113 @@ export default class Home extends Component {
                 {/* ./box-body */}
                 <div className="box-footer">
                   <div className="row">
-                    <div className="col-sm-3 col-xs-6">
+                    <div className="col-sm-6 col-xs-6">
                       <div className="description-block border-right">
                         <span className="description-percentage text-green"><i className="fa fa-caret-up" /> 17%</span>
-                        <h5 className="description-header">$35,210.43</h5>
-                        <span className="description-text">TOTAL REVENUE</span>
+                        <h5 className="description-header">50 nhân sự</h5>
+                        <span className="description-text">Tổng số nhân sự</span>
                       </div>
                       {/* /.description-block */}
                     </div>
                     {/* /.col */}
-                    <div className="col-sm-3 col-xs-6">
+                    <div className="col-sm-6 col-xs-6">
                       <div className="description-block border-right">
-                        <span className="description-percentage text-yellow"><i className="fa fa-caret-left" /> 0%</span>
-                        <h5 className="description-header">$10,390.90</h5>
-                        <span className="description-text">TOTAL COST</span>
+                        <span className="description-percentage text-yellow"><i className="fa fa-caret-down" /> 12%</span>
+                        <h5 className="description-header">100</h5>
+                        <span className="description-text">Tổng dự án</span>
                       </div>
                       {/* /.description-block */}
                     </div>
                     {/* /.col */}
-                    <div className="col-sm-3 col-xs-6">
-                      <div className="description-block border-right">
-                        <span className="description-percentage text-green"><i className="fa fa-caret-up" /> 20%</span>
-                        <h5 className="description-header">$24,813.53</h5>
-                        <span className="description-text">TOTAL PROFIT</span>
-                      </div>
-                      {/* /.description-block */}
-                    </div>
-                    {/* /.col */}
-                    <div className="col-sm-3 col-xs-6">
-                      <div className="description-block">
-                        <span className="description-percentage text-red"><i className="fa fa-caret-down" /> 18%</span>
-                        <h5 className="description-header">1200</h5>
-                        <span className="description-text">GOAL COMPLETIONS</span>
-                      </div>
-                     
-                    </div>
+                    
                   </div>
+                  <div className="box box-info">
+        <div className="box-header with-border">
+          <h3 className="box-title">Các dự án gần đây được bắt đầu</h3>
+          <div className="box-tools pull-right">
+            <button type="button" className="btn btn-box-tool" data-widget="collapse"><i className="fa fa-minus" />
+            </button>
+            <button type="button" className="btn btn-box-tool" data-widget="remove"><i className="fa fa-times" /></button>
+          </div>
+        </div>
+        {/* /.box-header */}
+        <div className="box-body">
+          <div className="col-sm-7 col-xs-7">
+            <table className="table no-margin">
+              <thead>
+                <tr>
+                  <th>Tên dự án</th>
+                  <th>TRẠNG THÁI</th>
+                  <th>NGÀY BẮT ĐẦU</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+             
+                {this.showListTable(repos)}
+              </tbody>
+            </table>
+
+            
+          </div>
+          <br/><br/><br/>
+          <div className="info-box  col-sm-5 col-xs-5">
+      <div className="info-box bg-yellow" >
+        <span className="info-box-icon"><i className="ion ion-ios-pricetag-outline" /></span>
+        <div className="info-box-content">
+          <span className="info-box-text">Tổng số dự án đã hoàn thành</span>
+          <span className="info-box-number">200</span>
+          <div className="progress">
+            <div className="progress-bar" style={{width: '50%'}} />
+          </div>
+          <span className="progress-description">
+          Trong năm 2019
+          </span>
+        </div>
+        {/* /.info-box-content */}
+      </div>
+        <div className="info-box bg-green">
+          <span className="info-box-icon"><i className="ion ion-ios-heart-outline" /></span>
+          <div className="info-box-content">
+            <span className="info-box-text">Tổng số dự án khách hàng không hài lòng</span>
+            <span className="info-box-number">180</span>
+            <div className="progress">
+              <div className="progress-bar" style={{width: '20%'}} />
+            </div>
+            <span className="progress-description">
+            Trong năm 2019
+            </span>
+          </div>
+          {/* /.info-box-content */}
+        </div>
+        {/* /.info-box */}
+        <div className="info-box bg-red">
+          <span className="info-box-icon"><i className="ion ion-ios-cloud-download-outline" /></span>
+          <div className="info-box-content">
+            <span className="info-box-text">Tổng số dự án khách hàng hài lòng</span>
+            <span className="info-box-number">20</span>
+            <div className="progress">
+              <div className="progress-bar" style={{width: '70%'}} />
+            </div>
+            <span className="progress-description">
+              Trong năm 2019
+            </span>
+          </div>
+          {/* /.info-box-content */}
+        </div>
+      </div>
+         
+        </div>
+        {/* /.box-body */}
+        <div className="box-footer clearfix">
+        
+          <Link to="/trang-chu/du-an/danh-sach-du-an" className="btn btn-sm btn-info btn-flat pull-left"> Xem tất cả </Link>
+        </div>
+        {/* /.box-footer */}
+      </div>
+      
+
+      
                   
                 </div>
               

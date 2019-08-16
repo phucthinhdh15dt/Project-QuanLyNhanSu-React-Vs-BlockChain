@@ -90,6 +90,41 @@ export function callApiPaging(endpoint, body, accesstoken ,page) {
     });
 };
 
+export function callApiGetAllAll(endpoint, body) {
+    var method ='GET' ;
+    return axios({
+        url: `${config.API_URL_LV}/${endpoint}/${"?format=json&"}`,
+        method,
+        headers:{
+            // 'access-control-request-origin':'*',
+             'content-type' : 'application/json-patch+json',
+             'accept':'application/json',
+            // 'Authorization': 'Bearer ' + accesstoken,
+        },
+        data: body
+    }).catch(err => {
+        return (err); 
+    });
+};
+
+//
+export function callApiPagingProfile(endpoint) {
+    var method ='GET' ;
+    return axios({
+        url: `${config.API_URL_INFO}/${endpoint}/`,
+        method,
+        headers:{
+            // 'access-control-request-origin':'*',
+             'content-type' : 'application/json-patch+json',
+             'accept':'application/json',
+            // 'Authorization': 'Bearer ' + accesstoken,
+        },
+        data: {}
+    }).catch(err => {
+        return (err); 
+    });
+};
+
 //seacrh api
 
 export function callApibyId(endpoint, body ,id) {
@@ -119,6 +154,23 @@ export  function callApiEdit(endpoint, body, accesstoken,idEdit) {
              'content-type' : 'application/json',
              'accept':'application/json',
             // 'Authorization': 'Bearer ' + accesstoken,
+        },
+        data: body
+    }).catch(err => {
+        return (err); 
+    });
+};
+
+export  function callApiPatch(endpoint, body,idEdit) {
+    var method ='PATCH' ;
+    return axios({
+        url: `${config.API_URL_LV}/${endpoint}/${idEdit}/`,
+        method,
+        headers:{
+            // 'access-control-request-origin':'*',
+             'content-type' : 'application/json',
+             'accept':'application/json',
+            
         },
         data: body
     }).catch(err => {

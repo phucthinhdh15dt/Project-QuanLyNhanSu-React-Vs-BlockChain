@@ -267,7 +267,7 @@ showListTableDegree =(repos) =>{
                         </li>
                        
                       </ul>
-                      <a href="#" className="btn btn-primary btn-block"><b>Đổi mật khẩu</b></a>
+                      
                     </div>
                     {/* /.box-body */}
                   </div>
@@ -319,19 +319,19 @@ showListTableDegree =(repos) =>{
                       <li className="active"><Link to="#activity" data-toggle="tab">Đánh giá</Link></li>
                     </ul>
                     <div className="tab-content">
-                      <div className="active tab-pane" id="activity">
+                      <div className="active tab-pane" id="activity" style={{height: "900px", overflow : "scroll"}}>
                       
                         {this.showListTableReview(review)}
                        
                       </div>
                       {/* /.tab-pane */}
-                      <div className="tab-pane" id="timeline">
+                      <div className="tab-pane" id="timeline" style={{height: "900px", overflow : "scroll"}}>
                        {this.showListTableTasks(task)}
                         
                         
                       </div>
                       {/* /.tab-pane */}
-                      <div className="tab-pane" id="settings">
+                      <div className="tab-pane" id="settings" style={{height: "900px", overflow : "scroll"}}>
                       {this.showListTableProject(project)}
                       </div>
                       {/* /.tab-pane */}

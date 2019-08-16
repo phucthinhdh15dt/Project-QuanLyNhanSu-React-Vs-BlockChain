@@ -3,6 +3,7 @@ import "./thongke.css";
 import ChartDoanhThu from "./ChartDoanhThu";
 import PieChartDoanhThu from "./PieChartDoanhThu";
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
+import LineDetailProject from "./../../container/ProjectContainer/component/LineDetailProject";
 import {
   BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,Text,
 } from 'recharts';
@@ -41,7 +42,21 @@ export default class Home extends Component {
       countContracts : 0
     }
   }
-
+  converData(){
+    var data = [];
+    
+    
+    data.push(
+      {name: "2013", uv: 50000},
+      {name: "2014", uv: 10000},
+      {name: "2015", uv: 100000},
+      {name: "2016", uv: 100000},
+      {name: "2017", uv: 150000},
+      {name: "2018", uv: 300000},
+      {name: "2019", uv: 250000},
+      );
+    return data;
+  }
   showTableDoanhThu = () =>{
 
     var result =[] ;
@@ -212,7 +227,23 @@ export default class Home extends Component {
                 {/* /.box */}
                 </div>  
             <ChartDoanhThu /> 
-            <PieChartDoanhThu />
+            <div className="col-md-10">
+          {/* LINE CHART */}
+          <div className="box box-info">
+            <div className="box-header with-border">
+                        <strong>Doanh thu theo từng năm</strong>
+                      
+                      <div className="chart">
+                      <LineDetailProject data={this.converData()} /> 
+                      </div>
+                      {/* /.chart-responsive */}
+                    </div>
+                    {/* /.col */}
+                    
+                    {/* /.col */}
+                  </div>
+                  {/* /.row */}
+                </div>
             </div>
            
             </div>

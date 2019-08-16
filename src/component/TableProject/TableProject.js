@@ -123,7 +123,7 @@ import Loading from './../../component/Loading/Loading';
               <td style={{width : "400px"}}>{tableJson[prototype[2]]}</td>
               <td>{tableJson[prototype[3]]}</td>
               <td>{tableJson[prototype[4]].substr(0,10)}</td>
-              <td style={{width: "200px"}}>
+              <td style={{width: "120px"}}>
                  <div className="progress progress-xs progress-striped active" >
                 <div className="progress-bar progress-bar-primary" style={{width: tableJson[prototype[5]]}}  />
                 <p style={{color : "#337ab7"}}> {tableJson[prototype[5]]}%</p>

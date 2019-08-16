@@ -39,8 +39,8 @@ export default class LineDetailProject extends PureComponent {
     return (
       <div>
         <LineChart
-          width={600}
-          height={400}
+          width={750}
+          height={450}
           data={data}
           margin={{
             top: 5, right: 30, left: 20, bottom: 5,
@@ -51,7 +51,7 @@ export default class LineDetailProject extends PureComponent {
           <YAxis />
           <Tooltip />
           <Legend onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} />
-          <Line type="monotone" dataKey="uv" strokeOpacity={opacity.uv} stroke="#82ca9d" />
+          <Line type="monotone" dataKey="uv" strokeOpacity={opacity.uv} stroke="#3c8dbc" />
         </LineChart>
         <span class="label label-primary"><i class="fa fa-area-chart" aria-hidden="true"></i>  Biểu đồ thể hiện tiến độ của dự án</span> 
       </div>

@@ -268,7 +268,7 @@ import Loading from './../../component/Loading/Loading';
                   </div>
                   <div className="col-xs-1" >
                   
-                   <NavLink to={`/trang-chu/nhan-su-chinh-thuc/them`} activeClassName="active" >
+                   <NavLink to={`/trang-chu/hop-dong/them`} activeClassName="active" >
                    
                    <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "80px"}} name="BUTTON_EDIT" ><span class="glyphicon glyphicon-plus"></span> Thêm </button>
                  

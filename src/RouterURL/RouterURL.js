@@ -101,8 +101,9 @@ export default class RouterURL extends Component {
                         
                         
                         <Route exact path="/trang-chu/hop-dong" component={ContractContainer} />
+                        <Route exact path="/trang-chu/hop-dong/them"  component={ModalCreatePosition}/>}/>
                          {/* profile */}
-                         <Route exact path="/trang-chu/ho-so/:profileId" component={profileComponent} />
+                         <Route exact path="/trang-chu/ho-so" component={profileComponent} />
                         {/* //thongke */}
                         <Route exact path="/trang-chu/thong-ke" component={ThongKe} />
                        
