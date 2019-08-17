@@ -26,7 +26,10 @@ export default class ModalEdit extends Component {
       education : '',
       team : '',
       msg : '',
-      arrayTeam : []
+      arrayTeam : [],
+      description: '',
+      leader : '',
+
     }
   }
   selectOptionTeam =()=>{
@@ -44,37 +47,35 @@ export default class ModalEdit extends Component {
    
     
   }
+  showMsg = () => {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+  }
   edit =() =>{
   if(validateformBlank()){
     var data = {
       "name": this.refs.name.value,
-      "birth": this.refs.birth.value,
-      "address": this.refs.address.value,
-      "level": this.refs.level.value,
-      "email":this.refs.email.value,
-      "education": this.refs.education.value,
-      "day_of_work": 0,
-      "day_of_thinking": 0
+      "leader": this.refs.leader.value,
+      "descriptions": this.refs.descriptions.value,
+      "num_member" : 0,
     };
    
-    callApiEdit('developer',data ,null, this.props.match.params.id )
+    callApiEdit('team',data ,null, this.props.match.params.id )
     .then(response => {
       this.setState({ 
-        editStatus :true , 
-        msg : "Thành công"
+        editStatus :true 
         });
+        this.showMsg()
   })
   .catch(function (error) {
     console.log(error);
-    this.setState({ 
-     
-      msg : "bug"
-      });
+   
 })}else{
   
   this.setState({ 
      
-    msg : "Có trường không hợp lệ ,xin kiểm tra lại"
+    msg : "Có trường không hợp lệ, xin kiểm tra lại"
     });
 }
   }
@@ -83,16 +84,14 @@ export default class ModalEdit extends Component {
   }
 
   loadingData = () => {
-    callApiPaging('developer/'+ this.props.match.params.id,null,null,'1')
+
+    callApiPaging('team/'+ this.props.match.params.id,null,null,'1')
         .then(response => {
             this.setState({ 
               name: response.data.name,
-              birth : response.data.birth,
-              address : response.data.address,
-              level : response.data.level,
-              email : response.data.email,
-              education : response.data.education,
-              team : response.data.team['name']
+              description : response.data.descriptions,
+              leader: response.data.leader
+              
               });
         })
         .catch(function (error) {
@@ -111,24 +110,22 @@ export default class ModalEdit extends Component {
         })
 
   }
-  componentDidMount (){
-    this.loadingData();
-  }
+ 
 
   onChangeName=(e)=> {
     this.setState({
       name: e.target.value
     });
   }
-  onChangeBirth =(e)=> {
+  onChangeSothanhvien =(e)=> {
     this.setState({
       birth: e.target.value
     });
    
   }
-  onChangeEmail=(e)=> {
+  onChangeLeader=(e)=> {
     this.setState({
-      email: e.target.value
+      leader: e.target.value
     });
    
   }
@@ -147,21 +144,22 @@ export default class ModalEdit extends Component {
    
   }
 
-  onChangeAddress=(e)=> {
+  onChangeDescriptions=(e)=> {
     this.setState({
-      address: e.target.value
+      descriptions: e.target.value
     });
    
   }
-
-  onChangeTeam=(e)=> {
+  onChangeTeam =(e)=> {
     this.setState({
       team: e.target.value
     });
    
   }
   
-
+  componentDidMount (){
+    this.loadingData();
+  }
   render() {
     
     return (
@@ -169,104 +167,88 @@ export default class ModalEdit extends Component {
       <div className="container" className="contai" >
       <br /> <br /> <br />
         <div className="row" > 
-        <div className="col-md-4">
-        <div className="col-md-4">
-    <div className="col-md-4">
+          <div className="col-md-4">
+            <div className="col-md-4">
+      <div className="col-md-4">
+    
+  </div>
   
 </div>
-
-</div>
-      </div>
-
-      <div className="col-md-7"  >
-      
-      
-        <form className="form-style-9">
-        <div className="title">
-         
-        Sửa đội
-  
-         </div>
-         <div style={{paddingLeft: "200px" ,zIndex : "1" ,color : "red" ,height: "13px" ,fontSize : "13px",fontWeight: "700"}} >  {this.state.msg} </div>
-         <br/>
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{height: '70px', width: '100%'}}>
-            <path d="M0.00,92.27 C216.83,192.92 304.30,8.39 500.00,109.03 L500.00,0.00 L0.00,0.00 Z" style={{stroke: 'none', fill: '#e1efe3'}} />
-           
-          </svg>
-              <div className="modal-body container">
-             
-              <div className="row">
-                      <div className="col-md-4">
+          </div>
+          <div className="col-md-7"  >
+          
+          
+            <form className="form-style-9">
+            <div className="title">
+            Sửa đội nhóm
+              </div>
+              <div style={{paddingLeft: "160px" ,color : "red" ,height: "15px"}} >  {this.state.msg} </div>
+              <br/>
+          <div className="container">
+          
+          <div className="row">
+                      <div className="col-md-6">
                      
-                        <label >Tên nhân sự</label>
-                        <input type="text" className="form-control" style={{radius :  "10px"}}
-                         value={this.state.name} id="name"  onChange={this.onChangeName}
+                        <label >Tên </label>
+                        <input type="text" value={this.state.name} className="form-control" style={{radius :  "10px"}}
+                          id="name"  onChange={this.onChangeName}
                          ref='name'
                          />
                       </div>
-                      <div className="col-md-2">
-                        <label >Ngày sinh</label>
-                        <input type="date" className="form-control" name="birth" value={this.state.birth}
-                          onChange={this.onChangeBirth}  ref='birth'/>
-                      </div>
+                     
                 </div>
                
-                  <div className="row">
-                    <div className="col-md-2">
-                     
-                     <label >Đội(Nhóm)</label>
-                     <select className="form-control " value={this.state.team} >
-                     {this.selectOptionTeam()}
-                    </select>
-                   </div>
-                   <div className="col-md-4">
-                     <label >Email</label>
-                     <input type="text" className="form-control" name="email" value={this.state.email}
-                      onChange={this.onChangeEmail}   ref='email' id="email" />
-                   </div>
-                   </div>
-
+                  
                    <div className="row">
-                    <div className="col-md-4">
-                     
-                     <label >Tốt nghiệp trường</label>
-                     <input type="text" className="form-control" style={{radius :  "10px"}}
-                      value={this.state.education} onChange={this.onChangeEducation} id='education'   ref='education'/>
-                   </div>
                    <div className="col-md-2">
-                     <label >Cấp độ</label>
-                     
-                        <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
-                        <option value="FR">Fresher</option>
-                        <option value="JR">Junior</option>
-                        <option value="SR">Senior</option>
-                        <option value="SA">Software Architecture</option>
-                        <option value="TD">Team Leader</option>
-                        <option value="PM">Project Manager</option>
-                      </select>
+                     <label >Số thành viên</label>
+                     <input type="number" readOnly value ="0" className="form-control" name="sothanhvien" 
+                      onChange={this.onChangeEmail}   ref='sothanhvien' id="sothanhvien" />
                    </div>
+                    
+                   <div className="col-md-4">
+                   <div>
+                     <label> Đội trưởng</label>
+                      <input list="leader" name="browser" value={this.state.leader} onChange={this.onChangeLeader}  ref='leader' className="form-control" style={{radius :  "10px"}} />
+                    <datalist id="leader">
+                      <option value="Đàm Quang Khoa">
+                      </option><option value="Nguyễn Phúc Thịnh">
+                      </option><option value="Phan Đức Thành">
+                      </option>
+                      </datalist>
+       
+      </div>
+                </div>
                    </div>
                    <div className="row">
                    <div className="col-md-6">
-                   <label >Địa chỉ </label> <br/>
-                   <textarea rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
+                   <label >Mô tả </label> <br/>
+                   <textarea rows={4} id='address' value={this.state.description} ref='descriptions' onChange={this.onChangeDescriptions} className="form-control" />
                     {/* <textarea rows={4} classname="form-control" cols={50} ref="address" onchange={this.onChangeAddress} defaultValue={this.state.education} /> */}
                    </div>
                    </div>
                    </div>
                    
-               <br/>
-              <div className="bt-action">
-              <button type="reset" className="btn btn-success">Làm mới </button>
-              <button type="button" className="btn btn-success" onClick={this.edit}>Sửa </button>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
-              </div>
-              </form>
-              </div>
-              </div>
-            </div>
+                   <br/>
+          <div className="bt-action col-md-12 conten-button">
+          <center> 
+          <button type="reset" className="btn btn-primary btn-block margin-bottom">Làm mới </button>
+          <button type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.edit}>Sửa </button>
+          </center>
+          </div>
+          
+          <div className="modal-footer" >
+            <button type="button" className="btn " onClick={this.goBack} >Quay lại</button>
+          </div>
+          </form>
+
+          </div>
+          <div className="col-md-2">
+        <br/>
+        <div id="snackbar" >Sửa thành công </div>
+        </div>
+        </div>
+      </div>
           
         
     )

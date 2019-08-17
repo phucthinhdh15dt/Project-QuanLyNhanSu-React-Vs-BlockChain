@@ -13,7 +13,7 @@ import ModalEdit from '../container/PesonnelContainer/component/ModalEdit';
 
 //quan ly team
 import ModalCreateTeam from '../container/TeamContainer/component/ModalCreate';
-import ModalEditTeam from '../container/TeamContainer/component/ModalCreate';
+import ModalEditTeam from '../container/TeamContainer/component/ModalEdit';
 import RedirectTeam from '../container/TeamContainer/component/RedirectTeam';
 
 //quan ly cong viec
@@ -39,9 +39,12 @@ import ProjectDetail from '../container/ProjectContainer/component/Detail';
 import ReviewContainer from '../container/ReviewContainer/ReviewContainer';
 //Contract
 import ContractContainer from '../container/ContractContainer/ContractContainer';
-
+import ContractCreate from '../container/ContractContainer/component/ModalCreate';
+import ContractEdit from '../container/ContractContainer/component/ModalEdit';
+//bang cap
 import DegreesContainer from '../container/DegreesContainer/DegreesContainer';
-
+import DegreesCreate from '../container/DegreesContainer/component/ModalCreate';
+import DegreesEdit from '../container/DegreesContainer/component/ModalEdit';
 
 //Notification
 import NotificationDetail from '../container/NotificationContainer/component/NotificationDetail';
@@ -91,17 +94,21 @@ export default class RouterURL extends Component {
                         
                         <Route exact path="/trang-chu/chuc-vu/them"  component={ModalCreatePosition}/>}/>
                         <Route exact path="/trang-chu/chuc-vu/chi-tiet/:id" component={DetailPosition} />
-                        <Route exact path="/trang-chu/chucvu/sua/:id"  component={ModalEditPosition}/>}/>
+                        <Route exact path="/trang-chu/chuc-vu/sua/:id"  component={ModalEditPosition}/>}/>
                         
                             {/* review */}
                         <Route exact path="/trang-chu/danh-gia" component={ReviewContainer} />
                         
 
                         <Route exact path="/trang-chu/bang-cap" component={DegreesContainer} />
+                        <Route exact path="/trang-chu/bang-cap/them"  component={DegreesCreate}/>}/>
+                        <Route exact path="/trang-chu/bang-cap"  component={DegreesEdit}/>}/>
                         
+                        <Route exact path="/trang-chu/bang-cap" component={DegreesContainer} />
                         
                         <Route exact path="/trang-chu/hop-dong" component={ContractContainer} />
-                        <Route exact path="/trang-chu/hop-dong/them"  component={ModalCreatePosition}/>}/>
+                        <Route exact path="/trang-chu/hop-dong/them"  component={ContractCreate}/>}/>
+                        <Route exact path="/trang-chu/hop-dong/sua/:id"  component={ContractEdit}/>}/>
                          {/* profile */}
                          <Route exact path="/trang-chu/ho-so" component={profileComponent} />
                         {/* //thongke */}

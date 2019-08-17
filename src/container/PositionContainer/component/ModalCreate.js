@@ -31,21 +31,21 @@ export default class ModalCreate extends Component {
     }
   }
   add =() =>{
+    
   if(validateformBlank()){
    
     var data = {
       "name": this.refs.name.value,
-      "birth": this.refs.birth.value,
-      "address": this.refs.address.value,
-      "level": this.refs.level.value,
-      "email":this.refs.email.value,
-      "education": this.refs.education.value,
-      "day_of_work": 0,
-      "day_of_thinking": 0,
-      "team_id" : this.refs.team.value
+      "description": this.refs.description.value,
+      "programing_language":this.refs.language.value ,
+      "salary": this.refs.salary.value,
+      "status_delete": "INTERVIEW",
+      "developer": [
+        "33"
+      ]
     };
     
-    callApiAdd('developers',data ,localStorage.getItem('token'))
+    callApiAdd('positions',data ,localStorage.getItem('token'))
     .then(response => {
       this.showMsg();
       this.setState({ 
@@ -58,14 +58,13 @@ export default class ModalCreate extends Component {
   .catch(function (error) {
     console.log(error);
     this.setState({ 
-     
       msg : "bug"
       });
 })}else{
   
   this.setState({ 
      
-    msg : "Có trường không hợp lệ ,xin kiểm tra lại"
+    msg : "Có trường không hợp lệ, xin kiểm tra lại"
     });
 }
   }
@@ -114,45 +113,27 @@ showMsg = () => {
       name: e.target.value
     });
   }
-  onChangeBirth =(e)=> {
+  onChangeSalary =(e)=> {
     this.setState({
       birth: e.target.value
     });
    
   }
-  onChangeEmail=(e)=> {
+  onChangeLanguage=(e)=> {
     this.setState({
       email: e.target.value
     });
    
   }
 
-  onChangeLevel=(e)=> {
+  onChangeDescription=(e)=> {
     this.setState({
       level: e.target.value
     });
    
   }
 
-  onChangeEducation=(e)=> {
-    this.setState({
-      education: e.target.value
-    });
-   
-  }
-
-  onChangeAddress=(e)=> {
-    this.setState({
-      address: e.target.value
-    });
-   
-  }
-  onChangeTeam =(e)=> {
-    this.setState({
-      team: e.target.value
-    });
-   
-  }
+  
 
   render() {
     
@@ -179,21 +160,32 @@ showMsg = () => {
               <div style={{paddingLeft: "160px" ,color : "red" ,height: "15px"}} >  {this.state.msg} </div>
               <br/>
           <div className="container">
+
+          <div className="row">
+             
+                <div className="col-md-6">
+                  
+                  <label >Tên chức vụ</label>
+                  <input type="text" className="form-control" style={{radius :  "10px"}}
+                  onChange={this.onChangeName} id='name' ref='name'/>
+                </div>
+                </div>
+
           
           <div className="row">
               <div className="col-md-2">
                   <label >Lương cơ bản </label>
                   <div className="input-group"> 
                     <span className="input-group-addon">$</span>
-                  <input type="number" className="form-control" name="email" 
-                  onChange={this.onChangeEmail}   ref='email' id="email" />
+                  <input type="number" className="form-control" name="salary" 
+                  onChange={this.onChangeSalary}   ref='salary' id="salary" />
                   </div>
                 </div>
                 <div className="col-md-4">
                   
                   <label >Ngôn ngữ lập trình</label>
                   <input type="text" className="form-control" style={{radius :  "10px"}}
-                  onChange={this.onChangeEducation} id='education'   ref='education'/>
+                  onChange={this.onChangeLanguage} id='language'   ref='language'/>
                 </div>
                 </div>
 
@@ -204,7 +196,7 @@ showMsg = () => {
                 <div className="row">
                 <div className="col-md-6">
                 <label >Mô tả </label> <br/>
-                <textarea style={{height : "100px"}} rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
+                <textarea style={{height : "100px"}} rows={4} id='description' value={this.state.description} ref='description' onChange={this.onChangeDescription} className="form-control" />
                 </div>
                 </div>
                 </div>

@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import './ModalCreate.css';
-
-import {callApi, callApiPaging, callApiDelete, callApiAdd ,callApiRefresh ,registerUser} from './../../../utils/ConnectApi';
+import {callApi, callApiPaging, callApiDelete, callApiAdd,callApiPagingProfile } from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 import Loading from './../../../component/Loading/Loading';
-import {refreshToken} from './../../../utils/token';
+
 //js 
 
 
@@ -18,9 +17,6 @@ export default class ModalCreate extends Component {
 
     this.state = {
       reposDetail: [],
-      username: '',
-      pass: '',
-      repass: '',
       editStatus : false,
       name : '',
       birth : '',
@@ -31,40 +27,24 @@ export default class ModalCreate extends Component {
       team : '',
       msg : '' ,
       arrayTeam : [],
-      zindex : -1000 
+      zindex : -1000 ,
+      reposDetail: [],
+      checkdata : 0 ,
+      id : '',
+      visibility : 'none'
     }
-  }
- ramdomMS=()=>  {
-    
-    var random = "1513" ;
-    for(var i=0 ;i<6 ;i++){
-      random = random+ Math.floor(Math.random() * 9) ;
-    }
-    return  random ;
   }
   add =() =>{
+    
   if(validateformBlank()){
-    var dataRegister = {
-      "email":this.refs.email.value,
-      "username" : this.refs.username.value,
-      "password" : this.refs.pass.value,
-    }
    
     var data = {
-      "dev_id" : this.ramdomMS(),
       "name": this.refs.name.value,
-      "username" : this.refs.username.value,
-      "birth": this.refs.birth.value,
-      "address": this.refs.address.value,
-      "level": this.refs.level.value,
-      "email":this.refs.email.value,
-      "education": this.refs.education.value,
-      "day_of_work": 0,
-      "day_of_thinking": 0,
-      "team_id" : this.refs.team.value,
+      "descriptions": this.refs.description.value,
+      "developer_id": ["36"]
     };
-    
-    callApiAdd('developers',data ,localStorage.getItem('token'))
+
+    callApiAdd('contract',data ,localStorage.getItem('token'))
     .then(response => {
       this.showMsg();
       this.setState({ 
@@ -77,33 +57,13 @@ export default class ModalCreate extends Component {
   .catch(function (error) {
     console.log(error);
     this.setState({ 
-     
       msg : "bug"
       });
-})
-//login
-registerUser('users/',dataRegister ,"null")
-.then(response => {
-  this.showMsg();
-  this.setState({ 
-   
-    editStatus :true , 
-  
-    
-    });
-})
-.catch(function (error) {
-console.log(error);
-this.setState({ 
- 
-  msg : "bug"
-  });
-})
-}else{
+})}else{
   
   this.setState({ 
      
-    msg : "Có trường không hợp lệ, xin kiểm tra lại !"
+    msg : "Có trường không hợp lệ, xin kiểm tra lại"
     });
 }
   }
@@ -113,7 +73,7 @@ this.setState({
 showMsg = () => {
     var x = document.getElementById("snackbar");
     x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   }
   loadingData = () => {
     
@@ -129,11 +89,33 @@ showMsg = () => {
 
   }
   componentDidMount (){
-
-    refreshToken();
     this.loadingData();
+  
   }
-   
+  search =() =>{
+    callApiPagingProfile('developerById/'+ this.refs.msnv.value)
+    .then(response => {
+        if(response.data === undefined){
+            this.setState({ 
+                reposDetail : [],
+                visibility : 'none',
+                checkdata : 0,
+                msg :"Mã số nhân viên không hề tồn tại"
+            });
+        }else
+        this.setState({ 
+            id : response.data.id,
+            reposDetail : response.data,
+            visibility : 'block',
+            checkdata : 1,
+            msg :""
+        });
+        
+  })
+  .catch(function (error) {
+  
+})
+  }
 
   selectOptionTeam =()=>{
 
@@ -154,63 +136,27 @@ showMsg = () => {
       name: e.target.value
     });
   }
-  onChangeBirth =(e)=> {
+  onChangeSalary =(e)=> {
     this.setState({
       birth: e.target.value
     });
    
   }
-  onChangeEmail=(e)=> {
+  onChangeLanguage=(e)=> {
     this.setState({
       email: e.target.value
     });
    
   }
 
-  onChangeLevel=(e)=> {
+  onChangeDescription=(e)=> {
     this.setState({
       level: e.target.value
     });
    
   }
 
-  onChangeEducation=(e)=> {
-    this.setState({
-      education: e.target.value
-    });
-   
-  }
-
-  onChangeAddress=(e)=> {
-    this.setState({
-      address: e.target.value
-    });
-   
-  }
-  onChangeTeam =(e)=> {
-    this.setState({
-      team: e.target.value
-    });
-   
-  }
-  onChangeUserName=(e)=> {
-    this.setState({
-      username: e.target.username
-    });
-   
-  }
-  onChangePassword=(e)=> {
-    this.setState({
-      pass: e.target.pass
-    });
-   
-  }
-  onChangeRePassword=(e)=> {
-    this.setState({
-      repass: e.target.repass
-    });
-   
-  }
+  
 
   render() {
     
@@ -232,99 +178,86 @@ showMsg = () => {
           
             <form className="form-style-9">
             <div className="title">
-            Thêm nhân sự mới
+            Thêm hợp đồng 
               </div>
               <div style={{paddingLeft: "160px" ,color : "red" ,height: "15px"}} >  {this.state.msg} </div>
               <br/>
           <div className="container">
-          
+
           <div className="row">
-                  <div className="col-md-4">
+             
+                <div className="col-md-6">
                   
-                    <label >Tên nhân sự</label>
-                    <input type="text" className="form-control" style={{radius :  "10px"}}
-                      id="name"  onChange={this.onChangeName}
-                      ref='name'
-                      />
-                  </div>
-                  <div className="col-md-2">
-                    <label >Ngày sinh</label>
-                    <input type="date" className="form-control" name="birth" 
-                      onChange={this.onChangeBirth}  ref='birth'/>
-                  </div>
-            </div>
+                  <label >Tên hợp đồng</label>
+                  <input type="text" className="form-control" style={{radius :  "10px"}}
+                  onChange={this.onChangeName} id='name' ref='name'/>
+                </div>
+                </div>
 
           
-
-            <div className="row">
-            <div className="col-md-2">
-                  
-                  <label >Tên đăng nhập</label>
-                  <input type="text" className="form-control" style={{radius :  "10px"}}
-                    id="name"  onChange={this.onChangeUserName}
-                    ref='username'
-                    />
-                </div>
-                  <div className="col-md-2">
-                  
-                    <label >Mật khẩu</label>
-                    <input type="password" className="form-control" style={{radius :  "10px"}}
-                      id="pass"  onChange={this.onChangePassword}
-                      ref='pass'
-                      />
-                  </div>
-                  <div className="col-md-2">
-                    <label >Nhập lại mật khẩu</label>
-                    <input type="password" className="form-control" id="repass"
-                      onChange={this.onChangeRePassword}  ref='repass'/>
-                  </div>
-            </div>
-            
-            
-              <div className="row">
-                <div className="col-md-3">
-                  
-                  <label >Đội(Nhóm)</label>
-                  <select className="form-control "  ref='team' onChange={this.onChangeTeam} >
-                  {this.selectOptionTeam()}
-                </select>
-                </div>
-                <div className="col-md-3">
-                  <label >Email</label>
-                  <input type="text" className="form-control" name="email" 
-                  onChange={this.onChangeEmail}   ref='email' id="email" />
-                </div>
-                </div>
-
                 <div className="row">
-                <div className="col-md-4">
-                  
-                  <label >Tốt nghiệp trường</label>
-                  <input type="text" className="form-control" style={{radius :  "10px"}}
-                  onChange={this.onChangeEducation} id='education'   ref='education'/>
-                </div>
-                <div className="col-md-2">
-                <label >Cấp độ</label>
-                  
-                  <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
-                  <option value="Fresher">Fresher</option>
-                  <option value="Junior">Junior</option>
-                  <option value="Senior">Senior</option>
-                  <option value="Software Architecture">Software Architecture</option>
-                  <option value="Leader">Team Leader</option>
-                  <option value="Project Manage">Project Manager</option>
-                </select>
-            </div>
-                </div>
-                <div className="row">
-                <div className="col-md-6">
-                <label >Địa chỉ </label> <br/>
-                <textarea style={{height : "50px"}} rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
-                </div>
-                </div>
+                    <div className="col-md-4">
+                        <label >Nhập mã nhân viên </label>
+                        <input type="text" className="form-control" style={{radius :  "10px"}}
+                          id="id" ref='msnv'
+                         />
+                      </div>
+
+                      <div className="col-md-2">
+                      <label style={{visibility: "hidden"}} >Nhập mã nhân viên </label><br/>
+                      <button type="button" className="btn btn-primary btn-block margin-bottom" onClick={this.search}>Truy vấn</button>
+                     
+                   </div>
+                   
                 </div>
                 
-            <br/>
+
+                <div className="row">
+                
+                
+                </div>
+
+                <div className="row">
+                <div className="col-md-6">
+                <label >Mô tả </label> <br/>
+                <textarea style={{height : "100px"}} rows={4} id='description' value={this.state.description} ref='description' onChange={this.onChangeDescription} className="form-control" />
+                </div>
+                </div>
+                <br/>
+                <div className="row" style={{display: this.state.visibility }} >
+                <div className="col-md-6">
+                
+                  <div className="box box-primary">
+                    <div className="box-body box-profile">
+                    
+                   
+                      <h3 className="profile-username text-center">{this.state.checkdata === 1 ? this.state.reposDetail.name  : ''}</h3>
+                      <p className="text-muted text-center">{this.state.checkdata === 1 ? this.state.reposDetail.dev_id  : ''}</p>
+                      
+                      <ul className="list-group list-group-unbordered">
+                        <li className="list-group-item">
+                          <b>Email</b> <p className="pull-right">{this.state.reposDetail  !== '' ?this.state.reposDetail.email : ''}</p>
+                        </li>
+                        <li className="list-group-item">
+                          <b>Địa chỉ</b> <p className="pull-right">{this.state.reposDetail  !== '' ?this.state.reposDetail.address : ''}</p>
+                        </li>
+                        <li className="list-group-item">
+                          <b>Cập độ</b> <p className="pull-right">{this.state.reposDetail  !== '' ?this.state.reposDetail.level : ''}</p>
+                        </li>
+                        
+                       
+                      </ul>
+                    
+                    </div>
+                 
+                  </div>
+                  
+                </div>
+                
+              </div>
+                </div>
+                
+                <br/>
           <div className="bt-action col-md-12 conten-button">
           <center> 
           <button type="reset" className="btn btn-primary btn-block margin-bottom">Làm mới </button>

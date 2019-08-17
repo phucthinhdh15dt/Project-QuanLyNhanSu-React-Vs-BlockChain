@@ -130,7 +130,7 @@ import Loading from './../../component/Loading/Loading';
               <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
               <td>{tableJson[prototype[2]]}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[3]]}</td>
-              <td>{tableJson[prototype[4]]}</td>
+              <td>{tableJson[prototype[4]]}$</td>
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
@@ -143,7 +143,7 @@ import Loading from './../../component/Loading/Loading';
                     <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Xóa nhân sự</h4>
+                        <h4 class="modal-title">Xóa chức vụ</h4>
                     </div>
                     <div class="modal-body">
                         <p>Bạn có chắc chắn xóa</p>

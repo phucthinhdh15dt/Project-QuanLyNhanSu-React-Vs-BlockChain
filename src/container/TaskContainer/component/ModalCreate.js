@@ -78,7 +78,7 @@ export default class ModalCreate extends Component {
   
   this.setState({ 
      
-    msg : "Có trường không hợp lệ ,xin kiểm tra lại"
+    msg : "Có trường không hợp lệ, xin kiểm tra lại"
     });
 }
   }

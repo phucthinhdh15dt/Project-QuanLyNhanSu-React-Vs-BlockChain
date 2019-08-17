@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {callApi, callApiPaging, callApiDelete,callApiPagingProfile } from '../../utils/ConnectApi';
+import {callApi, callApiPaging, callApiDelete,callApiPagingProfile,callApiPatch } from '../../utils/ConnectApi';
 import history from '../../RouterURL/history';
 import {Line, Bar} from 'react-chartjs-2';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
@@ -14,10 +14,22 @@ import { Link,Redirect,NavLink  } from 'react-router-dom';
     experience: [],
     degree: [] ,
     team: [],
-    idProfile: ''
+    idProfile: '',
+
   }
   goBack=()=>{
     history.goBack('/trang-chu/nhan-su-chinh-thuc');
+  }
+  checkTask=(idTask)=>{
+   var data = {
+    "status": "FINISHED"
+  }
+  callApiPatch('task',data,idTask)
+  .then(response => {
+this.loadingData();
+
+})
+.catch(function (error) {})
   }
   showListTableReview = (repos) =>{
     var result =[] ;
@@ -87,10 +99,13 @@ showListTableTasks =(repos) =>{
         {tableJson.descriptions}
         </div>
         <div className="timeline-footer">
-        {tableJson.status === "On Processing" ? <span class='label label-warning'>On Processing</span> : tableJson.status === "Finished" ? <span class='label label-success'>Finished</span> :  tableJson.status ==="Closed" ?<span class='label label-danger'>Closed</span> : <span class='label label-success'>{tableJson.status} </span> }
-          {/* <p className="btn btn-primary btn-xs">Read more</p>
-          <a className="btn btn-danger btn-xs">Delete</a> */}
+        {tableJson.status === "On Processing" ? <span class='label label-warning'>On Processing</span> : tableJson.status === "FINISHED" ? <span class='label label-success'>Đã hoàn thành</span> :  tableJson.status ==="ACTIVE" ?<span class='label label-danger'>Chưa hoàn thành</span> : <span class='label label-success'>{tableJson.status} </span> }
+        {tableJson.status !== "FINISHED" ? <button className="btn btn-xs btn-success pull-right" onClick={()=>this.checkTask(tableJson.id)}> <i class="fa fa-check" aria-hidden="true"></i></button> : '' }
+          
         </div>
+       
+      
+      
       </div>
     </li>
    

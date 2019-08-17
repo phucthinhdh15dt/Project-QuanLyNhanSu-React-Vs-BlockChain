@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import './Redirec.css';
-import { callApiPaging, callApibyId, callApiEdit } from './../../../utils/ConnectApi';
+import { callApiPaging, callApibyId, callApiEdit,callApiPagingProfile } from './../../../utils/ConnectApi';
 import history from './../../../RouterURL/history';
 import {validateformBlank} from './../../../constants/jsCommon/validateForm';
 
@@ -24,10 +24,16 @@ export default class RedirectTeam extends Component {
       team : '',
       msg : '' ,
       arrayTeam : [],
-      visibility : 'hidden'
+      visibility : 'none'
     }
   }
+  showMsg = () => {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+  }
   redir  =() =>{
+    alert( this.refs.team.value+ "--" +this.state.id)
    
     if( document.getElementById("id").value !== "" ) {
       
@@ -38,10 +44,12 @@ export default class RedirectTeam extends Component {
      
       callApiEdit('developer',data ,null, document.getElementById("id").value )
       .then(response => {
+       
         this.setState({ 
           editStatus :true , 
           msg : "Chuyển nhóm thành công"
           });
+          this.showMsg(); 
     })
     .catch(function (error) {
       console.log(error);
@@ -53,26 +61,25 @@ export default class RedirectTeam extends Component {
     
     this.setState({ 
        
-      msg : "Có trường không hợp lệ ,xin kiểm tra lại"
+      msg : "Có trường không hợp lệ, xin kiểm tra lại"
       });
   }
     }
   search =() =>{
-   
-    
-    callApibyId('developer',null , this.refs.team.value)
+    callApiPagingProfile('developerById/'+ this.refs.msnv.value)
     .then(response => {
         if(response.data === undefined){
             this.setState({ 
                 reposDetail : [],
-                visibility : 'hidden',
+                visibility : 'none',
                 checkdata : 0,
-                msg :"Id đã nhập không hề tồn tại"
+                msg :"Mã số nhân viên không hề tồn tại"
             });
         }else
         this.setState({ 
+            id : response.data.id,
             reposDetail : response.data,
-            visibility : 'visible',
+            visibility : 'block',
             checkdata : 1,
             msg :""
         });
@@ -170,7 +177,7 @@ export default class RedirectTeam extends Component {
                     <div className="col-md-4">
                         <label >Nhập mã nhân viên </label>
                         <input type="text" className="form-control" style={{radius :  "10px"}}
-                          id="id"  
+                          id="id" ref='msnv'
                          />
                       </div>
 
@@ -180,8 +187,6 @@ export default class RedirectTeam extends Component {
                      
                    </div>
                    
-                   
-                     
                 </div>
                <br/>
                 <div className="row">
@@ -203,7 +208,7 @@ export default class RedirectTeam extends Component {
                 </div>
                 <br/>
                
-                {/* <div className="row" style={{dis : '' + this.state.visibility }}  >
+                {/* <div className="row"   >
                 <div className="col-md-1">
                     
                     </div>
@@ -217,6 +222,41 @@ export default class RedirectTeam extends Component {
                           
                 </div>
                 </div> */}
+
+
+              <div className="row" style={{display : '' + this.state.visibility }}>
+                <div className="col-md-6">
+                
+                  <div className="box box-primary">
+                    <div className="box-body box-profile">
+                    
+                   
+                      <h3 className="profile-username text-center">{this.state.checkdata === 1 ? this.state.reposDetail.name  : ''}</h3>
+                      <p className="text-muted text-center">{this.state.checkdata === 1 ? this.state.reposDetail.dev_id  : ''}</p>
+                      
+                      <ul className="list-group list-group-unbordered">
+                        <li className="list-group-item">
+                          <b>Email</b> <p className="pull-right">{this.state.reposDetail  !== '' ?this.state.reposDetail.email : ''}</p>
+                        </li>
+                        <li className="list-group-item">
+                          <b>Địa chỉ</b> <p className="pull-right">{this.state.reposDetail  !== '' ?this.state.reposDetail.address : ''}</p>
+                        </li>
+                        <li className="list-group-item">
+                          <b>Cập độ</b> <p className="pull-right">{this.state.reposDetail  !== '' ?this.state.reposDetail.level : ''}</p>
+                        </li>
+                        
+                       
+                      </ul>
+                    
+                    </div>
+                 
+                  </div>
+                  
+                </div>
+                
+              </div>
+              
+ 
                   
                    
                  

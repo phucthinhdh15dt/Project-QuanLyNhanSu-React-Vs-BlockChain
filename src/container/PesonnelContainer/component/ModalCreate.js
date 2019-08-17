@@ -69,6 +69,7 @@ export default class ModalCreate extends Component {
       "day_of_work": 0,
       "day_of_thinking": 0,
       "team_id" : this.refs.team.value,
+      "project" : [1],
     };
     
     callApiAdd('developers',data ,localStorage.getItem('token'))

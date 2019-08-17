@@ -67,7 +67,7 @@ import Loading from './../../component/Loading/Loading';
           this.setState({ 
             zindex : 1
             });
-            await callApiDelete(`teams`, null, "null",idDelete)
+            await callApiDelete(`team`, null, "null",idDelete)
             .then(res => this.setState({ 
                  status: res.status,
                  msgerr : 'Xóa thành công',
@@ -137,7 +137,7 @@ import Loading from './../../component/Loading/Loading';
                     <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Xóa nhân sự</h4>
+                        <h4 class="modal-title">Xóa đội nhóm</h4>
                     </div>
                     <div class="modal-body">
                         <p>Bạn có chắc chắn xóa</p>

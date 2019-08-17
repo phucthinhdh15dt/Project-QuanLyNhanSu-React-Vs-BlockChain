@@ -25,47 +25,48 @@ export default class ModalCreate extends Component {
       email : '' ,
       education : '',
       team : '',
-      msg : '' ,
-      arrayTeam : []
+      msg : '',
+      arrayTeam : [],
+      descriptions : ''
     }
   }
   add =() =>{
+    // alert(this.refs.name.value+ "-" + this.refs.descriptions.value + "-" + this.refs.leader.value)
   if(validateformBlank()){
     var data = {
       "name": this.refs.name.value,
-      "birth": this.refs.birth.value,
-      "address": this.refs.address.value,
-      "level": this.refs.level.value,
-      "email":this.refs.email.value,
-      "education": this.refs.education.value,
-      "day_of_work": 0,
-      "day_of_thinking": 0,
-      "team_id" : this.refs.team.value
+      "descriptions": this.refs.descriptions.value,
+      "num_member": 0,
+      "leader": this.refs.leader.value,
     };
     
-    callApiAdd('developers',data ,localStorage.getItem('token'))
+    callApiAdd('teams',data ,localStorage.getItem('token'))
     .then(response => {
       this.setState({ 
-        editStatus :true , 
-        msg : "Thành công"
+        editStatus :true 
+        
         });
+        this.showMsg();
   })
   .catch(function (error) {
     console.log(error);
-    this.setState({ 
-     
-      msg : "bug"
-      });
+    
+    
 })}else{
   
   this.setState({ 
      
-    msg : "Có trường không hợp lệ ,xin kiểm tra lại"
+    msg : "Có trường không hợp lệ, xin kiểm tra lại"
     });
 }
   }
   goBack=()=>{
     history.goBack('/trang-chu/nhan-su-chinh-thuc');
+  }
+  showMsg = () => {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
   }
 
   loadingData = () => {
@@ -104,15 +105,15 @@ export default class ModalCreate extends Component {
       name: e.target.value
     });
   }
-  onChangeBirth =(e)=> {
+  onChangeSothanhvien =(e)=> {
     this.setState({
       birth: e.target.value
     });
    
   }
-  onChangeEmail=(e)=> {
+  onChangeLeader=(e)=> {
     this.setState({
-      email: e.target.value
+      leader: e.target.value
     });
    
   }
@@ -131,9 +132,9 @@ export default class ModalCreate extends Component {
    
   }
 
-  onChangeAddress=(e)=> {
+  onChangeDescriptions=(e)=> {
     this.setState({
-      address: e.target.value
+      descriptions: e.target.value
     });
    
   }
@@ -186,20 +187,18 @@ export default class ModalCreate extends Component {
                    <div className="row">
                    <div className="col-md-2">
                      <label >Số thành viên</label>
-                     <input type="number" className="form-control" name="email" 
-                      onChange={this.onChangeEmail}   ref='email' id="email" />
+                     <input type="number" readOnly value ="0" className="form-control" name="sothanhvien" 
+                      onChange={this.onChangeEmail}   ref='sothanhvien' id="sothanhvien" />
                    </div>
                     
                    <div className="col-md-4">
                    <div>
                      <label> Đội trưởng</label>
-                      <input list="leader" name="browser" className="form-control" style={{radius :  "10px"}} />
+                      <input list="leader" name="browser" onChange={this.onChangeLeader}  ref='leader' className="form-control" style={{radius :  "10px"}} />
                     <datalist id="leader">
-                      <option value="Internet Explorer">
-                      </option><option value="Firefox">
-                      </option><option value="Chrome">
-                      </option><option value="Opera">
-                      </option><option value="Safari">
+                      <option value="Đàm Quang Khoa">
+                      </option><option value="Nguyễn Phúc Thịnh">
+                      </option><option value="Phan Đức Thành">
                       </option>
                       </datalist>
        
@@ -209,7 +208,7 @@ export default class ModalCreate extends Component {
                    <div className="row">
                    <div className="col-md-6">
                    <label >Mô tả </label> <br/>
-                   <textarea rows={4} id='address' value={this.state.address} ref='address' onChange={this.onChangeAddress} className="form-control" />
+                   <textarea rows={4} id='address'  ref='descriptions' onChange={this.onChangeDescriptions} className="form-control" />
                     {/* <textarea rows={4} classname="form-control" cols={50} ref="address" onchange={this.onChangeAddress} defaultValue={this.state.education} /> */}
                    </div>
                    </div>

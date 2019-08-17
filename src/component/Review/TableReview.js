@@ -134,36 +134,7 @@ import Loading from './../../component/Loading/Loading';
               <td>{tableJson[prototype[3]]}</td>
               <td  style={{width : '350px'}}>{tableJson[prototype[4]]}</td>
 
-            <td> 
-            {/* data-toggle="modal" data-target="#exampleModalDelete" */}
-               
-                {console.log(tableJson[prototype[0]]) }
-                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
-           
-                 <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
-               
-                <NavLink to={`/trang-chu/nhan-su-chinh-thuc/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active" title="Chi tiết"><i class="fa fa-search-plus" aria-hidden="true" style={{fontSize: "15px"}}></i> </NavLink>
-                
-                <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                   
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Xóa nhân sự</h4>
-                    </div>
-                    <div class="modal-body" style={{height: "60px"}}>
-                        <p>Bạn có chắc chắn xóa</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"  onClick={()=>this.confirmDelete(tableJson[prototype[0]])} id="confirm">Delete</button>
-                    </div>
-                    </div>
-                </div>
-                </div>
-
-            </td>
+            
             
           </tr>
           } );

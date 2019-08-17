@@ -6,8 +6,7 @@
     "DỰ ÁN",
     "CÔNG VIỆC",
     "NGƯỜI ĐÁNH GIÁ",
-    "NỘI DUNG",
-    "THAO TÁC"
+    "NỘI DUNG"
   ];
  export const PERSONNEL_TITLE_STRING = "QUẢN LÝ NHÂN SỰ";
  //Modal
