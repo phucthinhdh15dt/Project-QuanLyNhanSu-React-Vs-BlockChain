@@ -33,6 +33,7 @@ export default class ModalCreate extends Component {
       arrayid: [],
       team: "" ,
       arrayDev : [],
+      devRevice : ''
      
     }
   }
@@ -151,9 +152,9 @@ export default class ModalCreate extends Component {
     });
    
   }
-  onChangeDeveloper=(e)=> {
+  onChangeDevRevice=(e)=> {
     this.setState({
-      developer: e.target.value
+      devRevice: e.target.value
     });
    
   }
@@ -164,6 +165,13 @@ export default class ModalCreate extends Component {
     });
    
   }
+  onChangeDeverlop=(e)=> {
+    this.setState({
+      developer: e.target.value
+    });
+   
+  }
+  
 
   onChangeLeadTask=(e)=> {
     this.setState({
@@ -209,10 +217,16 @@ await this.setState({
 }
 
 add =() =>{
-    
+   
+   
     var data = {
-      "name": "12312",
-       "descriptions" : "123123",
+        "name": this.refs.name.value,
+        "descriptions" : this.refs.descriptions.value,
+        "status" : this.refs.statusTask.value,
+        "level" : this.refs.level.value,
+        "developer" : this.refs.devRevice.value,
+        "leadTask" : localStorage.getItem('id'),
+        "project" : this.refs.project.value
     };
     
     callApiAdd('tasks',data ,localStorage.getItem('token'))
@@ -305,7 +319,7 @@ add =() =>{
                      <label >Người nhận việc(Mã số nhân viên)</label>
                      {/* <input type="text" className="form-control" name="developer" value={this.state.developer}
                       onChange={this.onChangeDeveloper}   ref='developer' id="developer" /> */}
-                       <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
+                       <select className="form-control " value={this.state.devRevice} ref='devRevice' onChange={this.onChangeDevRevice}>
                         {this.showTeam(this.state.arrayDev)}
                         
                       </select>
@@ -331,9 +345,9 @@ add =() =>{
                      <label >Mức độ</label>
                      
                         <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
-                        <option value="Easy">Dễ</option>
-                        <option value="Medium">Bình thường</option>
-                        <option value="Hard">khó</option>
+                        <option value="EASY">Dễ</option>
+                        <option value="MEDIUM">Bình thường</option>
+                        <option value="HARD">khó</option>
                         
                         
                       </select>
@@ -342,9 +356,9 @@ add =() =>{
                      <label >Trạng thái</label>
                      
                         <select className="form-control " value={this.state.statusTask} ref='statusTask' onChange={this.onChangeStatusTask}>
-                        <option value="Active" >Kích hoạt</option>
-                        <option value="On Processing">Đang thực hiện</option>
-                        <option value="Finished">Đã hoàn thành</option>
+                        <option value="ACTIVE" >Kích hoạt</option>
+                        <option value="ON_PROCESSING">Đang thực hiện</option>
+                        <option value="FINISHED">Đã hoàn thành</option>
                         
                       </select>
                    </div>
@@ -352,7 +366,7 @@ add =() =>{
                    <div className="row">
                    <div className="col-md-6">
                    <label >Mô tả công việc</label> <br/>
-                   <textarea rows={4} id='address' value={this.state.descriptions} ref='address' onChange={this.onChangeDescriptions} className="form-control" />
+                   <textarea rows={4} id='address' value={this.state.descriptions} ref='descriptions' onChange={this.onChangeDescriptions} className="form-control" />
                    
                    </div>
                    
@@ -375,7 +389,7 @@ add =() =>{
           </div>
           <div className="col-md-2">
         <br/>
-        <div id="snackbar" >Thêm thành công </div>
+        <div id="snackbar" >Giao việc thành công </div>
         </div>
         </div>
       </div>
