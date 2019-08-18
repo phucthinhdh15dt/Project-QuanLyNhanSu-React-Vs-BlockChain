@@ -32,13 +32,12 @@ export default class Error extends Component {
       const {msg} = this.state.msgError ;
       const { redirect } = this.state;
 
-      if (redirect) {
-        return <Redirect  to='/trang-chu'/>;
-      }
+      
         return (
           
             <div style={{backgroundImage: "url(https://cdn.dribbble.com/users/195330/screenshots/1545094/attachments/235536/21_404-error.png)", width : window.innerWidth,height : window.innerHeight,
-            backgroundRepeat: "no-repeat" ,backgroundPosition:"center", backgroundSize: "cover"}}>
+            backgroundRepeat: "no-repeat" ,backgroundPosition:"center", backgroundSize: "cover",
+            position: "absolute" ,zIndex: "1"}}>
                 {/* <img style={{height: "auto", width: "100%" }} src="https://cdn.dribbble.com/users/195330/screenshots/1545094/attachments/235536/21_404-error.png" /> */}
        
              </div>

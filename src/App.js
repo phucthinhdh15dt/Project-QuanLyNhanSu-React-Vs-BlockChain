@@ -19,10 +19,13 @@ export default class App extends Component {
   render() {
     return (
       <Router history={history}> 
+      
           <Route exact path="/" component={Login} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/logout" component={Login} />
-          <Route  path="/trang-chu" component={Error} />
+          <Route  path="/error" component={Error} />
+          <Route  path="/trang-chu" component={Home} />
+          
       </Router > 
     )
   }

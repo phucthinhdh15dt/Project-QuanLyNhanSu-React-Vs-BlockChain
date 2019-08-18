@@ -102,8 +102,12 @@ export default class Home extends Component {
           if(index >= repos.length-8 ){
             return <tr key={tableJson.index}> 
             <td style={{width : "250px"}}>{tableJson['name']}</td>
-            <td>{tableJson['status']}</td>
-            <td>{tableJson['date_start'].substr(0,10)}</td>
+            <td>
+            {tableJson['status']=== "Active" ? <label style={{width: "100%"}} className="btn btn-xs btn-danger pull-right"> Đã kích hoạt</label> : '' }
+              {tableJson['status']=== "On Processing" ? <label style={{width: "100%"}} className="btn btn-xs btn-warning pull-right">Đang thực hiện</label> : '' }
+              {tableJson['status']=== "Finished" ? <label style={{width: "100%"}} className="btn btn-xs btn-success pull-right">Đã hoàn thành</label> : '' }
+            </td>
+            <td  style={{textAlign: "center"}}>{tableJson['date_start'].substr(0,10)}</td>
         </tr>
           }
         } );
@@ -306,9 +310,9 @@ export default class Home extends Component {
             <table className="table no-margin">
               <thead>
                 <tr>
-                  <th>Tên dự án</th>
-                  <th>TRẠNG THÁI</th>
-                  <th>NGÀY BẮT ĐẦU</th>
+                  <th  style={{textAlign: "center"}}>Tên dự án</th>
+                  <th  style={{textAlign: "center"}}>TRẠNG THÁI</th>
+                  <th  style={{textAlign: "center"}}>NGÀY BẮT ĐẦU</th>
                   
                 </tr>
               </thead>
