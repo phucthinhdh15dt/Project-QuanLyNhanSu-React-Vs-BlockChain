@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link ,Switch } from "react-router-dom";
 import PesonnelContainer from '../container/PesonnelContainer/PesonnelContainer';
 import TeamContainer from '../container/TeamContainer/TeamContainer';
 import Home from '../component/Home/Home';
+import Error from '../component/App/Error';
+
 
 import ThongKe from '../component/ThongKe/ThongKe';
 import profileComponent from '../component/Profile/profileComponent'; 
@@ -117,7 +119,6 @@ export default class RouterURL extends Component {
                         {/* trang chu */}
                         <Route exact path="/trang-chu" component={Home} />
                         
-                        <Route component={Home} />
                         {/* Notification  */}
                       
                         

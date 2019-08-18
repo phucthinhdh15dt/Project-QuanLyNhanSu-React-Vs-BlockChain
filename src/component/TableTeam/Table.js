@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Navigation from '../Layouts/Navigation';
 import * as StringNavigation from '../../constants/NavigationConstants';
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
+import {authorization, DEVERLOPER, LEADER ,ADMIN} from './../../utils/authoze';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
 import './table.css';
 import Loading from './../../component/Loading/Loading';
@@ -122,16 +123,16 @@ import Loading from './../../component/Loading/Loading';
               return <tr key={tableJson.index}> 
               <td>{index+1}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
-              <td>{tableJson[prototype[2]]}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[3]]}</td>
               <td>{tableJson[prototype[4]].substr(0,10)}</td>
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
                 
-                <NavLink to={`/trang-chu/nhom/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
-                 <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}   className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> &nbsp;
-                
+                <NavLink to={`/trang-chu/nhom/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" disabled={ tableJson[prototype[0]] == localStorage.getItem('team') ? false : true } title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
+                {(authorization() == ADMIN ) ?
+                 <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}  style={{marginRight: "5px"}}  className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> 
+                : ''}
                 <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -255,11 +256,12 @@ import Loading from './../../component/Loading/Loading';
                   </div>
                   <div className="col-xs-1" >
                   
-                 
+                  {(authorization() == ADMIN ) ?
                     <NavLink to={`/trang-chu/nhom/them`}activeClassName="active" >
                      <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "80px"}} name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
                     
                       </NavLink>
+                      : '' }
                     <br />
                     <br />
 

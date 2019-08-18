@@ -3,6 +3,7 @@ import Navigation from '../Layouts/Navigation';
 import * as StringNavigation from '../../constants/NavigationConstants';
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
+import {authorization, DEVERLOPER, LEADER ,ADMIN} from './../../utils/authoze';
 import './table.css';
 import Loading from './../../component/Loading/Loading';
 
@@ -121,7 +122,14 @@ import Loading from './../../component/Loading/Loading';
               <td>{index+1}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
               <td style={{width : "400px"}}>{tableJson[prototype[2]]}</td>
-              <td>{tableJson[prototype[3]]}</td>
+              <td >
+               
+              {tableJson[prototype[3]]=== "Active" ? <label style={{width: "100%"}} className="btn btn-xs btn-danger pull-right"> Đã kích hoạt</label> : '' }
+              {tableJson[prototype[3]]=== "On Processing" ? <label style={{width: "100%"}} className="btn btn-xs btn-warning pull-right">Đang thực hiện</label> : '' }
+              {tableJson[prototype[3]]=== "Finished" ? <label style={{width: "100%"}} className="btn btn-xs btn-success pull-right">Đã hoàn thành</label> : '' }
+              
+              </td>
+              
               <td>{tableJson[prototype[4]].substr(0,10)}</td>
               <td style={{width: "120px"}}>
                  <div className="progress progress-xs progress-striped active" >
@@ -133,8 +141,9 @@ import Loading from './../../component/Loading/Loading';
              
             <td  style={{width : "100px"}}> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
-               
-                <NavLink to={`/trang-chu/du-an/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
+            {(authorization() == ADMIN || authorization() == LEADER ) ?
+                <NavLink to={`/trang-chu/du-an/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> &nbsp; </NavLink>  
+                : ''}
                 <NavLink to={`/trang-chu/du-an/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Xem tiến độ" ><i class="fa fa-line-chart" aria-hidden="true" ></i>  </button> </NavLink>  
                
                 
@@ -258,11 +267,12 @@ import Loading from './../../component/Loading/Loading';
                     <div className="title">Quản lý dự án </div> 
                     </div>
                     <div className="col-xs-1" >
-                    
+                    {(authorization() == ADMIN || authorization() == LEADER ) ?
                      <NavLink to={`/trang-chu/du-an/them`} activeClassName="active" >
                      <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "80px"}} name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
                     
                       </NavLink>
+                      : ''}
                       <br />
                       <br />
   

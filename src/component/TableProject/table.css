@@ -27,3 +27,6 @@ display: block;
     font-size: 12px;
     text-align: center;
   }
+  #status label{
+    vertical-align: middle 
+  }

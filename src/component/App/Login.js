@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Connect} from 'react-redux';
 import "./style.css";
 import "./loginValidate.js";
-import {callApiToken,callApiInfo} from './../../utils/ConnectApi';
+import {callApiToken,callApiInfo,callApiPaging ,callApiInfoLogin} from './../../utils/ConnectApi';
 import history from './../../RouterURL/history';
 import { Redirect, Link } from 'react-router-dom'
 export default class Login extends Component {
@@ -39,6 +39,16 @@ export default class Login extends Component {
           localStorage.setItem('is_active',response.data.is_active);
           localStorage.setItem('is_staff',response.data.is_staff);
           localStorage.setItem('is_superuser',response.data.is_superuser);
+          callApiInfoLogin('developer/'+ response.data.username+"/?format=json")
+        .then(response1 => {
+          localStorage.setItem('dev_id',response1.data.dev_id);
+          localStorage.setItem('team',response1.data.team);
+          
+          
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
         })
         .catch(function (error) {
             console.log(error);

@@ -20,9 +20,9 @@ import { Link,Redirect,NavLink  } from 'react-router-dom';
   goBack=()=>{
     history.goBack('/trang-chu/nhan-su-chinh-thuc');
   }
-  checkTask=(idTask)=>{
+  checkTask=(idTask, stateUpdate)=>{
    var data = {
-    "status": "FINISHED"
+    "status": stateUpdate
   }
   callApiPatch('task',data,idTask)
   .then(response => {
@@ -99,8 +99,10 @@ showListTableTasks =(repos) =>{
         {tableJson.descriptions}
         </div>
         <div className="timeline-footer">
-        {tableJson.status === "On Processing" ? <span class='label label-warning'>On Processing</span> : tableJson.status === "FINISHED" ? <span class='label label-success'>Đã hoàn thành</span> :  tableJson.status ==="ACTIVE" ?<span class='label label-danger'>Chưa hoàn thành</span> : <span class='label label-success'>{tableJson.status} </span> }
-        {tableJson.status !== "FINISHED" ? <button className="btn btn-xs btn-success pull-right" onClick={()=>this.checkTask(tableJson.id)}> <i class="fa fa-check" aria-hidden="true"></i></button> : '' }
+        {tableJson.status === "ON_PROCESSING" ? <span class='label label-warning'>Đang thực hiện</span> : tableJson.status === "FINISHED" ? <span class='label label-success'>Đã hoàn thành</span> :  tableJson.status ==="ACTIVE" ?<span class='label label-danger'>Chưa hoàn thành</span> : <span class='label label-success'>{tableJson.status} </span> }
+        {tableJson.status === "ON_PROCESSING" ? <button className="btn btn-xs btn-success pull-right" onClick={()=>this.checkTask(tableJson.id,'FINISHED')}> <i class="fa fa-check" aria-hidden="true"></i></button> : '' }
+        {tableJson.status === "ACTIVE" ? <button className="btn btn-xs btn-warning pull-right" onClick={()=>this.checkTask(tableJson.id,'ON_PROCESSING')}> <i class="fa fa-play-circle" aria-hidden="true"></i>
+</button> : '' }
           
         </div>
        
@@ -347,19 +349,19 @@ searchProfile = async()=>{
                       <li className="active"><a href="#activity" data-toggle="tab">Đánh giá</a></li>
                     </ul>
                     <div className="tab-content">
-                      <div className="active tab-pane" id="activity" style={{height: "450px", overflow : "scroll"}}>
+                      <div className="active tab-pane" id="activity" style={{height: "650px", overflow : "scroll"}}>
                       
                         {this.showListTableReview(review)}
                        
                       </div>
                       {/* /.tab-pane */}
-                      <div className="tab-pane" id="timeline" style={{height: "450px", overflow : "scroll"}}>
+                      <div className="tab-pane" id="timeline" style={{height: "650px", overflow : "scroll"}}>
                        {this.showListTableTasks(task)}
                         
                         
                       </div>
                       {/* /.tab-pane */}
-                      <div className="tab-pane" id="settings" style={{height: "450px", overflow : "scroll"}}>
+                      <div className="tab-pane" id="settings" style={{height: "650px", overflow : "scroll"}}>
                       {this.showListTableProject(project)}
                       </div>
                       {/* /.tab-pane */}

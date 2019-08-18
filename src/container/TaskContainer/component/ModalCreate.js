@@ -331,10 +331,9 @@ add =() =>{
                      <label >Mức độ</label>
                      
                         <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
-                        <option value="Easy">EASY</option>
-                        <option value="Medium">MEDIUM</option>
-                        <option value="Hard">HARD</option>
-                        <option value="Extreme Hard">EXTREMELY</option>
+                        <option value="Easy">Dễ</option>
+                        <option value="Medium">Bình thường</option>
+                        <option value="Hard">khó</option>
                         
                         
                       </select>
@@ -343,11 +342,9 @@ add =() =>{
                      <label >Trạng thái</label>
                      
                         <select className="form-control " value={this.state.statusTask} ref='statusTask' onChange={this.onChangeStatusTask}>
-                        <option value="Active" >ACTIVE</option>
-                        <option value="On Processing">ON PROCESSING</option>
-                        <option value="Pending">PENDING</option>
-                        <option value="Finished">FINISHED</option>
-                        <option value="Closed">CLOSED</option>
+                        <option value="Active" >Kích hoạt</option>
+                        <option value="On Processing">Đang thực hiện</option>
+                        <option value="Finished">Đã hoàn thành</option>
                         
                       </select>
                    </div>

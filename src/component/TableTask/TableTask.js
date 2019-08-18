@@ -3,6 +3,7 @@ import Navigation from '../Layouts/Navigation';
 import * as StringNavigation from '../../constants/NavigationConstants';
 import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
 import { Link,Redirect,NavLink  } from 'react-router-dom';
+import {authorization, DEVERLOPER, LEADER ,ADMIN} from './../../utils/authoze';
 import './table.css';
 import Loading from './../../component/Loading/Loading';
  class TableTask extends Component {
@@ -114,17 +115,31 @@ import Loading from './../../component/Loading/Loading';
               <td>{index+1}</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
               <td>{tableJson[prototype[2]]}</td>
-              <td style={{textAlign : "left"}}>{tableJson[prototype[3]]}</td>
-              <td>{tableJson[prototype[4]]}</td>
+              <td>
+              {tableJson[prototype[3]]==="ACTIVE" ? <label style={{width: "100%"}} className="btn btn-xs btn-danger pull-right"> Đã kích hoạt</label> : '' }
+              {tableJson[prototype[3]]==="ON_PROCESSING" ? <label style={{width: "100%"}} className="btn btn-xs btn-warning pull-right">Đang thực hiện</label> : '' }
+              {tableJson[prototype[3]]==="FINISHED" ? <label style={{width: "100%"}} className="btn btn-xs btn-success pull-right">Đã hoàn thành</label> : '' }
+              </td>
+              <td>
+              {tableJson[prototype[4]]==="EASY" ? "Dễ" : '' }
+              {tableJson[prototype[4]]==="MEDIUM" ? "Bình thường" : '' }
+              {tableJson[prototype[4]]==="HARD" ? "Khó" : '' }
+              </td>
               <td>{tableJson.leadTask.name}</td>
               <td>{tableJson.developer.name}</td>
               <td>{tableJson.date_start.substring(0,10)}</td>
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
                
-                
-                <NavLink to={`/trang-chu/cong-viec/sua/${tableJson[prototype[0]]}`} activeClassName="active" ><button className="btn btn-primary btn-xs madow" title="Sửa" disabled={ tableJson[prototype[3]] ==="Active" ? true :false} ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
-               
+            {(authorization() == ADMIN ) ?
+                <NavLink to={`/trang-chu/cong-viec/sua/${tableJson[prototype[0]]}`} activeClassName="active" ><button className="btn btn-primary btn-xs madow" title="Sửa" disabled={ tableJson[prototype[3]] ==="Active" ? true :false} ><span class="glyphicon glyphicon-edit"></span> </button> &nbsp; </NavLink>  
+              : '' }
+
+          {(authorization() !== ADMIN ) ?
+                  
+                <NavLink to={`/trang-chu/cong-viec/sua/${tableJson[prototype[0]]}`} activeClassName="active" ><button className="btn btn-primary btn-xs madow" title="Sửa" disabled={ ((tableJson.leadTask.dev_id === localStorage.getItem('dev_id')) ) ? false : true } ><span class="glyphicon glyphicon-edit"></span> </button> &nbsp; </NavLink>  
+              : '' }
+
             </td>
             
           </tr>

@@ -18,6 +18,6 @@ export const PERSONNEL_MODAL_EDIT_TITLE ="SỬA NHÂN SỰ";
 export const PERSONNEL_TABLE_PROTOTYPE = [ "id", "name", "birth", "address", "level" ]
 
 
-export const TEAM_TABLE_STRING =[ "STT","TÊN NHÓM","SỐ THÀNH VIÊN","TRƯỞNG NHÓM","NGÀY LẬP NHÓM","THAO TÁC"];
+export const TEAM_TABLE_STRING =[ "STT","TÊN NHÓM","TRƯỞNG NHÓM","NGÀY LẬP NHÓM","THAO TÁC"];
 export const TEAM_TITLE_STRING = "QUẢN LÝ ĐỘI NHÓM";
 export const TEAM_TABLE_PROTOTYPE = [ "id", "name", "num_member", "leader","date_start"]

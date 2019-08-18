@@ -317,11 +317,11 @@ showMsg = () => {
                      <label >Cấp độ</label>
                      
                         <select className="form-control " id="status" value={this.state.status} ref='status' onChange={this.onChangeLevel}>
-                        <option value="Active">ACTIVE</option>
-                  <option value="On Processing">ON PROCESSING</option>
-                  <option value="Pending">PENDING</option>
-                  <option value="Finished">FINISHED</option>
-                  <option value="Closed">CLOSED</option>
+                        <option value="Active">Kích hoạt</option>
+                  <option value="On Processing">Đang thực hiện</option>
+                  
+                  <option value="Finished">Hoàn thành</option>
+                 
                       </select>
                    </div>
                    </div>

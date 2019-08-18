@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link,Switch } from "react-router-dom";
 import Home from './component/App/Home';
 import Login from './component/App/Login';
+import Error from './component/App/Error';
 import history from './RouterURL/history';
 import "./css/css/AdminLTE.min.css";
 import "./css/css/skins/_all-skins.min.css";
@@ -21,7 +22,7 @@ export default class App extends Component {
           <Route exact path="/" component={Login} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/logout" component={Login} />
-          <Route  path="/trang-chu" component={Home} />
+          <Route  path="/trang-chu" component={Error} />
       </Router > 
     )
   }

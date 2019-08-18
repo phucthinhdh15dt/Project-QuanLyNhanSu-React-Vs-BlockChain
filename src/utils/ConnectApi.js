@@ -36,6 +36,23 @@ export  function callApiInfo(endpoint, body, accesstoken) {
     });
 };
 
+export  function callApiInfoLogin(endpoint) {
+    var method ='GET' ;
+    return axios({
+        url: `${config.API_URL_INFO}/${endpoint}`,
+        method,
+        headers:{
+            // 'access-control-request-origin':'*',
+             'content-type' : 'application/json-patch+json',
+             'accept':'application/json',
+            //  'Authorization': 'Bearer ' + accesstoken,
+        },
+        data: {}
+    }).catch(err => {
+        return (err); 
+    });
+};
+
 export  function registerUser(endpoint, body, refreshToken) {
     var method ='POST' ;
     return axios({

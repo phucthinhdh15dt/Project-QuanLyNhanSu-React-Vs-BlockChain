@@ -61,6 +61,8 @@ export default class SideBar extends Component {
     localStorage.setItem('is_active','');
     localStorage.setItem('is_staff','');
     localStorage.setItem('is_superuser','');
+    localStorage.setItem('dev_id','');
+    localStorage.setItem('team','');
   }
 
     render(){
@@ -110,7 +112,9 @@ export default class SideBar extends Component {
                   <ul className="treeview-menu1" >
                     {/* <li><Link to="/trang-chu/cong-viec-cua-toi"><i className="fa fa-circle-o" /> Công việc của tôi </Link></li> */}
                     <li><Link to="/trang-chu/cong-viec"><i className="fa fa-circle-o" /> Danh sách công viêc </Link></li>
+                    {(authorization() != DEVERLOPER) ? 
                     <li><Link to="/trang-chu/giao-viec"><i className="fa fa-circle-o" /> Giao việc </Link></li>
+                    : ''}
                   </ul>
                 </li>
                 : "" }
@@ -137,7 +141,9 @@ export default class SideBar extends Component {
                 </Link>
                 <ul className="treeview-menu3">
                   <li><Link to="/trang-chu/nhan-su-chinh-thuc"><i className="fa fa-circle-o" /> Danh sách lập trình viên</Link></li>
+                  {(authorization() != DEVERLOPER) ? 
                   <li><Link to="/trang-chu/chuyen-nhom"><i className="fa fa-circle-o" /> Chuyển nhóm làm việc</Link></li>
+                  : ''}
                   <li><Link to="/trang-chu/nhom"><i className="fa fa-circle-o" /> Quản lý nhóm</Link></li>
                 </ul>
               </li>

@@ -42,7 +42,7 @@ export default class ModalCreate extends Component {
     var data = {
       "name": this.refs.name.value,
       "descriptions": this.refs.address.value,
-      "status": this.refs.level.value,
+      "status": "Active",
       "level": "Easy",
       "process": 1,
       "num_member": 0,
@@ -231,8 +231,8 @@ showMsg = () => {
                 <div className="col-md-2">
                 <label >Chọn trạng thái</label>
                   
-                  <select className="form-control " value={this.state.level} ref='level' onChange={this.onChangeLevel}>
-                  <option value="Active">ACTIVE</option>
+                  <select className="form-control " disabled value={this.state.level} ref='level' onChange={this.onChangeLevel}>
+                  <option value="Active">Kích hoạt</option>
                   <option value="On Processing">ON PROCESSING</option>
                   <option value="Pending">PENDING</option>
                   <option value="Finished">FINISHED</option>
