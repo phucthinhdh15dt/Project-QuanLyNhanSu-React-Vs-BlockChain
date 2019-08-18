@@ -127,10 +127,14 @@ import Loading from './../../component/Loading/Loading';
               <td>{tableJson[prototype[4]].substr(0,10)}</td>
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
-               
-                
-                <NavLink to={`/trang-chu/nhom/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" disabled={ tableJson[prototype[0]] == localStorage.getItem('team') ? false : true } title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> </NavLink>  &nbsp;
+            {(authorization() !== ADMIN ) ?
+                <NavLink to={`/trang-chu/nhom/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" disabled={ tableJson[prototype[0]] == localStorage.getItem('team') ? false : true } title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> &nbsp; </NavLink>  
+                  : '' }
+                  {(authorization() === ADMIN ) ?
+                <NavLink to={`/trang-chu/nhom/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow"  title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> &nbsp; </NavLink>  
+                  : '' }
                 {(authorization() == ADMIN ) ?
+                
                  <button data-toggle="modal" data-target={'#'+tableJson[prototype[0]]+'delete'}  style={{marginRight: "5px"}}  className="btn btn-danger btn-xs madow"   title="Xóa"><span class="glyphicon glyphicon-trash"></span></button> 
                 : ''}
                 <div class="modal fade" id={tableJson[prototype[0]]+'delete'}  role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
