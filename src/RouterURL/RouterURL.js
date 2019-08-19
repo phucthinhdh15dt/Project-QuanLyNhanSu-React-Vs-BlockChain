@@ -102,7 +102,7 @@ export default class RouterURL extends Component {
 
                         <Route exact path="/trang-chu/bang-cap" component={DegreesContainer} />
                         <Route exact path="/trang-chu/bang-cap/them"  component={DegreesCreate}/>}/>
-                        <Route exact path="/trang-chu/bang-cap"  component={DegreesEdit}/>}/>
+                        <Route exact path="/trang-chu/bang-cap/sua/:id"  component={DegreesEdit}/>}/>
                         
                         <Route exact path="/trang-chu/bang-cap" component={DegreesContainer} />
                         

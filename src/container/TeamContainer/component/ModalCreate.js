@@ -160,12 +160,12 @@ export default class ModalCreate extends Component {
   
 </div>
           </div>
-          <div className="col-md-7"  >
+          <div className="col-md-7"  style={{marginBottom: "60px" , marginTop: "75px"}}  >
           
           
-            <form className="form-style-9">
+            <form className="form-style-9" >
             <div className="title">
-            Thêm đội nhóm mới
+            Thêm đội nhóm
               </div>
               <div style={{paddingLeft: "160px" ,color : "red" ,height: "15px"}} >  {this.state.msg} </div>
               <br/>

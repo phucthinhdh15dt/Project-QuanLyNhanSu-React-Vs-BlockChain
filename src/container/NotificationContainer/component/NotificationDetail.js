@@ -114,18 +114,11 @@ export default class NotificationDetail extends Component {
     
     
     return (
+      
       <div className="content-wrapper">
         <Loading  zindex ={this.state.zindex}/>
-        <section className="content-header">
-          <h1>
-            Mailbox
-            <small>13 new messages</small>
-          </h1>
-          <ol className="breadcrumb">
-            <li><a href="#"><i className="fa fa-dashboard" /> Home</a></li>
-            <li className="active">Mailbox</li>
-          </ol>
-        </section>
+        <br/><br/><br/>
+        
         {/* Main content */}
         <section className="content">
           <div className="row">
@@ -168,7 +161,7 @@ export default class NotificationDetail extends Component {
             </div>
             {/* /.col */}
             <div className="col-md-9">
-              <div className="box box-primary" style={{minHeight:'500px'}}>
+              <div className="box box-primary" style={{minHeight:'605px'}}>
                 <div className="box-header with-border">
                   <h3 className="box-title">Thông báo của tôi</h3>
                   <div className="box-tools pull-right">

@@ -341,13 +341,13 @@ showListTableDegree =(repos) =>{
                       {/* <li className="active"><Link to="#activity" data-toggle="tab">Đánh giá</Link></li> */}
                     </ul>
                     <div className="tab-content">
-                      <div className="active tab-pane" id="activity" style={{height: "450px", overflow : "scroll"}}>
+                      <div className="active tab-pane" id="activity" style={{height: "520px", overflow : "scroll"}}>
                       
                       {this.showListUpdateProject(this.state.updateProjectState)}
                        
                       </div>
                       {/* /.tab-pane */}
-                      <div className="tab-pane" id="timeline" style={{height: "450px", overflow : "scroll"}}>
+                      <div className="tab-pane" id="timeline" style={{height: "520px", overflow : "scroll"}}>
                        
                       {this.showListUpdateProject(this.state.updateProjectState)}
                         

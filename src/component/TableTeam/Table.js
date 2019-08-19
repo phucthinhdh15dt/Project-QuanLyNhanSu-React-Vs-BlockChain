@@ -122,9 +122,10 @@ import Loading from './../../component/Loading/Loading';
            
               return <tr key={tableJson.index}> 
               <td>{index+1}</td>
-              <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
-              <td style={{textAlign : "left"}}>{tableJson[prototype[3]]}</td>
-              <td>{tableJson[prototype[4]].substr(0,10)}</td>
+              <td style={{textAlign : "left", width: "210px"}}>{tableJson[prototype[1]]}</td>
+              <td style={{textAlign : "left", width: "400px"}}>{tableJson[prototype[2]]}</td>
+              <td style={{textAlign : "left"}}>{tableJson[prototype[4]]}</td>
+              <td>{tableJson[prototype[5]].substr(0,10)}</td>
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
             {(authorization() !== ADMIN ) ?
@@ -272,7 +273,7 @@ import Loading from './../../component/Loading/Loading';
                   </div>
                   <div className="col-xs-1" >
                   
-                  <button  className="btn btn-primary btn-block margin-bottom " title="download CSV" onClick={()=>this.downloadCSV({ filename: StringNavigation.TITLE_NAVIGATION_QUANLYNHANSU.replace(/ /g, '-')+"-DATA.csv"})}  ><span class="glyphicon glyphicon-save-file"></span></button>
+                  <button  className="btn btn-primary btn-block margin-bottom " title="download CSV" onClick={()=>this.downloadCSV({ filename: "QUAN-LY-NHOM"+"-DATA.csv"})}  ><span class="glyphicon glyphicon-save-file"></span></button>
                    
                    <br />
                    <br />

@@ -9,9 +9,9 @@ export default class Footer extends Component {
          
             <footer className="main-footer">
             <div className="pull-right hidden-xs">
-              <b>Version</b> 1.0.0
+              <b>Phiên bản</b> 1.0.0
             </div>
-            <strong>Bản quyền © 2019 <a href="#">Luận văn đề tài quản lý nhân sự áp dụng</a>.</strong> block chain
+            <strong>Bản quyền © 2019 <span>Luận văn đề tài quản lý nhân sự trên nền tảng</span>.</strong> Blockchain
           </footer>
         
 

@@ -76,11 +76,11 @@ export default class ModalEdit extends Component {
     }
     callApiPatch('project',editProcess,this.props.match.params.id)
     .then(response => {
-  
+      
   })
   .catch(function (error) {})
 
-    callApiUpdateProject('UpdateProject',updateData )
+    callApiUpdateProject('UpdateProject', updateData)
     .then(response => {
       this.showMsg();
       this.setState({ 
@@ -104,7 +104,7 @@ export default class ModalEdit extends Component {
   }
   callApiPatch('project',editProcess1,this.props.match.params.id)
   .then(response => {
-
+    this.showMsg();
 })
 .catch(function (error) {})
   

@@ -146,7 +146,7 @@ export default class ModalEdit extends Component {
 
   onChangeDescriptions=(e)=> {
     this.setState({
-      descriptions: e.target.value
+      description: e.target.value
     });
    
   }
@@ -175,7 +175,7 @@ export default class ModalEdit extends Component {
   
 </div>
           </div>
-          <div className="col-md-7"  >
+          <div className="col-md-7"   style={{marginBottom: "60px" , marginTop: "75px"}} >
           
           
             <form className="form-style-9">

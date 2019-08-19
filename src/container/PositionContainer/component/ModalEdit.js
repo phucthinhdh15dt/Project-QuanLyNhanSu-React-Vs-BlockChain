@@ -167,7 +167,7 @@ showMsg = () => {
           <div className="col-md-7"  >
           
           
-            <form className="form-style-9">
+            <form className="form-style-9" style={{marginBottom: "70px", marginTop: "55px"}}>
             <div className="title">
             Sửa chức vụ
               </div>

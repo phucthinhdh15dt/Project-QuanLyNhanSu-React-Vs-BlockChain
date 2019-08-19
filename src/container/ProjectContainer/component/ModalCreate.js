@@ -192,7 +192,7 @@ showMsg = () => {
   
 </div>
           </div>
-          <div className="col-md-7"  >
+          <div className="col-md-7" style={{marginBottom: "60px" , marginTop: "65px"}} >
           
           
             <form className="form-style-9">

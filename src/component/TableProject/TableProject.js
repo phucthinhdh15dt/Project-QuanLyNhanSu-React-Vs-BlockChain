@@ -119,10 +119,10 @@ import Loading from './../../component/Loading/Loading';
       if(repos.length > 0){
           result = repos.map((tableJson, index) =>{
               return <tr key={tableJson.index}> 
-              <td>{index+1}</td>
-              <td style={{textAlign : "left"}}>{tableJson[prototype[1]]}</td>
-              <td style={{width : "400px"}}>{tableJson[prototype[2]]}</td>
-              <td >
+              <td style={{width: "10px"}}>{index+1}</td>
+              <td style={{textAlign : "left", width: "200px"}}>{tableJson[prototype[1]]}</td>
+              <td style={{width : "350px"}}>{tableJson[prototype[2]]}</td>
+              <td style={{width: "80px"}} >
                
               {tableJson[prototype[3]]=== "Active" ? <label style={{width: "100%"}} className="btn btn-xs btn-danger pull-right"> Đã kích hoạt</label> : '' }
               {tableJson[prototype[3]]=== "On Processing" ? <label style={{width: "100%"}} className="btn btn-xs btn-warning pull-right">Đang thực hiện</label> : '' }
@@ -130,13 +130,14 @@ import Loading from './../../component/Loading/Loading';
               
               </td>
               
-              <td>{tableJson[prototype[4]].substr(0,10)}</td>
-              <td style={{width: "120px"}}>
-                 <div className="progress progress-xs progress-striped active" >
-                <div className="progress-bar progress-bar-primary" style={{width: tableJson[prototype[5]]}}  />
-                <p style={{color : "#337ab7"}}> {tableJson[prototype[5]]}%</p>
-               </div>
+              <td style={{width: "80px"}}>{tableJson[prototype[4]].substr(0,10)}</td>
+              <td style={{width: "140px"}} className="inli">
+                 <div style={{width: "100px"}} className="progress progress-xs progress-striped active" >
+                <div className="progress-bar progress-bar-primary" style={{width: tableJson[prototype[5]], height: "50%"}}  />
+                 
                
+               </div>
+               <div style={{color : "#337ab7"}}> {tableJson[prototype[5]]}%</div>
               </td>
              
             <td  style={{width : "100px"}}> 
@@ -279,7 +280,7 @@ import Loading from './../../component/Loading/Loading';
                     </div>
                     <div className="col-xs-1" >
                     
-                    <button  className="btn btn-primary btn-block margin-bottom " title="download CSV" onClick={()=>this.downloadCSV({ filename: StringNavigation.TITLE_NAVIGATION_QUANLYNHANSU.replace(/ /g, '-')+"-DATA.csv"})}  ><span class="glyphicon glyphicon-save-file"></span></button>
+                    <button  className="btn btn-primary btn-block margin-bottom " title="download CSV" onClick={()=>this.downloadCSV({ filename: "QUAN-LY-DU-AN"+"-DATA.csv"})}  ><span class="glyphicon glyphicon-save-file"></span></button>
                      
                      <br />
                      <br />
@@ -307,6 +308,7 @@ import Loading from './../../component/Loading/Loading';
                           
                           </div>
                       </div>
+                      <br/><br/><br/><br/><br/><br/>
                       <div className="row">
                           <div className="col-sm-7"></div>
                           <div className="col-sm-5 pull-right" >

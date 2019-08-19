@@ -33,7 +33,6 @@ export default class RedirectTeam extends Component {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
   }
   redir  =() =>{
-    alert( this.refs.team.value+ "--" +this.state.id)
    
     if( document.getElementById("id").value !== "" ) {
       
@@ -47,7 +46,7 @@ export default class RedirectTeam extends Component {
        
         this.setState({ 
           editStatus :true , 
-          msg : "Chuyển nhóm thành công"
+         
           });
           this.showMsg(); 
     })
@@ -159,7 +158,7 @@ export default class RedirectTeam extends Component {
           </div>
           <div className="col-md-7"  >
           
-            <form className="form-style-9">
+            <form className="form-style-9" style={{paddingBottom: "60px", paddingTop: "60px"}}>
             <div className="title">
             Chuyển nhóm
               </div>
@@ -208,22 +207,7 @@ export default class RedirectTeam extends Component {
                 </div>
                 <br/>
                
-                {/* <div className="row"   >
-                <div className="col-md-1">
-                    
-                    </div>
-                    <div className="col-md-5" style={{paddingLeft: "20px"}}>
-                <label > Thông tin truy vấn</label>
-                       
-                       
-                        <p> <u> Tên  </u>  : {this.state.checkdata === 1 ? this.state.reposDetail.name  : ''} </p>  
-                        <p> <u> Email</u>  : {this.state.reposDetail  !== '' ?this.state.reposDetail.email : ''} </p>
-                        <p> <u> Tốt nghiệp </u>  : {this.state.reposDetail  !== '' ?this.state.reposDetail.education : ''} </p>
-                          
-                </div>
-                </div> */}
-
-
+               
               <div className="row" style={{display : '' + this.state.visibility }}>
                 <div className="col-md-6">
                 
