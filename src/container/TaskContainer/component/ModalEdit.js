@@ -279,7 +279,7 @@ await this.setState({
                      <label >Người nhận việc(Mã số nhân viên)</label>
                      {/* <input type="text" className="form-control" name="developer" value={this.state.developer}
                       onChange={this.onChangeDeveloper}   ref='developer' id="developer" /> */}
-                       <select className="form-control " value={this.state.developer} ref='developer' onChange={this.onChangeLevel}>
+                       <select className="form-control " value={this.state.developer} ref='developer' onChange={this.onChangeDeveloper}>
                         {this.showTeam(this.state.arrayDev)}
                         
                       </select>

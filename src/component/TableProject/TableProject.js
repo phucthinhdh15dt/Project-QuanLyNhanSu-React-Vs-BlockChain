@@ -142,8 +142,11 @@ import Loading from './../../component/Loading/Loading';
              
             <td  style={{width : "100px"}}> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
-            {(authorization() == ADMIN || authorization() == LEADER ) ?
+            {(authorization() == ADMIN ) ?
                 <NavLink to={`/trang-chu/du-an/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> &nbsp; </NavLink>  
+                : ''}
+                {(authorization() == LEADER ) ?
+                <NavLink  to={`/trang-chu/du-an/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button disabled={tableJson[prototype[0]] === 1 ? false : true}  className="btn btn-primary btn-xs madow" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> &nbsp; </NavLink>  
                 : ''}
                 <NavLink to={`/trang-chu/du-an/chi-tiet/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" title="Xem tiến độ" ><i class="fa fa-line-chart" aria-hidden="true" ></i>  </button> </NavLink>  
                
@@ -268,7 +271,7 @@ import Loading from './../../component/Loading/Loading';
                     <div className="title">Quản lý dự án </div> 
                     </div>
                     <div className="col-xs-1" >
-                    {(authorization() == ADMIN || authorization() == LEADER ) ?
+                    {(authorization() == ADMIN ) ?
                      <NavLink to={`/trang-chu/du-an/them`} activeClassName="active" >
                      <button className="btn btn-primary btn-block margin-bottom madow" style={{width: "80px"}} name="BUTTON_EDIT" ><span class="	glyphicon glyphicon-plus"></span> Thêm </button>
                     

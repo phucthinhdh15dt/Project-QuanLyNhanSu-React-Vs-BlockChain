@@ -94,7 +94,7 @@ showListUpdateProject =(repos) =>{
          <i className="bg-blue" /><span class="label label-primary"> {tableJson.numberUpdateProject}%</span>
          <div className="timeline-item">
            <span className="time"><i className="fa fa-clock-o" /> {(tableJson.dateUpdate+"").substr(11,14)}</span>
-           <h3 className="timeline-header"><a href="#">{tableJson.username}</a> Đã cập nhật</h3>
+           <h3 className="timeline-header"><a href="#">{tableJson.username}</a> đã cập nhật</h3>
            <div className="timeline-body">
            {tableJson.contentUpdateProject}
            </div>
