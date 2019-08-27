@@ -2,32 +2,31 @@ import React, { Component } from 'react'
 import "./thongke.css";
 import ChartDoanhThu from "./ChartDoanhThu";
 import PieChartDoanhThu from "./PieChartDoanhThu";
-import {callApi, callApiPaging, callApiDelete } from './../../utils/ConnectApi';
+import {callApi, callApiPaging, callApiDelete,callApiGetAllAll } from './../../utils/ConnectApi';
 import LineDetailProject from "./../../container/ProjectContainer/component/LineDetailProject";
 import {
   BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,Text,
 } from 'recharts';
 const data = [
   {
-    name: '2013', uv: 40, pv: 24, amt: 21,
+    name: '2013', uv: 7, pv: 1, amt: 1,
   },
   {
-    name: '2014', uv: 40, pv: 24, amt: 21,
+    name: '2014', uv: 4, pv: 3, amt: 4,
+  },{
+    name: '2015', uv: 5, pv: 3, amt: 4,
   },
   {
-    name: '2015', uv: 40, pv: 24, amt: 21,
+    name: '2016', uv: 3, pv: 3, amt: 4,
   },
   {
-    name: '2016', uv: 40, pv: 24, amt: 21,
+    name: '2017', uv: 5, pv: 2, amt: 6,
   },
   {
-    name: '2017', uv: 30, pv: 10, amt: 40,
+    name: '2018', uv: 7, pv: 1, amt: 4,
   },
   {
-    name: '2018', uv: 10, pv: 100, amt: 12,
-  },
-  {
-    name: '2019', uv: 20, pv: 31, amt: 11,
+    name: '2019', uv: 2, pv: 5, amt: 8,
   },
 ];
 export default class Home extends Component {
@@ -39,17 +38,126 @@ export default class Home extends Component {
       countDevelopers : 0,
       countTeams : 0 ,
       countTasks : 0 ,
-      countContracts : 0
+      countContracts : 0,
+      
+      reposProject :[],
+      count : 0 ,
+      data : []
     }
   }
+  loadingDataDev =async () => {
+    callApiPaging('developers',null,null,1)
+        .then(async(response) => {
+            await this.setState({ 
+              countDevelopers : response.data.count ,
+              
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+  }
+
+  loadingDataContracts =async () => {
+    callApiPaging('contract',null,null,1)
+        .then(async(response) => {
+            await this.setState({ 
+              countContracts : response.data.count ,
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+  }
+
+  loadingDataTasks =async () => {
+    callApiPaging('tasks',null,null,1)
+        .then(async(response) => {
+            await this.setState({ 
+              countTasks : response.data.count ,
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+  }
+
+  loadingDataProject =async () => {
+    
+    callApiGetAllAll('projects',null)
+        .then(async(response) => {
+            await this.setState({ 
+              reposProject : response.data.results ,
+              countProjects : response.data.count
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+  }
+
+  loadingDataTeam =async () => {
+    callApiPaging('teams',null,null,1)
+        .then(async(response) => {
+            await this.setState({ 
+              repos: response.data.results,
+              countTeams : response.data.count ,
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+  }
+
+  loadingData =async () => {
+     
+    callApiPaging('projects',null,null,this.state.page)
+        .then(async(response) => {
+            await this.setState({ 
+              reposProject: response.data.results,
+              count : response.data.count
+              });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+
+  }
+
+  showListTable = (repos) =>{
+    var result =[] ;
+    if(repos.length > 0){
+        result = repos.map((tableJson, index) =>{
+          if(index >= repos.length-8 ){
+            return <tr key={tableJson.index}> 
+            <td style={{width : "250px"}}>{tableJson['name']}</td>
+            <td>
+            {tableJson['status']=== "Active" ? <label style={{width: "100%"}} className="btn btn-xs btn-danger pull-right"> Đã kích hoạt</label> : '' }
+              {tableJson['status']=== "On Processing" ? <label style={{width: "100%"}} className="btn btn-xs btn-warning pull-right">Đang thực hiện</label> : '' }
+              {tableJson['status']=== "Finished" ? <label style={{width: "100%"}} className="btn btn-xs btn-success pull-right">Đã hoàn thành</label> : '' }
+            </td>
+            <td  style={{textAlign: "center"}}>{tableJson['date_start'].substr(0,10)}</td>
+        </tr>
+          }
+        } );
+    }
+ 
+    return  result;
+}    
+
+  componentDidMount (){
+    this.loadingDataProject();
+    this.loadingDataTeam();
+    this.loadingDataDev();
+    this.loadingDataTasks();
+    this.loadingDataContracts();
+  }
+
   converData(){
     var data = [];
     
     
     data.push(
-      {name: "2013", uv: 50000},
-      {name: "2014", uv: 10000},
-      {name: "2015", uv: 100000},
       {name: "2016", uv: 100000},
       {name: "2017", uv: 150000},
       {name: "2018", uv: 300000},
@@ -77,10 +185,9 @@ export default class Home extends Component {
       return  result;
 
   }
-  componentDidMount (){
-  }
+  
   render() {
-    
+    var repos = this.state.reposProject;
     return (
         <div className="content-wrapper">
         {/* Content Header (Page header) */}
@@ -142,7 +249,7 @@ export default class Home extends Component {
           <div className="row">
             <div className="col-md-12">
             <div className="col-md-12">
-            <div className="col-md-6">
+            <div className="col-md-7">
                 {/* LINE CHART */}
                 <div className="box box-info">
                   <div className="box-header with-border">
@@ -189,19 +296,11 @@ export default class Home extends Component {
                   {/* /.box-body */}
                 </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-5">
                 <div className="box">
                   <div className="box-header">
                     <h3 className="box-title">Bảng biểu thống kê dự án các năm</h3>
-                    <div className="box-tools">
-                      <ul className="pagination pagination-sm no-margin pull-right">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">»</a></li>
-                      </ul>
-                    </div>
+                    
                   </div>
         {/* /.box-header */}
         <div className="box-body no-padding">
@@ -210,10 +309,10 @@ export default class Home extends Component {
               <tr>
                 <th style={{width: '10px'}}>#</th>
                 <th>Năm</th>
-                <th>Dự án khách hàng hài lòng</th>
-                <th>Dự án khách hàng hài lòng</th>
-                <th>Dự án khách hàng hài lòng</th>
-                <th>Tổng dự án</th>
+                <th>Hài lòng</th>
+                <th>Duy trì </th>
+                <th>Không hài lòng</th>
+                <th>Tổng</th>
               </tr>
               {this.showTableDoanhThu()}
              
@@ -227,7 +326,7 @@ export default class Home extends Component {
                 {/* /.box */}
                 </div>  
             <ChartDoanhThu /> 
-            <div className="col-md-10">
+            <div className="col-md-12">
           {/* LINE CHART */}
           <div className="box box-info">
             <div className="box-header with-border">

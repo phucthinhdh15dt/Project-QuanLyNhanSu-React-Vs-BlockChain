@@ -226,7 +226,7 @@ import Loading from './../../component/Loading/Loading';
           <div className="content-wrapper" >
         
           <Loading  zindex ={this.state.zindex}/>
-            <section className="content">
+            <section className="content" >  
               <div className="row">
                 <div className="col-xs-12">
                   <div className="box">
@@ -285,7 +285,7 @@ import Loading from './../../component/Loading/Loading';
                           <div className="col-sm-7"></div>
                           <div className="col-sm-5 pull-right" >
                               <nav aria-label="Page navigation example" >
-                                  <ul class="pagination pull-right" style={{marginTop: "10px"}}>
+                                  <ul class="pagination pull-right" style={{marginTop: "120px"}}>
                                   <li class="page-item"  className="col-sm-5" style={{ width: "160px"}}>
                                       <button className="btn btn-primary btn-block margin-bottom"  onClick={this.setPage}>
                                       <span class="glyphicon glyphicon-fast-backward"></span> Trước đó 

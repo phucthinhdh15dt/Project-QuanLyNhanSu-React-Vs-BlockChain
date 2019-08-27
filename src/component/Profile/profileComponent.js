@@ -39,21 +39,25 @@ this.loadingData();
             return <div className="post">
             <div className="user-block">
                 
-              <img className="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image" />
+              <img className="img-circle img-bordered-sm" src="https://getstickerpack.com/images/ic_launcher-web.png" alt="user image" />
               <span className="username">
-                <a href="#">{tableJson.author}</a>
+                <p style={{color: "#337ab7"}}>{tableJson.author}</p>
                 <a href="#" className="pull-right btn-box-tool"><i className="fa fa-times" /></a>
               </span>
-              <span className="description">{tableJson.date_start.substr(0,10)}   <i className="fa fa-clock-o" />{((tableJson.date_start+"").substr(11,12)).substr(0,5)}</span>
+              <span className="description">{tableJson.date_start.substr(0,10)}   <i className="fa fa-clock-o" /> {((tableJson.date_start+"").substr(11,12)).substr(0,5)}</span>
             </div>
             
             <p>
             {tableJson.content}
               
             </p>
+            
             <ul className="list-inline">
-              <li><a href="#" className="link-black text-sm"><i className="fa fa-share margin-r-5" /> Dự án : {tableJson.project.name }</a></li>
-              
+            <li ><p  to={`/trang-chu/du-an/chi-tiet/${tableJson.project.id }`} className="link-black text-sm"><i className="fa fa-share margin-r-5" />Công việc: {tableJson.task.name }</p></li>
+              <br/>
+
+              <li ><NavLink style={{color: "#337ab7"}} to={`/trang-chu/du-an/chi-tiet/${tableJson.project.id }`} className="link-black text-sm"><i className="fa fa-share margin-r-5" />Dự án : {tableJson.project.name }</NavLink></li>
+              project
             </ul>
            
           </div>
@@ -141,7 +145,7 @@ showListTableProject =(repos) =>{
         {tableJson.descriptions}
         </div>
         <div className="timeline-footer">
-        {tableJson.status === "On Processing" ? <span class='label label-warning'>On Processing</span> : tableJson.status === "Finished" ? <span class='label label-success'>Finished</span> :  tableJson.status ==="Closed" ?<span class='label label-danger'>Closed</span> : <span class='label label-success'>{tableJson.status} </span> }
+        {tableJson.status === "On Processing" ? <span class='label label-warning'>Đang thực hiện</span> : tableJson.status === "Finished" ? <span class='label label-success'>Đã hoàn thành</span> :  tableJson.status ==="Active" ?<span class='label label-danger'>Đã kích hoạt</span> : <span class='label label-success'>{tableJson.status} </span> }
           {/* <p className="btn btn-primary btn-xs">Read more</p>
           <a className="btn btn-danger btn-xs">Delete</a> */}
         </div>
@@ -292,7 +296,7 @@ searchProfile = async()=>{
                         <li className="list-group-item">
                           <b>Số năm làm việc</b> <p className="pull-right">{this.state.info.day_of_work} năm </p>
                         </li>
-                        <li className="list-group-item">
+                        <li className="list-group-item" style={{height: "50px" }}>
                           <b>Thuộc nhóm</b> <p className="pull-right">{this.state.team.name} </p>
                         </li>
                        

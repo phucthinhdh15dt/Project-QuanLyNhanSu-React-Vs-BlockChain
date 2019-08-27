@@ -128,7 +128,10 @@ import Loading from './../../component/Loading/Loading';
               <td>{tableJson[prototype[5]].substr(0,10)}</td>
             <td> 
             {/* data-toggle="modal" data-target="#exampleModalDelete" */}
-            {(authorization() !== ADMIN ) ?
+            {(authorization() == DEVERLOPER ) ?
+                <NavLink to={`/trang-chu/nhom/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" disabled = "true" title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> &nbsp; </NavLink>  
+                  : '' }
+            {(authorization() == LEADER ) ?
                 <NavLink to={`/trang-chu/nhom/sua/${tableJson[prototype[0]]}`} activeClassName="active"><button className="btn btn-primary btn-xs madow" disabled={ tableJson[prototype[0]] == localStorage.getItem('team') ? false : true } title="Sửa" ><span class="glyphicon glyphicon-edit"></span> </button> &nbsp; </NavLink>  
                   : '' }
                   {(authorization() === ADMIN ) ?
@@ -208,7 +211,7 @@ import Loading from './../../component/Loading/Loading';
     filename = args.filename || 'export.csv';
 
     if (!csv.match(/^data:text\/csv/i)) {
-        csv = 'data:text/csv;charset=utf-8,' + csv;
+        csv = 'data:text/csv;charset=utf-16,' + csv;
     }
     data = encodeURI(csv);
 

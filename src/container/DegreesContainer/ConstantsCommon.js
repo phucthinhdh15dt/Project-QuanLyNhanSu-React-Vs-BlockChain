@@ -1,7 +1,7 @@
  // PERSONNEL Table
- export const PERSONNEL_TABLE_STRING =[ "STT","TÊN BẰNG CẤP","MÔ TẢ BẰNG CẤP","NGÀY NHẬN BẰNG","THAO TÁC"];
+ export const PERSONNEL_TABLE_STRING =[ "STT","TÊN BẰNG CẤP","NHÂN VIÊN SỞ HỮU","MÔ TẢ BẰNG CẤP","NGÀY NHẬN BẰNG","THAO TÁC"];
  export const PERSONNEL_TITLE_STRING = "QUẢN LÝ NHÂN SỰ";
- //Modal
+ //Moda
 //From delete Personnel 
  export const PERSONNEL_MODAL_DELETE_TITLE ="XÁC NHẬN XÓA NHÂN SỰ";
 //From add Personnel 

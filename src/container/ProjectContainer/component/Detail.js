@@ -129,7 +129,7 @@ showListTableProject =(repos) =>{
         {tableJson.descriptions}
         </div>
         <div className="timeline-footer">
-        {tableJson.status === "On Processing" ? <span class='label label-warning'>On Processing</span> : tableJson.status === "Finished" ? <span class='label label-success'>Finished</span> :  tableJson.status ==="Closed" ?<span class='label label-danger'>Closed</span> : <span class='label label-success'>{tableJson.status} </span> }
+        {tableJson.status === "On Processing" ? <span class='label label-warning'>Đang thực hiện</span> : tableJson.status === "Finished" ? <span class='label label-success'>Finished</span> :  tableJson.status ==="Closed" ?<span class='label label-danger'>Closed</span> : <span class='label label-success'>{tableJson.status} </span> }
           {/* <p className="btn btn-primary btn-xs">Read more</p>
           <a className="btn btn-danger btn-xs">Delete</a> */}
         </div>
@@ -279,10 +279,10 @@ showListTableDegree =(repos) =>{
                     
                    
                       <h3 className="profile-username text-center">{this.state.info.name}</h3>
-                      <p className="text-muted text-center">{this.state.info.status = 'On Processing' ? <span className="label label-warning">On Processing</span>
-                       : this.state.info.status = 'Active' ? <span className="label label-success">Active</span>
+                      <p className="text-muted text-center">{this.state.info.status = 'On Processing' ? <span className="label label-warning">Đang thực hiện</span>
+                       : this.state.info.status = 'Active' ? <span className="label label-success">Đã kích hoạt</span>
                        : this.state.info.status = 'Pending' ? <span className="label label-info">Pending</span>
-                       : this.state.info.status = 'Finished' ? <span className="label label-info">Finished</span>
+                       : this.state.info.status = 'Finished' ? <span className="label label-info">Đã hoàn thành</span>
                       : <span className="label label-success">Active</span>
                        
                        }</p>

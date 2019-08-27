@@ -23,6 +23,7 @@ export default class Home extends Component {
         .then(async(response) => {
             await this.setState({ 
               countDevelopers : response.data.count ,
+              
               });
         })
         .catch(function (error) {
@@ -60,6 +61,7 @@ export default class Home extends Component {
         .then(async(response) => {
             await this.setState({ 
               reposProject : response.data.results ,
+              countProjects : response.data.count
               });
         })
         .catch(function (error) {
@@ -72,7 +74,7 @@ export default class Home extends Component {
         .then(async(response) => {
             await this.setState({ 
               repos: response.data.results,
-              count : response.data.count ,
+              countTeams : response.data.count ,
               });
         })
         .catch(function (error) {
@@ -200,7 +202,7 @@ export default class Home extends Component {
             <div className="col-md-12">
               <div className="box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Báo cáo tháng trước</h3>
+                  <h3 className="box-title">Doanh thu</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse"><i className="fa fa-minus" />
                     </button>
@@ -237,15 +239,15 @@ export default class Home extends Component {
                       </p>
                       <div className="progress-group">
                         <span className="progress-text">Số dự án hoàn thành</span>
-                        <span className="progress-number"><b>30</b>/{this.state.countProjects}</span>
+                        <span className="progress-number"><b>10</b>/{this.state.countProjects}</span>
                         <div className="progress sm">
                           <div className="progress-bar progress-bar-aqua" style={{width: '30%'}} />
                         </div>
                       </div>
                       {/* /.progress-group */}
                       <div className="progress-group">
-                        <span className="progress-text">Tổng số công việc</span>
-                        <span className="progress-number">400</span>
+                        <span className="progress-text">Công việc chưa hoàn thành </span>
+                        <span className="progress-number"><b>5</b>{this.state.countTasks}</span>
                         <div className="progress sm">
                           <div className="progress-bar progress-bar-red" style={{width: '50%'}} />
                         </div>
@@ -259,13 +261,7 @@ export default class Home extends Component {
                         </div>
                       </div>
                       {/* /.progress-group */}
-                      <div className="progress-group">
-                        <span className="progress-text">Hợp đồng</span>
-                        <span className="progress-number"><b>250</b>/{this.state.countContracts}</span>
-                        <div className="progress sm">
-                          <div className="progress-bar progress-bar-yellow" style={{width: '80%'}} />
-                        </div>
-                      </div>
+                      
                       {/* /.progress-group */}
                     </div>
                     {/* /.col */}
@@ -278,7 +274,7 @@ export default class Home extends Component {
                     <div className="col-sm-6 col-xs-6">
                       <div className="description-block border-right">
                         <span className="description-percentage text-green"><i className="fa fa-caret-up" /> 17%</span>
-                        <h5 className="description-header">50 nhân sự</h5>
+                        <h5 className="description-header">5 nhân sự</h5>
                         <span className="description-text">Tổng số nhân sự</span>
                       </div>
                       {/* /.description-block */}
@@ -287,7 +283,7 @@ export default class Home extends Component {
                     <div className="col-sm-6 col-xs-6">
                       <div className="description-block border-right">
                         <span className="description-percentage text-yellow"><i className="fa fa-caret-down" /> 12%</span>
-                        <h5 className="description-header">100</h5>
+                        <h5 className="description-header">{this.state.countProjects}</h5>
                         <span className="description-text">Tổng dự án</span>
                       </div>
                       {/* /.description-block */}
@@ -327,12 +323,12 @@ export default class Home extends Component {
           <br/><br/><br/>
           <div className="info-box  col-sm-5 col-xs-5">
       <div className="info-box bg-yellow" >
-        <span className="info-box-icon"><i className="ion ion-ios-pricetag-outline" /></span>
+        <span className="info-box-icon"><i className="fa ion-code-working" /></span>
         <div className="info-box-content">
           <span className="info-box-text">Tổng số dự án đã hoàn thành</span>
-          <span className="info-box-number">200</span>
+          <span className="info-box-number">10</span>
           <div className="progress">
-            <div className="progress-bar" style={{width: '50%'}} />
+            <div className="progress-bar" style={{width: '100%'}} />
           </div>
           <span className="progress-description">
           Trong năm 2019
@@ -341,12 +337,12 @@ export default class Home extends Component {
         {/* /.info-box-content */}
       </div>
         <div className="info-box bg-green">
-          <span className="info-box-icon"><i className="ion ion-ios-heart-outline" /></span>
+          <span className="info-box-icon"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
           <div className="info-box-content">
-            <span className="info-box-text">Tổng số dự án khách hàng không hài lòng</span>
-            <span className="info-box-number">180</span>
+            <span className="info-box-text">Tổng số dự án khách hàng hài lòng</span>
+            <span className="info-box-number">8</span>
             <div className="progress">
-              <div className="progress-bar" style={{width: '20%'}} />
+              <div className="progress-bar" style={{width: '100%'}} />
             </div>
             <span className="progress-description">
             Trong năm 2019
@@ -356,12 +352,12 @@ export default class Home extends Component {
         </div>
         {/* /.info-box */}
         <div className="info-box bg-red">
-          <span className="info-box-icon"><i className="ion ion-ios-cloud-download-outline" /></span>
+          <span className="info-box-icon"><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
           <div className="info-box-content">
-            <span className="info-box-text">Tổng số dự án khách hàng hài lòng</span>
-            <span className="info-box-number">20</span>
+            <span className="info-box-text">Tổng số dự án khách hàng không hài lòng</span>
+            <span className="info-box-number">2</span>
             <div className="progress">
-              <div className="progress-bar" style={{width: '70%'}} />
+              <div className="progress-bar" style={{width: '100%'}} />
             </div>
             <span className="progress-description">
               Trong năm 2019

@@ -274,7 +274,7 @@ showMsg = () => {
         <form className="form-style-9">
         <div className="title">
          
-        Cập nhập dự án
+        Cập nhật dự án
   
          </div>
 

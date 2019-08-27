@@ -128,6 +128,7 @@ import Loading from './../../component/Loading/Loading';
               return <tr key={tableJson.index}> 
               <td>{index+1}</td>
               <td>{tableJson[prototype[1]]}</td>
+              <td> {tableJson.developer.dev_id } - {tableJson.developer.name }</td>
               <td style={{textAlign : "left"}}>{tableJson[prototype[2]]}</td>
               <td>{(tableJson[prototype[3]]).substr(0,10)}</td>
               
